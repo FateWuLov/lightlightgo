@@ -1,0 +1,2 @@
+/// 错误码
+const int ERROR_CODE_USER_BIND_REPEAT = 40017;
