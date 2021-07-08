@@ -68,7 +68,7 @@ TextStyle textStyleNormal(double size) {
     fontFamily: 'Baskerville',
     fontStyle: FontStyle.normal,
     fontWeight: FontWeight.w400,
-    color: Colors.white,
+    color: GlobalColors.mainText,
     decoration: TextDecoration.none,
     fontSize: size,
     height: 1.2,
@@ -79,7 +79,7 @@ TextStyle inviteCodeTextStyle(double size) {
   return TextStyle(
     fontFamily: 'Gilroy',
     fontWeight: FontWeight.w400,
-    color: Colors.white,
+    color: GlobalColors.mainText,
     decoration: TextDecoration.none,
     fontSize: size,
     height: 1.4,
@@ -89,7 +89,7 @@ TextStyle inviteCodeTextStyle(double size) {
 TextStyle textStyleBold(double size) {
   return TextStyle(
     fontFamily: 'Baskerville-SemiBold',
-    color: Colors.white,
+    color: GlobalColors.mainText,
     fontStyle: FontStyle.normal,
     fontWeight: FontWeight.w700,
     decoration: TextDecoration.none,
@@ -102,14 +102,14 @@ TextStyle textStyleMedium(double size) {
   return TextStyle(
     fontFamily: 'Baskerville-SemiBold',
     fontWeight: FontWeight.w600,
-    color: Colors.white,
+    color: GlobalColors.mainText,
     decoration: TextDecoration.none,
     fontSize: size,
     height: 1.2,
   );
 }
 
-TextStyle textStyleGenevaBold(double size, {height: 1.4, color: Colors.white}) {
+TextStyle textStyleGenevaBold(double size, {height: 1.4, color: GlobalColors.mainText}) {
   return TextStyle(
       fontFamily: 'Baskerville',
       fontWeight: FontWeight.w700,
@@ -120,7 +120,7 @@ TextStyle textStyleGenevaBold(double size, {height: 1.4, color: Colors.white}) {
 }
 
 TextStyle textStyleJostSemiBold(double size,
-    {height: 1.4, color: Colors.white}) {
+    {height: 1.4, color: GlobalColors.mainText}) {
   return TextStyle(
       fontFamily: 'Jost-SemiBold',
       fontWeight: FontWeight.w600,
@@ -130,7 +130,7 @@ TextStyle textStyleJostSemiBold(double size,
       height: height);
 }
 
-TextStyle textStyleJostBold(double size, {height: 1.4, color: Colors.white}) {
+TextStyle textStyleJostBold(double size, {height: 1.4, color: GlobalColors.mainText}) {
   return TextStyle(
       fontFamily: 'Jost-SemiBold',
       fontWeight: FontWeight.w700,
@@ -141,7 +141,7 @@ TextStyle textStyleJostBold(double size, {height: 1.4, color: Colors.white}) {
 }
 
 TextStyle textStyleBitterExtraBoldItalic(double size,
-    {height: 1.4, color: Colors.white}) {
+    {height: 1.4, color: GlobalColors.mainText}) {
   return TextStyle(
     fontFamily: 'Baskerville',
     fontWeight: FontWeight.w700,
@@ -154,7 +154,7 @@ TextStyle textStyleBitterExtraBoldItalic(double size,
 }
 
 TextStyle textStyleAppleChancery(double size,
-    {height: 1.4, color: Colors.white}) {
+    {height: 1.4, color: GlobalColors.mainText}) {
   return TextStyle(
     fontFamily: 'Baskerville',
     fontStyle: FontStyle.normal,

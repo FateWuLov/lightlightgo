@@ -41,7 +41,8 @@ const int WorkStatusAvailable = 1; //可接单状态
 const int WorkStatusPunished = 2; //被惩罚状态，自己无法修改
 
 const String AppProductStar = 'answer-star';
-const String AppProductLifeaste = 'lifeaste';
+const String AppProductLifeaste = 'genescope';
+// const String AppProductLifeaste = 'lifeaste';
 
 const String UserPlatformAndroid = 'android';
 const String UserPlatformIos = 'ios';

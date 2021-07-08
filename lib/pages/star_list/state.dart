@@ -1,5 +1,7 @@
 
 
+import 'package:lifeaste/models/userModel.dart';
+
 enum StarCategory { bestMatch, recentViewed, staffPick, live, new_ }
 
 const int StarSortType_Default = 0;
@@ -11,6 +13,10 @@ const List<String> StarSortStrs = ['', 'order_completed', 'comment_count', 'rate
 
 
 class StarListState {
+  String dataListGID = 'dataListGID';
+
+  List<UserInfoModel> dataList = [];
+
   StarListState() {
     ///Initialize variables
   }

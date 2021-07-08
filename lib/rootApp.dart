@@ -51,7 +51,7 @@ class RootApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         builder: BotToastInit(),
         theme: ThemeData(
-          primarySwatch: Colors.brown,
+          primarySwatch: Colors.lightBlue,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
         initialRoute: RouteConfig.root,

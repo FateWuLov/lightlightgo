@@ -155,7 +155,7 @@ class InnerShadowButton extends StatelessWidget {
       height: height,
       alignment: Alignment.center,
       decoration: BoxDecoration(
-          color: Colors.black,
+          color: GlobalColors.buttonBg,
           borderRadius: BorderRadius.circular(borderRadius),
           border: Border.all(color: _borderColor)
       ),
@@ -173,8 +173,7 @@ class InnerShadowButton extends StatelessWidget {
                     ? textStyleMedium(this.textSize ?? 16)
                     .copyWith(color: GlobalColors.grey166)
                     : this.style ??
-                    textStyleMedium(this.textSize ?? 16)
-                        .copyWith(color: GlobalColors.buttonBg),
+                    textStyleMedium(this.textSize ?? 16),
               ),
             ),
       ),
@@ -247,7 +246,7 @@ class SpecialText extends StatelessWidget {
     return AutoSizeText(
       title ?? '',
       style: textStyleTitleBold(textSize ?? 16).copyWith(
-          color: GlobalColors.buttonBg),
+          color: GlobalColors.mainTheme),
       textAlign: textAlign,
       maxLines: maxLines ?? 1,
       minFontSize: 6,
