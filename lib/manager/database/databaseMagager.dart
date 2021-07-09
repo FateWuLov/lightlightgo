@@ -116,6 +116,7 @@ class DatabaseManager {
               'firstBindEmailAt INTEGER,'
               'dailyBonus INTEGER,'
               'favorite INTEGER,'
+              'threeMinutesTickets INTEGER,'
               'liveAutoMessage TEXT,'
               'facebookEmail TEXT)');
 
@@ -184,31 +185,10 @@ class DatabaseManager {
           await batch.commit();
         }, onUpgrade: (Database db, int oldVersion, int newVersion) {
           if (oldVersion < newVersion) {
-            if (oldVersion < 2) {
-              upgradeVersion2(db);
-            }
-            if (oldVersion < 3) {
-              upgradeVersion3(db);
-            }
-            if (oldVersion < 4) {
-              upgradeVersion4(db);
-            }
+
           }
         });
     return _database;
-  }
-
-  upgradeVersion2(Database db) {
-    db.execute("ALTER TABLE ${DatabaseTable.user} ADD COLUMN inviteCount INTEGER;");
-    db.execute("ALTER TABLE ${DatabaseTable.user} ADD COLUMN liveAutoMessage TEXT;");
-  }
-
-  upgradeVersion3(Database db) {
-    db.execute("ALTER TABLE ${DatabaseTable.user} ADD COLUMN lastLoginType TEXT;");
-  }
-
-  upgradeVersion4(Database db) {
-    db.execute("ALTER TABLE ${DatabaseTable.user} ADD COLUMN threeMinutesTickets INTEGER;");
   }
 
   closeDb() async {
