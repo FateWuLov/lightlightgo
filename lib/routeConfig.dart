@@ -1,5 +1,6 @@
 import 'package:get/get_navigation/src/routes/get_route.dart';
 import 'package:lifeaste/pages/debug_tools/view.dart';
+import 'package:lifeaste/pages/order_detail/view.dart';
 import 'package:lifeaste/pages/root_page/view.dart';
 import 'package:lifeaste/pages/user_profile/view.dart';
 
@@ -14,6 +15,8 @@ class RouteConfig {
   /// 增值服务搜索
   static final String premiumSearch = "/premiumSearch";
   static final String starSearch = "/starSearch";
+
+  static final String orderDetail = "/orderDetail";
 
   static final String myFavoriteList = "/myFavoriteList";
   static final String enterInviteCode = "/enterInviteCode";
@@ -38,5 +41,6 @@ class RouteConfig {
     GetPage(name: root, page: () => RootPage()),
     GetPage(name: user, page: () => UserProfilePage()),
     GetPage(name: debugTools, page: () => DebugToolsPage()),
+    GetPage(name: orderDetail, page: () => OrderDetailPage()),
   ];
 }

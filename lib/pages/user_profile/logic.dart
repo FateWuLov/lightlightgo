@@ -10,6 +10,8 @@ import 'package:lifeaste/manager/net/apiManager.dart';
 import 'package:lifeaste/manager/net/networkResultData.dart';
 import 'package:lifeaste/models/orderModel.dart';
 import 'package:lifeaste/models/userModel.dart';
+import 'package:lifeaste/pages/create_order/state.dart';
+import 'package:lifeaste/pages/create_order/view.dart';
 import 'package:lifeaste/pages/user_profile/state.dart';
 
 class UserProfileLogic extends GetxController {
@@ -20,6 +22,11 @@ class UserProfileLogic extends GetxController {
   }
 
   void onSelectService(ServiceInfoModel service) {
+    showNormalDialog(
+        arguments: CreateOrderPageArgs(state.userInfo, service),
+        child: CreateOrderPage()
+    );
+
     AnalyticsManager.instance.clickServiceType(
       state.userInfo,
       service,

@@ -1,6 +1,7 @@
 
 
 import 'package:lifeaste/models/userModel.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 enum StarCategory { bestMatch, recentViewed, staffPick, live, new_ }
 
@@ -16,6 +17,9 @@ class StarListState {
   String dataListGID = 'dataListGID';
 
   List<UserInfoModel> dataList = [];
+
+  int nextPage = 0;
+  RefreshController refreshController = RefreshController();
 
   StarListState() {
     ///Initialize variables

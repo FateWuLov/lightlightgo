@@ -94,8 +94,6 @@ class ApiManager {
     }
     params.afInfo = afInfo;
 
-    print('ccx loginV2 ${params.toJson().entries}');
-
     NetResultData resultData =
         await netRequest.postRequest('${hostStr()}/user/login2', params.toJson());
     return resultData;
@@ -291,12 +289,16 @@ class ApiManager {
   }
 
   //订单相关
-  Future<NetResultData> getOrderList(int status, int type, int page) async {
+  Future<NetResultData> getOrderList({
+    int status = OrderStatusAll,
+    int page = 1,
+    int countPerPage = 20,
+  }) async {
     return netRequest.getRequest('${hostStr()}/order/sort/status',
         {
           'status': status.toString(),
-          'type': type,
           'page': page.toString(),
+          'countPerPage': countPerPage
         });
   }
 

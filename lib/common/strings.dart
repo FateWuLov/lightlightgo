@@ -4,6 +4,11 @@ import 'package:lifeaste/common/typicalKeys.dart';
 import 'package:lifeaste/manager/BossManager.dart';
 
 class Strings {
+
+  static const String question = 'Question:';
+  static const String submitSuccessfully = 'Submit Successfully!';
+  static const String viewDetails = "View Details";
+
   //title
   static const String message = 'Message';
   static const String order = 'Order';
@@ -65,7 +70,6 @@ class Strings {
       'If you cancel now, you will lose all info filled.';
   static const String kickOutTips =
       'You\'ve been disconnected by the server because your account was used to login on another device.';
-  static const String submissionSuccessful = 'Submission Successful!';
   static const String limitWordsWarn =
       'Your message contains inappropriate words, please modify and resend.';
   static const String microForVideoChat =
@@ -464,8 +468,6 @@ class Strings {
   static const String youHaveClaimed = "You have claimed";
   static const String supriseGift = "Surprise Gift";
   static const String tapToOpen = "Tap to Open";
-
-  static const String viewDetails = "View Details";
   static const String defaultAutoResp =
       'Thanks for choosing me & sharing your questions, I will look into your situation and soon get back to you: )';
   static const String UMayAlsoLike = "Advisors You May Also Like";

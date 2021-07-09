@@ -5,6 +5,7 @@ import 'package:lifeaste/models/userModel.dart';
 import 'package:lifeaste/widgets/base/baseTabPage.dart';
 import 'package:lifeaste/widgets/loading.dart';
 import 'package:lifeaste/widgets/starCard.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import 'logic.dart';
 import 'state.dart';
@@ -20,7 +21,11 @@ class StarListPage extends StatelessWidget {
       child: GetBuilder<StarListLogic>(
         id: state.dataListGID,
         builder: (logic) {
-          return _mainContent();
+          return Expanded(child: SmartRefresher(
+            controller: state.refreshController,
+            onRefresh: logic.headerRefresh,
+            child: _mainContent(),
+          ));
         },
       ),
     );
@@ -28,27 +33,25 @@ class StarListPage extends StatelessWidget {
 
   Widget _mainContent() {
     if (state.dataList.isNotEmpty) {
-      return Expanded(
-        child: ListView.builder(
-          itemBuilder: (BuildContext context, int index) {
-            if (index >= state.dataList.length) return Container();
-            UserInfoModel model = state.dataList[index];
-            return StarCard(
-              model,
-              onTap: () {
-                logic.onClickStar(model);
-              },
-              onAsk: () {
-                logic.onAskStar(model);
-              },
-            );
-          },
-          itemCount: state.dataList.length,
-        ),
+      return ListView.builder(
+        itemBuilder: (BuildContext context, int index) {
+          if (index >= state.dataList.length) return Container();
+          UserInfoModel model = state.dataList[index];
+          return StarCard(
+            model,
+            onTap: () {
+              logic.onClickStar(model);
+            },
+            onAsk: () {
+              logic.onAskStar(model);
+            },
+          );
+        },
+        itemCount: state.dataList.length,
       );
     }
-    return Expanded(child: Center(
+    return Center(
       child: LoadingView(),
-    ));
+    );
   }
 }

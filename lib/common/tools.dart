@@ -1133,6 +1133,7 @@ void showNormalBottomSheet({
 
 showNormalDialog({
   @required Widget? child,
+  Object? arguments,
   bool barrierDismissible = true,
   Color? barrierColor,
   String? barrierLabel,
@@ -1144,6 +1145,7 @@ showNormalDialog({
 
   return Get.dialog(
       child,
+      arguments: arguments,
       barrierDismissible: barrierDismissible,
       barrierColor: barrierColor ?? Colors.black.withOpacity(0.7),
       useSafeArea: useSafeArea,

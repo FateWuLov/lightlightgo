@@ -40,6 +40,9 @@ class GlobalColors {
   static const Color mainText = Color.fromRGBO(33, 37, 57, 1);
   static const Color subText = Color.fromRGBO(133, 137, 161, 1);
   static const Color hintText = Color.fromRGBO(133, 137, 161, 1);
+  // 反色文字
+  static const Color invertText = Colors.white;
+
   static const Color goldText = Color.fromRGBO(255, 163, 0, 1);
   static const Color redText = Color.fromRGBO(255, 0, 20, 1);
   static const Color saleText = Color.fromRGBO(181, 29, 138, 1);
