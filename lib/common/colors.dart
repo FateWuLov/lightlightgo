@@ -9,6 +9,8 @@ class GlobalColors {
   static const Color navBg = Color.fromRGBO(241, 246, 250, 1);
   static const Color buttonBg = Color.fromRGBO(77, 126, 150, 1);
 
+  static const Color shadowColor = Color.fromRGBO(222, 233, 240, 1);
+
   static const Color clearSeen = Color.fromRGBO(33, 37, 57, 1);
   static const Color separator = Color.fromRGBO(29, 31, 33, 1);
 

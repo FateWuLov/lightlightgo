@@ -22,7 +22,7 @@ class MePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BaseTabPage(
-      title: Strings.order,
+      title: Strings.mine,
       child: Expanded(
         child: Container(
             child: ListView(
@@ -62,32 +62,34 @@ class MePage extends StatelessWidget {
     return GestureDetector(
       onTap: btnAction,
       child: Container(
-        height: 62,
-        color: Colors.transparent,
-        child: Container(
-          decoration: BoxDecoration(
-              border: Border(
-                  bottom: BorderSide(color: GlobalColors.greyLine, width: 1))),
-          margin: EdgeInsets.symmetric(horizontal: 17),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              Image.asset(iconStr, width: 30, height: 30),
-              SizedBox(
-                width: 8,
-              ),
-              Text(
-                title,
-                style: mainTextStyleNormal(18),
-              ),
-              Expanded(
-                child: Container(),
-              ),
-              trailing ?? Container(),
-              Image.asset(ImageNames.arrow),
-            ],
-          ),
+        height: 60,
+        margin: EdgeInsets.fromLTRB(20, 16, 20, 0),
+        padding: EdgeInsets.fromLTRB(12, 0, 9, 0),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(16),
+            color: GlobalColors.darkThemeText,
+            boxShadow: [
+              BoxShadow(color: GlobalColors.shadowColor, blurRadius: 18, offset: Offset(0, 8), spreadRadius: 0)
+            ]
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Image.asset(iconStr, width: 30, height: 30),
+            SizedBox(
+              width: 4,
+            ),
+            Text(
+              title,
+              style: textStyleMedium(16),
+            ),
+            Expanded(
+              child: Container(),
+            ),
+            trailing ?? Container(),
+            Image.asset(ImageNames.arrow),
+          ],
         ),
       ),
     );
@@ -96,87 +98,174 @@ class MePage extends StatelessWidget {
   Container buildUserInfoView() {
     if (state.userInfo.value.isGuest()) {
       return Container(
-        margin: EdgeInsets.only(left: 20, right: 20),
-        height: 207,
+        margin: EdgeInsets.symmetric(horizontal: 20),
         width: getProportionateScreenWidth(335),
-        decoration: BoxDecoration(
-          color: Colors.black,
-        ),
-        padding: EdgeInsets.only(bottom: 10),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        height: 175,
+        alignment: Alignment.center,
+        //height: getProportionateScreenWidth(207),
+        child: Stack(
           children: [
-            RoundAvatar(
-              getProportionateScreenWidth(60),
-              state.userInfo.value.avatar,
+            Positioned(
+              bottom: 0,
+              child: Container(
+                height: 141,
+                width: getProportionateScreenWidth(335),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(16),
+                    color: GlobalColors.darkThemeText,
+                    boxShadow: [
+                      BoxShadow(color: GlobalColors.shadowColor, blurRadius: 18, offset: Offset(0, 8), spreadRadius: 0)
+                    ]
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Obx(() {
+                          return Text(
+                            state.userInfo.value.name,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: textStyleTitleBold(18).copyWith(color: GlobalColors.mainText),
+                          );
+                        }),
+                        // SizedBox(width: 3),
+                        // GestureDetector(
+                        //   onTap: logic.onTapEdit,
+                        //   child: Image.asset(
+                        //     ImageNames.edit,
+                        //     width: 14,
+                        //     height: 14,
+                        //     fit: BoxFit.contain,
+                        //   ),
+                        // )
+                      ],
+                    ),
+                    SizedBox(height: 8),
+                    Obx(() {
+                      return Visibility(
+                        visible: state.userInfo.value.bio.isNotEmpty,
+                        child: Container(
+                          padding: EdgeInsets.only(left: 25, right: 25),
+                          child: AutoSizeText(
+                            state.userInfo.value.bio,
+                            style: textStyleMedium(14)
+                                .copyWith(color: GlobalColors.mainText),
+                            maxLines: 4,
+                            minFontSize: 12,
+                          ),
+                        ),
+                      );
+                    }),
+                    SizedBox(
+                      height: 38,
+                    )
+                  ],
+                ),
+              ),
             ),
-            Text(
-              state.userInfo.value.name,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: textStyleTitleBold(18),
+            Positioned(
+              top: 0,
+              child: Container(
+                width: getProportionateScreenWidth(335),
+                alignment: Alignment.center,
+                child: Obx(() {
+                  return RoundAvatar(
+                    80,
+                    state.userInfo.value.avatar,
+                  );
+                }),
+              )
             ),
           ],
         ),
       );
     }
     return Container(
-      margin: EdgeInsets.only(left: 20, right: 20),
-      //height: getProportionateScreenWidth(207),
+      margin: EdgeInsets.symmetric(horizontal: 20),
       width: getProportionateScreenWidth(335),
-      decoration: BoxDecoration(
-        color: Colors.black,
-      ),
+      height: 175,
+      alignment: Alignment.center,
+      //height: getProportionateScreenWidth(207),
       child: Stack(
         children: [
-          Container(
-            width: getProportionateScreenWidth(335),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                SizedBox(
-                  height: getProportionateScreenWidth(20),
-                ),
-                Obx(() {
+          Positioned(
+            bottom: 0,
+            child: Container(
+              height: 141,
+              width: getProportionateScreenWidth(335),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(16),
+                  color: GlobalColors.darkThemeText,
+                  boxShadow: [
+                    BoxShadow(color: GlobalColors.shadowColor, blurRadius: 18, offset: Offset(0, 8), spreadRadius: 0)
+                  ]
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Row(
+                    children: [
+                      Obx(() {
+                        return Text(
+                          state.userInfo.value.name,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: textStyleTitleBold(18).copyWith(color: GlobalColors.mainText),
+                        );
+                      }),
+                      // SizedBox(width: 3),
+                      // GestureDetector(
+                      //   onTap: logic.onTapEdit,
+                      //   child: Image.asset(
+                      //     ImageNames.edit,
+                      //     width: 14,
+                      //     height: 14,
+                      //     fit: BoxFit.contain,
+                      //   ),
+                      // )
+                    ],
+                  ),
+                  SizedBox(height: 8),
+                  Obx(() {
+                    return Visibility(
+                      visible: state.userInfo.value.bio.isNotEmpty,
+                      child: Container(
+                        padding: EdgeInsets.only(left: 25, right: 25),
+                        child: AutoSizeText(
+                          state.userInfo.value.bio,
+                          style: textStyleMedium(14)
+                              .copyWith(color: GlobalColors.mainText),
+                          maxLines: 4,
+                          minFontSize: 12,
+                        ),
+                      ),
+                    );
+                  }),
+                  SizedBox(
+                    height: 38,
+                  )
+                ],
+              ),
+            ),
+          ),
+          Positioned(
+              top: 0,
+              child: Container(
+                width: getProportionateScreenWidth(335),
+                alignment: Alignment.center,
+                child: Obx(() {
                   return RoundAvatar(
-                    getProportionateScreenWidth(60),
+                    80,
                     state.userInfo.value.avatar,
                   );
                 }),
-                SizedBox(
-                  height: getProportionateScreenWidth(9),
-                ),
-                Obx(() {
-                  return Text(
-                    state.userInfo.value.name,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: textStyleTitleBold(18).copyWith(color: Colors.white),
-                  );
-                }),
-                SizedBox(height: getProportionateScreenWidth(4)),
-                Obx(() {
-                  return Visibility(
-                    visible: state.userInfo.value.bio.isNotEmpty,
-                    child: Container(
-                      padding: EdgeInsets.only(left: 25, right: 25),
-                      child: AutoSizeText(
-                        state.userInfo.value.bio,
-                        style: subTextStyleNormal(14)
-                            .copyWith(color: Colors.white),
-                        maxLines: 4,
-                        minFontSize: 12,
-                      ),
-                    ),
-                  );
-                }),
-                SizedBox(
-                  height: getProportionateScreenWidth(39),
-                )
-              ],
-            ),
-          )
+              )
+          ),
         ],
       ),
     );

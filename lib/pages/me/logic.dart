@@ -24,4 +24,8 @@ class MeLogic extends GetxController {
     Get.toNamed(RouteConfig.debugTools);
   }
 
+  void onTapEdit() {
+
+  }
+
 }
