@@ -13,8 +13,8 @@ class Strings {
 
   //title
   static const String message = 'Message';
-  static const String order = 'Order';
-  static const String advisor = 'Advisor';
+  static const String order = 'Orders';
+  static const String advisor = 'Advisors';
   static const String premium = 'Premium';
   static const String selectDuration = 'Select Duration';
   static const String addMinutes = 'Add Minutes';
