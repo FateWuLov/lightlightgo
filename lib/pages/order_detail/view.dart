@@ -54,7 +54,7 @@ class OrderDetailPage extends StatelessWidget {
       onTap: logic.onClickStar,
       child: Row(
         children: [
-          RoundAvatar(32, state.starInfo.avatar),
+          AvatarView(32, state.starInfo.avatar, hasShadow: false,),
           SizedBox(width: 6),
           Expanded(
               child: Text(

@@ -3,27 +3,65 @@ import 'package:flutter/material.dart';
 import 'package:lifeaste/common/images.dart';
 import 'package:lifeaste/common/styles.dart';
 
-class RoundAvatar extends StatelessWidget {
+enum AvatarViewShape {
+  round,
+  square
+}
+
+class AvatarView extends StatelessWidget {
   final double height;
   final String? url;
-  RoundAvatar(this.height, this.url);
+  final AvatarViewShape shape;
+  final bool hasShadow;
+  final double borderRadius;
+  AvatarView(this.height, this.url ,{
+    this.shape = AvatarViewShape.round,
+    this.hasShadow = true,
+    this.borderRadius = 10
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        height: height,
-        child: ClipRRect(
-          borderRadius:BorderRadius.circular(height/2.0),
-          child: Container(
-            decoration: BoxDecoration(
+    if (shape == AvatarViewShape.square) {
+      return Container(
+          height: height,
+          width: height,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(borderRadius),
+              border: Border.all(color: GlobalColors.darkThemeText, width: 2),
               boxShadow: [
-                BoxShadow(color: GlobalColors.shadowColor, blurRadius: 18, offset: Offset(0, 8), spreadRadius: 0)
+                BoxShadow(color: GlobalColors.avatarShadow, blurRadius: 10, offset: Offset(0, 4))
               ]
-            ),
-            child: buildContent(),
           ),
-        )
-    );
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(borderRadius),
+            child: buildContent(),
+          )
+      );
+    }
+    else {
+      if (hasShadow) {
+        return Container(
+            height: height,
+            decoration: BoxDecoration(
+                boxShadow: [
+                  BoxShadow(color: GlobalColors.avatarShadow, blurRadius: 10, offset: Offset(0, 4))
+                ]
+            ),
+            child: ClipRRect(
+              borderRadius:BorderRadius.circular(height/2.0),
+              child: buildContent(),
+            )
+        );
+      }
+      return Container(
+          height: height,
+          child: ClipRRect(
+            borderRadius:BorderRadius.circular(height/2.0),
+            child: buildContent(),
+          )
+      );
+    }
   }
 
   Widget buildContent() {

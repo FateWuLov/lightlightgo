@@ -173,7 +173,7 @@ class MePage extends StatelessWidget {
                 width: getProportionateScreenWidth(335),
                 alignment: Alignment.center,
                 child: Obx(() {
-                  return RoundAvatar(
+                  return AvatarView(
                     80,
                     state.userInfo.value.avatar,
                   );
@@ -259,7 +259,7 @@ class MePage extends StatelessWidget {
                 width: getProportionateScreenWidth(335),
                 alignment: Alignment.center,
                 child: Obx(() {
-                  return RoundAvatar(
+                  return AvatarView(
                     80,
                     state.userInfo.value.avatar,
                   );

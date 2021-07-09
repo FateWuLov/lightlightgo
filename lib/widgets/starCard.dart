@@ -35,7 +35,7 @@ class StarCard extends StatelessWidget {
             Row(
               children: [
                 SizedBox(width: 12,),
-                RoundAvatar(60, star.avatar),
+                AvatarView(60, star.avatar, shape: AvatarViewShape.square,),
                 SizedBox(width: 8,),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

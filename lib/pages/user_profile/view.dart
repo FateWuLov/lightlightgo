@@ -112,7 +112,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
             child: Container(
               width: getProportionateScreenWidth(335),
               alignment: Alignment.center,
-              child: RoundAvatar(
+              child: AvatarView(
                 80,
                 state.userInfo.avatar,
               ),

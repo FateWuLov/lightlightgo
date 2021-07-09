@@ -120,7 +120,7 @@ class OrderCell extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        RoundAvatar(60, order.starInfo.avatar),
+                        AvatarView(60, order.starInfo.avatar),
                         SizedBox(width: 7,),
                         Container(
                           margin: EdgeInsets.only(top: 15),
