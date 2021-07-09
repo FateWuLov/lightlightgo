@@ -123,7 +123,7 @@ class OrderCell extends StatelessWidget {
                         RoundAvatar(60, order.starInfo.avatar),
                         SizedBox(width: 7,),
                         Container(
-                          margin: EdgeInsets.only(top: 7),
+                          margin: EdgeInsets.only(top: 15),
                           child: Text(
                             order.starInfo.name,
                             style: textStyleBold(18),
@@ -132,7 +132,7 @@ class OrderCell extends StatelessWidget {
                       ],
                     ),
                     Container(
-                      margin: EdgeInsets.only(top: 7),
+                      margin: EdgeInsets.only(top: 15),
                       child: Text(stringFromTimestamp(order.createTime),
                           style: textStyleNormal(8).copyWith(color: GlobalColors.orderTimeColor)),
                     ),

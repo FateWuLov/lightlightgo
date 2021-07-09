@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:lifeaste/common/colors.dart';
 import 'package:lifeaste/common/images.dart';
+import 'package:lifeaste/common/styles.dart';
 
 class RoundAvatar extends StatelessWidget {
   final double height;
