@@ -7,6 +7,8 @@ import 'package:lifeaste/common/size_config.dart';
 import 'package:lifeaste/common/strings.dart';
 import 'package:lifeaste/common/tools.dart';
 import 'package:lifeaste/pages/user_profile/state.dart';
+import 'package:lifeaste/widgets/base/baseNavBar.dart';
+import 'package:lifeaste/widgets/base/basePage.dart';
 import 'package:lifeaste/widgets/roundAvatar.dart';
 
 import 'logic.dart';
@@ -41,62 +43,36 @@ class _UserProfilePageState extends State<UserProfilePage> {
   }
 
   Widget buildBaseView() {
-    return Scaffold(
-      backgroundColor: GlobalColors.mainBg,
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          SizedBox(height: 15,),
-          _navUserInfo(),
-          ListView(
-            shrinkWrap: true,
-            padding: EdgeInsets.symmetric(horizontal: 20),
-            physics: BouncingScrollPhysics(),
-            children: [
-              SizedBox(height: 11,),
-              _userInfoView(),
-              SizedBox(height: 20,),
-              _aboutContent(),
-            ],
-          ),
-        ],
-      )
+    return BasePage(
+      navBar: BaseNavBar(
+        centerItem: _navStarInfo(),
+        leftAction: logic.onPopBack,
+      ),
+      child: SafeArea(
+        child: ListView(
+          shrinkWrap: true,
+          padding: EdgeInsets.symmetric(horizontal: 20),
+          physics: BouncingScrollPhysics(),
+          children: [
+            SizedBox(height: 55,),
+            _userInfoView(),
+            SizedBox(height: 20,),
+            _aboutContent(),
+          ],
+        )
+      ),
     );
   }
 
-  Widget _navUserInfo() {
-    return SafeArea(
-      bottom: false,
-      child: Container(
-        height: 30,
-        width: SizeConfig.screenWidth,
-        alignment: Alignment.center,
-        child: Stack(
-          children: [
-            Positioned(
-              left: 18,
-              child: GestureDetector(
-                onTap: logic.onPopBack,
-                child: Image.asset(
-                  ImageNames.back,
-                  width: 24,
-                  height: 24,
-                  fit: BoxFit.contain,
-                ),
-              ),
-            ),
-            Container(
-              width: SizeConfig.screenWidth,
-              alignment: Alignment.center,
-              child: Text(
-                breakWord(state.userInfo.name),
-                style: textStyleTitle(18),
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-              ),
-            ),
-          ],
-        ),
+  Widget _navStarInfo() {
+    return Container(
+      margin: EdgeInsets.only(right: 44),
+      alignment: Alignment.center,
+      child: Text(
+        breakWord(state.userInfo.name),
+        style: textStyleTitle(18),
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
       ),
     );
   }
