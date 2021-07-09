@@ -562,7 +562,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.pocket.lifeaste;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ask.lifeaste;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
