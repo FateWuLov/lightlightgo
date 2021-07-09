@@ -14,9 +14,12 @@ class BasePage extends StatelessWidget {
     return Stack(
       fit: StackFit.expand,
       children: <Widget>[
-        Positioned(
+        Positioned.fill(
           child: Container(
-            color: bgColor ?? Styles.mainBg,
+            decoration: BoxDecoration(
+              gradient: Styles.mainGradientT2B(),
+              color: bgColor,
+            ),
           ),
         ),
         Positioned(
@@ -37,8 +40,8 @@ class BasePage extends StatelessWidget {
       return SafeArea(
         child: Container(
           height: 44,
-          decoration: BoxDecoration(
-              color: navBar?.decoration?.color ?? Styles.navBg),
+          decoration:
+              BoxDecoration(color: navBar?.decoration?.color ?? Styles.navBg),
           child: navBar,
         ),
       );
