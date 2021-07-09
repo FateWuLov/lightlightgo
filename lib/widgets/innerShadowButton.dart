@@ -37,7 +37,7 @@ class MainButton extends StatelessWidget {
         margin: margin,
         decoration: BoxDecoration(
           color: Styles.buttonBg,
-          borderRadius: new BorderRadius.all(Radius.circular(4)),
+          borderRadius: new BorderRadius.circular(50),
         ),
         child: child ?? Center(
           child: AutoSizeText(

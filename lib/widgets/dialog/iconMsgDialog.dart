@@ -51,6 +51,10 @@ class _IconMsgDialogState extends State<IconMsgDialog> {
       children: <Widget>[
         Container(
           width: 320,
+          decoration: BoxDecoration(
+              color: Styles.mainBg,
+              borderRadius: BorderRadius.circular(16)
+          ),
           child: Stack(
             children: [
               // Positioned.fill(

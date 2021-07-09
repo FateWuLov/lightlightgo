@@ -71,6 +71,10 @@ class _NormalDialogState extends State<NormalDialog>{
           children: [
             Container(
                 width: 320,
+                decoration: BoxDecoration(
+                    color: Styles.mainBg,
+                    borderRadius: BorderRadius.circular(16)
+                ),
                 child: Stack(
                   children: [
                     // Positioned(

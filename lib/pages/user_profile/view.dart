@@ -2,7 +2,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lifeaste/common/common.dart';
-import 'package:lifeaste/common/size_config.dart';
 import 'package:lifeaste/pages/user_profile/state.dart';
 import 'package:lifeaste/widgets/base/baseNavBar.dart';
 import 'package:lifeaste/widgets/base/basePage.dart';
