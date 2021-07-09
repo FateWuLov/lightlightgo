@@ -1,5 +1,5 @@
 import 'package:lifeaste/common/tools.dart';
-import 'package:lifeaste/common/typicalKeys.dart';
+import 'package:lifeaste/common/info.dart';
 import 'package:lifeaste/logic/global.dart';
 import 'package:lifeaste/models/userModel.dart';
 import 'package:json_annotation/json_annotation.dart';
@@ -78,11 +78,11 @@ class XMPPMessageModel {
   int messageStatus;
   @JsonKey(defaultValue: '')
   String senderId;
-  @JsonKey(defaultValue: TypicalKeys.roleIdentify_star)
+  @JsonKey(defaultValue: Info.roleIdentify_star)
   String senderIdentify;
   @JsonKey(defaultValue: '')
   String receiverId;
-  @JsonKey(defaultValue: TypicalKeys.roleIdentify_star)
+  @JsonKey(defaultValue: Info.roleIdentify_star)
   String receiverIdentify;
   @JsonKey(defaultValue: '')
   String senderName;
@@ -232,7 +232,7 @@ class XMPPMessageModel {
 class ConversationModel {
   @JsonKey(defaultValue: '')
   String conversationId;
-  @JsonKey(defaultValue: TypicalKeys.roleIdentify_star)
+  @JsonKey(defaultValue: Info.roleIdentify_star)
   String mateIdentify;
   @JsonKey(defaultValue: '')
   String myId;

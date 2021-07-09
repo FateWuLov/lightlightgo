@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:get/get.dart';
 import 'package:lifeaste/common/tools.dart';
-import 'package:lifeaste/common/typicalKeys.dart';
+import 'package:lifeaste/common/info.dart';
 import 'package:lifeaste/manager/analyticsManager.dart';
 
 import '../../routeConfig.dart';
@@ -13,9 +13,9 @@ class MeLogic extends GetxController {
 
   void feedbackBtnClick() {
     if (Platform.isIOS) {
-      CommonFunction.openUrl('sms:${TypicalKeys.feedbackEmail}');
+      CommonFunction.openUrl('sms:${Info.feedbackEmail}');
     } else {
-      CommonFunction.openUrl('mailto:${TypicalKeys.feedbackEmail}');
+      CommonFunction.openUrl('mailto:${Info.feedbackEmail}');
     }
     AnalyticsManager.instance.logEvent(EventName_FeedbackClick);
   }

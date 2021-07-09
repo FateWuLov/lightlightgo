@@ -2,7 +2,7 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:lifeaste/common/strings.dart';
 import 'package:lifeaste/common/tools.dart';
-import 'package:lifeaste/common/typicalKeys.dart';
+import 'package:lifeaste/common/info.dart';
 import 'package:lifeaste/manager/hiveManager.dart';
 
 part 'bossConfigModel.g.dart';
@@ -161,7 +161,7 @@ class AppInfoConfig {
   @JsonKey(defaultValue: false)
   bool showToWebsiteBannerDialog;
 
-  @JsonKey(defaultValue: TypicalKeys.baseWebLink)
+  @JsonKey(defaultValue: Info.baseWebLink)
   String baseLink;
 
   /// 往下滑N个增值服务重复显示之前看过的数量

@@ -5,10 +5,10 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:lifeaste/common/colors.dart';
+import 'package:lifeaste/common/styles.dart';
 import 'package:lifeaste/common/strings.dart';
 import 'package:lifeaste/common/tools.dart';
-import 'package:lifeaste/common/typicalKeys.dart';
+import 'package:lifeaste/common/info.dart';
 import 'package:lifeaste/logic/global.dart';
 import 'package:lifeaste/manager/BossManager.dart';
 import 'package:lifeaste/manager/hiveManager.dart';
@@ -342,29 +342,29 @@ class UserInfoModel {
   Map<String, dynamic> toJson() => fixToJson(_$UserInfoModelToJson(this));
 
   bool isNormalUser() {
-    return !(this.identify == TypicalKeys.roleIdentify_star);
+    return !(this.identify == Info.roleIdentify_star);
   }
 
   bool isDebugUser() {
     if (lastLoginType.isNotEmpty == true) {
-      return lastLoginType == TypicalKeys.loginType_debug;
+      return lastLoginType == Info.loginType_debug;
     }
-    return loginType == TypicalKeys.loginType_debug;
+    return loginType == Info.loginType_debug;
   }
 
   bool isGuest() {
     if (lastLoginType.isNotEmpty == true) {
-      return lastLoginType == TypicalKeys.loginType_guest;
+      return lastLoginType == Info.loginType_guest;
     }
-    return loginType == TypicalKeys.loginType_guest;
+    return loginType == Info.loginType_guest;
   }
 
   bool isOfficialSupport() {
-    return userId == TypicalKeys.officialAccountUserId;
+    return userId == Info.officialAccountUserId;
   }
 
   bool isSoulOfficialSupport() {
-    return userId == TypicalKeys.soulAccountUserId;
+    return userId == Info.soulAccountUserId;
   }
 
   bool isAssistantIdSupport() {

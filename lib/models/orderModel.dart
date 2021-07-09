@@ -1,10 +1,10 @@
 import 'dart:ui';
 
 import 'package:json_annotation/json_annotation.dart';
-import 'package:lifeaste/common/colors.dart';
+import 'package:lifeaste/common/styles.dart';
 import 'package:lifeaste/common/strings.dart';
 import 'package:lifeaste/common/tools.dart';
-import 'package:lifeaste/common/typicalKeys.dart';
+import 'package:lifeaste/common/info.dart';
 import 'package:lifeaste/logic/global.dart';
 import 'package:lifeaste/manager/BossManager.dart';
 
@@ -199,7 +199,7 @@ UserInfoModel _userInfo(var value) {
     return UserInfoModel.fromJson({});
   }
   UserInfoModel model = UserInfoModel.fromJson(value);
-  model.identify = TypicalKeys.roleIdentify_user;
+  model.identify = Info.roleIdentify_user;
   return model;
 }
 
@@ -209,7 +209,7 @@ UserInfoModel _starInfo(var value) {
     return UserInfoModel.fromJson({});
   }
   UserInfoModel model = UserInfoModel.fromJson(value);
-  model.identify = TypicalKeys.roleIdentify_star;
+  model.identify = Info.roleIdentify_star;
   return model;
 }
 

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lifeaste/common/colors.dart';
+import 'package:lifeaste/common/styles.dart';
 import 'package:lifeaste/widgets/base/baseNavBar.dart';
 
 class BasePage extends StatelessWidget {

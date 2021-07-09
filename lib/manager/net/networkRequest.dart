@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:encrypt/encrypt.dart';
 import 'package:lifeaste/common/fn_method_channel.dart';
 import 'package:lifeaste/common/tools.dart';
-import 'package:lifeaste/common/typicalKeys.dart';
+import 'package:lifeaste/common/info.dart';
 import 'package:lifeaste/logic/global.dart';
 import '../hiveManager.dart';
 import 'networkResultData.dart';
@@ -130,7 +130,7 @@ class NetRequest {
   }
 
   Future<NetResultData> putRequest(url, String filePath) async {
-    bool result = await TypicalKeys.methodChannel.invokeMethod(
+    bool result = await Info.methodChannel.invokeMethod(
         methodNameUploadImage, {'url': url, 'filePath': filePath});
     print('====请求result$result');
     if (result) {
@@ -145,22 +145,22 @@ class NetRequest {
       return;
     }
     String sessionKey = '';
-    if (params.containsKey(TypicalKeys.tokenHeaderKey)) {
-      List result = params[TypicalKeys.tokenHeaderKey];
+    if (params.containsKey(Info.tokenHeaderKey)) {
+      List result = params[Info.tokenHeaderKey];
       if (result.length > 0) {
         sessionKey = result.first;
       }
     }
     if (sessionKey.length > 0) {
-      HiveManager.instance.set(TypicalKeys.requestSessionKey, sessionKey);
+      HiveManager.instance.set(Info.requestSessionKey, sessionKey);
     }
   }
 
   getHeaderValue(Map? params) {
     Map<String, dynamic> headers = Map();
-    var sessionKey = HiveManager.instance.get(TypicalKeys.requestSessionKey);
+    var sessionKey = HiveManager.instance.get(Info.requestSessionKey);
     if (sessionKey != null) {
-      headers.putIfAbsent(TypicalKeys.tokenHeaderKey, () => sessionKey);
+      headers.putIfAbsent(Info.tokenHeaderKey, () => sessionKey);
     }
     headers.putIfAbsent('user-info', () => requestUserInfo());
     int timestamp = DateTime.now().millisecondsSinceEpoch;

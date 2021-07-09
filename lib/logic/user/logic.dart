@@ -7,7 +7,7 @@ import 'package:lifeaste/common/events.dart';
 import 'package:lifeaste/common/fn_method_channel.dart';
 import 'package:lifeaste/common/strings.dart';
 import 'package:lifeaste/common/tools.dart';
-import 'package:lifeaste/common/typicalKeys.dart';
+import 'package:lifeaste/common/info.dart';
 import 'package:lifeaste/manager/analyticsManager.dart';
 import 'package:lifeaste/manager/database/databaseMagager.dart';
 import 'package:lifeaste/manager/hiveManager.dart';
@@ -61,8 +61,8 @@ class UserLogic extends GetxController {
   }
 
   initForLaunch() async {
-    String xToken = HiveManager.instance.get(TypicalKeys.requestSessionKey) ?? '';
-    String userStr = HiveManager.instance.get(TypicalKeys.userInfoKey) ?? '';
+    String xToken = HiveManager.instance.get(Info.requestSessionKey) ?? '';
+    String userStr = HiveManager.instance.get(Info.userInfoKey) ?? '';
     print('initForLaunch xToken $xToken, userStr $userStr');
     if (userStr.isNotEmpty && xToken.isNotEmpty) {
       var userMap = json.decode(userStr);
@@ -92,7 +92,7 @@ class UserLogic extends GetxController {
         (hasLogin() && userInfoModel.userId == state.user.userId)) {
       resetUser(userInfoModel);
       String value = json.encode(userInfoModel.toJson());
-      HiveManager.instance.set(TypicalKeys.userInfoKey, value);
+      HiveManager.instance.set(Info.userInfoKey, value);
       return true;
     } else {
       return false;
@@ -116,7 +116,7 @@ class UserLogic extends GetxController {
         showLoadingToast();
       }
       LoginParams params = LoginParams.fromJson({});
-      params.loginType = TypicalKeys.loginType_guest;
+      params.loginType = Info.loginType_guest;
       params.loginId = guestId;
       LoginUserInfo userInfo = LoginUserInfo.fromJson({});
       userInfo.name = 'Guest_' + randomUsername();
@@ -137,7 +137,7 @@ class UserLogic extends GetxController {
 
     showLoadingToast();
     LoginParams params = LoginParams.fromJson({});
-    params.loginType = TypicalKeys.loginType_debug;
+    params.loginType = Info.loginType_debug;
     params.loginId = loginId;
     LoginUserInfo userInfo = LoginUserInfo.fromJson({});
     userInfo.name = randomUsername();
@@ -152,7 +152,7 @@ class UserLogic extends GetxController {
       return;
     }
     try {
-      var result = await TypicalKeys.methodChannel
+      var result = await Info.methodChannel
           .invokeMethod(methodNameAppleIdLoginStr);
 
       var loginId = result['loginId'];
@@ -163,7 +163,7 @@ class UserLogic extends GetxController {
 
       showLoadingToast();
       LoginParams params = LoginParams.fromJson({});
-      params.loginType = TypicalKeys.loginType_apple;
+      params.loginType = Info.loginType_apple;
       params.loginId = loginId;
       String uuidKey = 'uuid';
       if (result != null && result.containsKey(uuidKey)) {
@@ -187,14 +187,14 @@ class UserLogic extends GetxController {
   void firebaseLogin() async {
     try {
       var result =
-      await TypicalKeys.methodChannel.invokeMethod(methodNamePhoneLoginStr);
+      await Info.methodChannel.invokeMethod(methodNamePhoneLoginStr);
 
       var loginId = result['loginId'];
       if (loginId == null || loginId.isEmpty) {
         showTipsToast(Strings.phoneFailed);
       } else {
         LoginParams params = LoginParams.fromJson({});
-        params.loginType = TypicalKeys.loginType_phone;
+        params.loginType = Info.loginType_phone;
         params.loginId = loginId;
         String uuidKey = 'uuid';
         if (result != null && result.containsKey(uuidKey)) {
@@ -266,8 +266,8 @@ class UserLogic extends GetxController {
   Future<void> logout() async {
     showLoadingToast();
     // Global.pushLogic().unregister();
-    HiveManager.instance.set(TypicalKeys.userInfoKey, '');
-    HiveManager.instance.set(TypicalKeys.requestSessionKey, '');
+    HiveManager.instance.set(Info.userInfoKey, '');
+    HiveManager.instance.set(Info.requestSessionKey, '');
     AnalyticsManager.instance.logInternalEvent(IEN_Logout);
     // xmppDisconnect();
     // Global.xmppLogic().updateConnect(false);

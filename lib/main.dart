@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:lifeaste/pages/root_page/logic.dart';
 import 'package:lifeaste/rootApp.dart';
 
+import 'common/styles.dart';
 import 'common/tools.dart';
 import 'logic/global.dart';
 import 'manager/BossManager.dart';

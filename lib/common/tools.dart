@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lifeaste/common/size_config.dart';
 import 'package:lifeaste/common/strings.dart';
-import 'package:lifeaste/common/typicalKeys.dart';
+import 'package:lifeaste/common/info.dart';
 import 'package:lifeaste/logic/global.dart';
 import 'package:lifeaste/manager/BossManager.dart';
 import 'package:lifeaste/manager/hiveManager.dart';
@@ -21,7 +21,7 @@ import 'package:package_info/package_info.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'dart:ui' as ui;
 import '../routeConfig.dart';
-import 'colors.dart';
+import 'styles.dart';
 
 Color getModeColor(int onlineMode) {
   if (onlineMode == 0) {
@@ -31,171 +31,6 @@ Color getModeColor(int onlineMode) {
   } else {
     return Color.fromARGB(255, 238, 21, 46);
   }
-}
-
-TextStyle mainTextStyleRegular(double size) {
-  return textStyleNormal(size).copyWith(color: GlobalColors.mainText);
-}
-
-TextStyle themeTextStyleBold(double size) {
-  return textStyleBold(size).copyWith(color: GlobalColors.themeText);
-}
-
-TextStyle subTextStyle(double size) {
-  return textStyleBold(size).copyWith(color: GlobalColors.subText);
-}
-
-TextStyle textStyleTitleBold(double size) {
-  return TextStyle(
-    fontFamily: 'Luminari',
-    color: GlobalColors.mainText,
-    decoration: TextDecoration.none,
-    fontWeight: FontWeight.w700,
-    fontSize: size,
-    height: 1.4,
-  );
-}
-
-TextStyle textStyleTitle(double size) {
-  return TextStyle(
-    fontFamily: 'Luminari',
-    color: GlobalColors.mainText,
-    decoration: TextDecoration.none,
-    fontWeight: FontWeight.w400,
-    fontSize: size,
-    height: 1.4,
-  );
-}
-
-TextStyle textStyleNormal(double size) {
-  return TextStyle(
-    fontFamily: 'Baskerville',
-    fontStyle: FontStyle.normal,
-    fontWeight: FontWeight.w400,
-    color: GlobalColors.mainText,
-    decoration: TextDecoration.none,
-    fontSize: size,
-    height: 1.2,
-  );
-}
-
-TextStyle inviteCodeTextStyle(double size) {
-  return TextStyle(
-    fontFamily: 'Gilroy',
-    fontWeight: FontWeight.w400,
-    color: GlobalColors.mainText,
-    decoration: TextDecoration.none,
-    fontSize: size,
-    height: 1.4,
-  );
-}
-
-TextStyle textStyleBold(double size) {
-  return TextStyle(
-    fontFamily: 'Baskerville-SemiBold',
-    color: GlobalColors.mainText,
-    fontStyle: FontStyle.normal,
-    fontWeight: FontWeight.w700,
-    decoration: TextDecoration.none,
-    fontSize: size,
-    height: 1.2,
-  );
-}
-
-TextStyle textStyleMedium(double size) {
-  return TextStyle(
-    fontFamily: 'Baskerville-SemiBold',
-    fontWeight: FontWeight.w600,
-    color: GlobalColors.mainText,
-    decoration: TextDecoration.none,
-    fontSize: size,
-    height: 1.2,
-  );
-}
-
-TextStyle textStyleGenevaBold(double size, {height: 1.4, color: GlobalColors.mainText}) {
-  return TextStyle(
-      fontFamily: 'Baskerville',
-      fontWeight: FontWeight.w700,
-      color: color,
-      decoration: TextDecoration.none,
-      fontSize: size,
-      height: height);
-}
-
-TextStyle textStyleJostSemiBold(double size,
-    {height: 1.4, color: GlobalColors.mainText}) {
-  return TextStyle(
-      fontFamily: 'Jost-SemiBold',
-      fontWeight: FontWeight.w600,
-      color: color,
-      decoration: TextDecoration.none,
-      fontSize: size,
-      height: height);
-}
-
-TextStyle textStyleJostBold(double size, {height: 1.4, color: GlobalColors.mainText}) {
-  return TextStyle(
-      fontFamily: 'Jost-SemiBold',
-      fontWeight: FontWeight.w700,
-      color: color,
-      decoration: TextDecoration.none,
-      fontSize: size,
-      height: height);
-}
-
-TextStyle textStyleBitterExtraBoldItalic(double size,
-    {height: 1.4, color: GlobalColors.mainText}) {
-  return TextStyle(
-    fontFamily: 'Baskerville',
-    fontWeight: FontWeight.w700,
-    fontStyle: FontStyle.italic,
-    color: color,
-    decoration: TextDecoration.none,
-    fontSize: size,
-    height: height,
-  );
-}
-
-TextStyle textStyleAppleChancery(double size,
-    {height: 1.4, color: GlobalColors.mainText}) {
-  return TextStyle(
-    fontFamily: 'Baskerville',
-    fontStyle: FontStyle.normal,
-    fontWeight: FontWeight.w600,
-    color: color,
-    decoration: TextDecoration.none,
-    fontSize: size,
-    height: height,
-  );
-}
-
-TextStyle mainTextStyleNormal(double size) {
-  return textStyleNormal(size).copyWith(color: GlobalColors.mainText);
-}
-
-TextStyle subTextStyleNormal(double size) {
-  return textStyleNormal(size).copyWith(color: GlobalColors.subText);
-}
-
-TextStyle greyTextStyleNormal(double size) {
-  return textStyleNormal(size).copyWith(color: GlobalColors.greyText);
-}
-
-TextStyle themeTextStyleNormal(double size) {
-  return textStyleNormal(size).copyWith(color: GlobalColors.themeText);
-}
-
-TextStyle darkThemeTextStyleNormal(double size) {
-  return textStyleNormal(size).copyWith(color: GlobalColors.darkThemeText);
-}
-
-TextStyle themeTextStyleMedium(double size) {
-  return textStyleMedium(size).copyWith(color: GlobalColors.themeText);
-}
-
-TextStyle opacityTextStyleNormal(double size) {
-  return textStyleNormal(size).copyWith(color: GlobalColors.tabBg);
 }
 
 /// 关闭弹窗，直到路由栈顶部不是弹窗
@@ -263,89 +98,6 @@ showHttpErrorToast(NetResultData resultData) {
       showTipsToast(Strings.requestFailed);
     }
   }
-}
-
-LinearGradient whiteGradient() {
-  return LinearGradient(
-      begin: Alignment.centerLeft,
-      end: Alignment.centerRight,
-      colors: [Colors.white, Colors.white]);
-}
-
-LinearGradient transparentGradient() {
-  return LinearGradient(
-      begin: Alignment.centerLeft,
-      end: Alignment.centerRight,
-      colors: [Colors.transparent, Colors.transparent]);
-}
-
-LinearGradient mainGradientLeft2Right() {
-  return LinearGradient(
-      begin: Alignment.centerLeft,
-      end: Alignment.centerRight,
-      colors: [GlobalColors.gradientStart, GlobalColors.gradientEnd]);
-}
-
-LinearGradient mainGradientTop2Bottom() {
-  return LinearGradient(
-      begin: Alignment.topCenter,
-      end: Alignment.bottomCenter,
-      colors: [GlobalColors.gradientStart, GlobalColors.gradientEnd]);
-}
-
-LinearGradient mainDisableGradientLeft2Right() {
-  return LinearGradient(
-      begin: Alignment.centerLeft,
-      end: Alignment.centerRight,
-      colors: [
-        GlobalColors.gradientStart.withOpacity(0.36),
-        GlobalColors.gradientEnd.withOpacity(0.36)
-      ]);
-}
-
-LinearGradient mainGradientLeftTop2RightBottom() {
-  return LinearGradient(
-      begin: Alignment.topLeft,
-      end: Alignment.bottomRight,
-      colors: [GlobalColors.gradientStart, GlobalColors.gradientEnd]);
-}
-
-LinearGradient discountGradientLeft2Right() {
-  return LinearGradient(
-      begin: Alignment.centerLeft,
-      end: Alignment.centerRight,
-      colors: [
-        GlobalColors.discountGradientStart,
-        GlobalColors.discountGradientEnd
-      ]);
-}
-
-LinearGradient darkGoldGradientTop2Bottom() {
-  return LinearGradient(
-      begin: Alignment.topRight,
-      end: Alignment.bottomLeft,
-      colors: [
-        GlobalColors.darkGoldGradientStart,
-        GlobalColors.darkGoldGradientEnd
-      ]);
-}
-
-LinearGradient redGradientLeftTop2RightBottom() {
-  return LinearGradient(
-      begin: Alignment.topLeft,
-      end: Alignment.bottomRight,
-      colors: [Color.fromRGBO(255, 21, 24, 1), Color.fromRGBO(238, 21, 46, 1)]);
-}
-
-LinearGradient disableGradient() {
-  return LinearGradient(
-      begin: Alignment.centerLeft,
-      end: Alignment.centerRight,
-      colors: [GlobalColors.hintText, GlobalColors.hintText]);
-}
-
-BoxDecoration mainGradientDecoration() {
-  return BoxDecoration(gradient: mainGradientLeft2Right());
 }
 
 //字符串转时间mm-dd-yyyy
@@ -661,35 +413,35 @@ String breakWord(String? word) {
 
 ConversationModel officialConversationModel() {
   ConversationModel model = ConversationModel.fromJson({});
-  model.conversationId = TypicalKeys.officialAccountUserId;
-  model.mateIdentify = TypicalKeys.roleIdentify_user;
-  model.mateName = TypicalKeys.officialAccountName;
-  model.mateAvatar = TypicalKeys.officialAccountAvatar;
+  model.conversationId = Info.officialAccountUserId;
+  model.mateIdentify = Info.roleIdentify_user;
+  model.mateName = Info.officialAccountName;
+  model.mateAvatar = Info.officialAccountAvatar;
   return model;
 }
 
 UserInfoModel officialUserInfoModel() {
   UserInfoModel officialModel = UserInfoModel.fromJson({});
-  officialModel.userId = TypicalKeys.officialAccountUserId;
-  officialModel.avatar = TypicalKeys.officialAccountAvatar;
-  officialModel.name = TypicalKeys.officialAccountName;
-  officialModel.identify = TypicalKeys.roleIdentify_user;
+  officialModel.userId = Info.officialAccountUserId;
+  officialModel.avatar = Info.officialAccountAvatar;
+  officialModel.name = Info.officialAccountName;
+  officialModel.identify = Info.roleIdentify_user;
   return officialModel;
 }
 
 ConversationModel assistantConversationModel() {
   ConversationModel model = ConversationModel.fromJson({});
   model.conversationId = Global.userLogic().state.user.assistantId;
-  model.mateIdentify = TypicalKeys.roleIdentify_user;
-  model.mateName = TypicalKeys.assistantAccountName;
+  model.mateIdentify = Info.roleIdentify_user;
+  model.mateName = Info.assistantAccountName;
   return model;
 }
 
 UserInfoModel assistantUserInfoModel() {
   UserInfoModel model = UserInfoModel.fromJson({});
   model.userId = Global.userLogic().state.user.assistantId;
-  model.name = TypicalKeys.assistantAccountName;
-  model.identify = TypicalKeys.roleIdentify_user;
+  model.name = Info.assistantAccountName;
+  model.identify = Info.roleIdentify_user;
   return model;
 }
 
@@ -935,7 +687,7 @@ void openStarLeaderboard(BuildContext context) {
 void openOurWebsite(BuildContext context) {
   String url = BossManager.instance.ourWebsiteLink();
   if (url.isEmpty) return;
-  var sessionKey = HiveManager.instance.get(TypicalKeys.requestSessionKey);
+  var sessionKey = HiveManager.instance.get(Info.requestSessionKey);
   if (sessionKey != null && sessionKey.isNotEmpty) {
     url = url + '?t=' + sessionKey;
   }
@@ -952,7 +704,7 @@ void openWebPackage(BuildContext context, {String? productId}) {
   }
   if (url.isEmpty) return;
   url = completeUrl(url);
-  var sessionKey = HiveManager.instance.get(TypicalKeys.requestSessionKey);
+  var sessionKey = HiveManager.instance.get(Info.requestSessionKey);
   if (sessionKey != null && sessionKey.isNotEmpty) {
     url = url + '?t=' + sessionKey;
     if (productId != null) {

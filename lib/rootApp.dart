@@ -7,7 +7,7 @@ import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:lifeaste/pages/root_page/logic.dart';
 import 'package:lifeaste/routeConfig.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-import 'common/typicalKeys.dart';
+import 'common/info.dart';
 import 'logic/global.dart';
 
 RouteObserver<PageRoute> routeObserver = MyObserver();
@@ -47,7 +47,7 @@ class RootApp extends StatelessWidget {
       hideFooterWhenNotFull: true,
       enableBallisticLoad: false,
       child: GetMaterialApp(
-        title: TypicalKeys.appName,
+        title: Info.appName,
         debugShowCheckedModeBanner: false,
         builder: BotToastInit(),
         theme: ThemeData(

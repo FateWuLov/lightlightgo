@@ -1,4 +1,3 @@
-
 import 'package:get/get.dart';
 import 'package:lifeaste/common/events.dart';
 import 'package:lifeaste/common/strings.dart';
@@ -24,8 +23,7 @@ class UserProfileLogic extends GetxController {
   void onSelectService(ServiceInfoModel service) {
     showNormalDialog(
         arguments: CreateOrderPageArgs(state.userInfo, service),
-        child: CreateOrderPage()
-    );
+        child: CreateOrderPage());
 
     AnalyticsManager.instance.clickServiceType(
       state.userInfo,
@@ -105,16 +103,16 @@ class UserProfileLogic extends GetxController {
     //     }
     //   }
     // } else {
-      //普通服务
-      state.userInfo.availableService.sort((a, b) {
-        return a.type.compareTo(b.type);
-      });
-      for (ServiceInfoModel model in state.userInfo.availableService) {
-        if (!model.isRealTime()) {
-          model.discountable = state.userInfo.isFollowUpPeriod();
-          services.add(model);
-        }
+    //普通服务
+    state.userInfo.availableService.sort((a, b) {
+      return a.type.compareTo(b.type);
+    });
+    for (ServiceInfoModel model in state.userInfo.availableService) {
+      if (!model.isRealTime()) {
+        model.discountable = state.userInfo.isFollowUpPeriod();
+        services.add(model);
       }
+    }
     // }
     return services;
   }
@@ -127,7 +125,8 @@ class UserProfileLogic extends GetxController {
       _updateUserInfo(UserInfoModel.fromJson(resultData.data));
       eventBus.fire(DidUpdateUserInfoEvent(state.userInfo));
     } else {
-      UserInfoModel? userInfoModel = await DatabaseManager.instance.getUser(state.userInfo.userId);
+      UserInfoModel? userInfoModel =
+          await DatabaseManager.instance.getUser(state.userInfo.userId);
       if (userInfoModel != null) {
         _updateUserInfo(userInfoModel);
       }

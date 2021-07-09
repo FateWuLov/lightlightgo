@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:lifeaste/common/images.dart';
+import 'package:lifeaste/common/styles.dart';
 import 'package:lifeaste/common/tools.dart';
 import 'package:lifeaste/widgets/gestureContainer.dart';
 

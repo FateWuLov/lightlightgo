@@ -103,7 +103,7 @@ AppInfoConfig _$AppInfoConfigFromJson(Map<String, dynamic> json) {
         'I’ve been inspired by this free psychic app Lifeaste, where you can get psychic advice from gifted readers - anywhere, at anytime and get reading insights into your life questions. I am sure you will find it fantastic too. I’m sending you %s FREE CREDITS GIFT, enter my code %s & come experience to get the gift!',
     json['iosOnlyWebsitePurchase'] as bool? ?? false,
     json['inviteCodeNeedsFlower'] as bool? ?? false,
-    json['baseLink'] as String? ?? 'https://aw.psych-scope.com',
+    json['baseLink'] as String? ?? 'https://aw.sparkling-insights.com',
     json['repeatPremiumSlideCount'] as int? ?? 10,
     json['showChatPurchaseBanner'] as bool? ?? false,
     json['logAppEvent'] as bool? ?? true,

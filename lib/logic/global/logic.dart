@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:devicelocale/devicelocale.dart';
 import 'package:get/get.dart';
 import 'package:lifeaste/common/fn_method_channel.dart';
-import 'package:lifeaste/common/typicalKeys.dart';
+import 'package:lifeaste/common/info.dart';
 import 'package:lifeaste/manager/hiveManager.dart';
 import 'package:package_info/package_info.dart';
 import '../global.dart';
@@ -27,7 +27,7 @@ class GlobalLogic extends GetxController {
   loadNativeInfo() async {
     state.packageInfo = await PackageInfo.fromPlatform();
     state.locale = await Devicelocale.currentAsLocale;
-    var value = await TypicalKeys.methodChannel.invokeMethod(methodNameGetNativeInfo);
+    var value = await Info.methodChannel.invokeMethod(methodNameGetNativeInfo);
     if (value != null) {
       state.uuid = value['uuid'] ?? '';
       state.guestId = value['guestId'] ?? '';

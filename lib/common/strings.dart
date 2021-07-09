@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:lifeaste/common/typicalKeys.dart';
+import 'package:lifeaste/common/info.dart';
 import 'package:lifeaste/manager/BossManager.dart';
 
 class Strings {
@@ -105,7 +105,7 @@ class Strings {
   static const String sureQuitDraft = 'Sure to quit this draft?';
   static const String saveDraftEditLater = 'You can save the draft and edit it later.';
   static const String reviewCopiedClipboard = 'Review has submitted successfully and copied to the clipboard.';
-  static const String leaveReviewOnStore = 'We are glad to see you had a great experience with us. It is appreciate to leave ${TypicalKeys.appName} a good review on store to tell more people about this wonderful app!';
+  static const String leaveReviewOnStore = 'We are glad to see you had a great experience with us. It is appreciate to leave ${Info.appName} a good review on store to tell more people about this wonderful app!';
 
   //actions
   static const String cancel = 'Cancel';
@@ -277,7 +277,7 @@ class Strings {
   static const String enterInviteCode = 'Enter Invite Code';
   static const String feedback = 'Feedback';
   static const String settingWebsite = 'Move to Website';
-  static const String settingRateUs = 'Love ${TypicalKeys.appName}? Rate Us';
+  static const String settingRateUs = 'Love ${Info.appName}? Rate Us';
   static const String logout = 'Logout';
   static const String becomeAnAdvisor = 'Apply for Advisor';
   static const String logoutContent =
@@ -416,15 +416,15 @@ class Strings {
 
   //内置消息
   static const String newerGreet =
-      'Hi, welcome to ${TypicalKeys.appName}, the most trustworthy online psychic platform in the world. Whatever your needs, we’ll support you to find the answers💗';
+      'Hi, welcome to ${Info.appName}, the most trustworthy online psychic platform in the world. Whatever your needs, we’ll support you to find the answers💗';
 
   static const String becomeAnAdvisorGreet =
-      'Thanks for your interest in joining ${TypicalKeys.appName}. Please send your name, contact email address and a brief self-introduction to us by directly replying this message. Our recruitment staff will further guide you step by step to complete the psychic application process. Looking forward to your join : )';
+      'Thanks for your interest in joining ${Info.appName}. Please send your name, contact email address and a brief self-introduction to us by directly replying this message. Our recruitment staff will further guide you step by step to complete the psychic application process. Looking forward to your join : )';
 
   static const String badRatingGreet = 'We always attach great importance to user experience. If you have any question or advice about the service, please leave us messages, we will get back to you as soon as possible.';
 
   static const String assistentGreet =
-      'Hi %s, nice to meet you. I\'m your assistant Luna😉 You are the best gift for ${TypicalKeys.appName} and now check what I have got for you :)';
+      'Hi %s, nice to meet you. I\'m your assistant Luna😉 You are the best gift for ${Info.appName} and now check what I have got for you :)';
 
   static const String searchEmptyTip =
       "There is no result found under your filter condition. Please adjust and try again.";
@@ -448,7 +448,7 @@ class Strings {
   static const String getMatched = 'Get Matched';
 
   static const List<String> launchGuideTitles = [
-    "Get insight by\n${TypicalKeys.appName} advisors",
+    "Get insight by\n${Info.appName} advisors",
     "Connect via online live text, audio & video chat",
     "Share your questions by\nplacing an order",
   ];
@@ -465,7 +465,7 @@ class Strings {
   static const String levelUpRewardGreet =
       "Hi %s, we have an exclusive gift for you.";
   static const String openIt = "Open it";
-  static const String moreSurprisesInWebsite = "Have you tried ${TypicalKeys.appName} Web? —> Much more top-up package options with EXCLUSIVE DISCOUNT & BONUS CREDITS awaiting you to discover! Move to Web Now 👉👉👉 ${TypicalKeys.ourWebsiteSymbol} (*No need to login & Purchased credits will be automatically synced with your ${TypicalKeys.appName} app account.)";
+  static const String moreSurprisesInWebsite = "Have you tried ${Info.appName} Web? —> Much more top-up package options with EXCLUSIVE DISCOUNT & BONUS CREDITS awaiting you to discover! Move to Web Now 👉👉👉 ${Info.ourWebsiteSymbol} (*No need to login & Purchased credits will be automatically synced with your ${Info.appName} app account.)";
   static const String youHaveClaimed = "You have claimed";
   static const String supriseGift = "Surprise Gift";
   static const String tapToOpen = "Tap to Open";
@@ -491,8 +491,8 @@ class Strings {
   static const String hot = 'Hot';
   static const String inputQuestionExceedLimit = 'Exceed the maximum character limit, please modify and submit.';
 
-  static const String enjoyApp = 'Enjoy ${TypicalKeys.appName}?';
-  static const String appRateTip = 'We really appreciate if you give ${TypicalKeys.appName} a 5-star rating and leave a good review.';
+  static const String enjoyApp = 'Enjoy ${Info.appName}?';
+  static const String appRateTip = 'We really appreciate if you give ${Info.appName} a 5-star rating and leave a good review.';
   static const String appRateUs  = 'Rate us';
 
   static const List<String> defaultHotWords = ['Love', 'Relationship Coaching', 'General Reading', 'Tarot', 'Career', 'Dream Analysis'];
@@ -516,10 +516,10 @@ class Strings {
 
   static const String inviteCard = 'Invite Card';
   static const String inviteRecord = 'Invite Record';
-  static const String loveInviteFriends = 'Love ${TypicalKeys.appName}?\nInvite your friends to join!';
-  static const String inviteFriendsJoin = 'Inspired by ${TypicalKeys.appName} advisors? Invite your friends to join & get ';
+  static const String loveInviteFriends = 'Love ${Info.appName}?\nInvite your friends to join!';
+  static const String inviteFriendsJoin = 'Inspired by ${Info.appName} advisors? Invite your friends to join & get ';
   static const String inviteFriendsJoinEnd = ' credits!';
-  static const String inviteFriendsBothYouWill = 'Invite your friends to experience ${TypicalKeys.appName} and both of you will get %s reading credits as invitation reward when your friends input your code & made first purchase.';
+  static const String inviteFriendsBothYouWill = 'Invite your friends to experience ${Info.appName} and both of you will get %s reading credits as invitation reward when your friends input your code & made first purchase.';
   static const String rewardedOnceFriendCompletes = '%s credits will rewarded once your friend completes the first reading order.';
   static const String copiedInviteCode = 'Invite code copied.';
   static const String sendInviteVia = 'Send invite via';
@@ -531,9 +531,9 @@ class Strings {
   static const String claimed = 'Claimed';
   static const String inviteRecordEmpty = 'There’s no friends input your code yet.\nInvite more people to get the invite rewards!';
   static const String getCreditsAfterFriendOrder = 'You can get %s credits after your friend makes first top up.';
-  static const String shareText = 'I\'ve been inspired by this free psychic app ${TypicalKeys.appName}, where you can get psychic advice from gifted readers - anywhere, at anytime and get reading insights into your life questions. I am sure you will find it fantastic too. Check it in the AppStore or in Google Play and get special first time offer!';
-  static const String shareTextWithCredits = 'I\'ve been inspired by this free psychic app ${TypicalKeys.appName}, where you can get psychic advice from gifted readers - anywhere, at anytime and get reading insights into your life questions. I am sure you will find it fantastic too. Check it in the AppStore or in Google Play, use my code %s to get %s BONUS CREDITS!';
-  static const String newShareTextWithCredits = 'I’ve been inspired by this free psychic app ${TypicalKeys.appName}, where you can get psychic advice from gifted readers - anywhere, at anytime and get reading insights into your life questions. I am sure you will find it fantastic too. I’m sending you %s FREE CREDITS GIFT, enter my code %s & come experience to get the gift!';
+  static const String shareText = 'I\'ve been inspired by this free psychic app ${Info.appName}, where you can get psychic advice from gifted readers - anywhere, at anytime and get reading insights into your life questions. I am sure you will find it fantastic too. Check it in the AppStore or in Google Play and get special first time offer!';
+  static const String shareTextWithCredits = 'I\'ve been inspired by this free psychic app ${Info.appName}, where you can get psychic advice from gifted readers - anywhere, at anytime and get reading insights into your life questions. I am sure you will find it fantastic too. Check it in the AppStore or in Google Play, use my code %s to get %s BONUS CREDITS!';
+  static const String newShareTextWithCredits = 'I’ve been inspired by this free psychic app ${Info.appName}, where you can get psychic advice from gifted readers - anywhere, at anytime and get reading insights into your life questions. I am sure you will find it fantastic too. I’m sending you %s FREE CREDITS GIFT, enter my code %s & come experience to get the gift!';
   static const String shareSubject = 'Invitation Letter - Free Psychic Reading';
 
   static const String enterInviteCodeTitle = 'Received an invite code\nfrom friend?';
@@ -578,7 +578,7 @@ class Strings {
   static const String camera = 'Camera';
   static const String image = 'Image';
   static String recommendTitleNewUser(bool twoLine) => 'Most people\'s choice.${twoLine ? '\n' : ' '}Try it!';
-  static String recommendTitleOldUser(bool twoLine) => 'New advisor joined ${TypicalKeys.appName}.${twoLine ? '\n' : ' '}Discover them!';
+  static String recommendTitleOldUser(bool twoLine) => 'New advisor joined ${Info.appName}.${twoLine ? '\n' : ' '}Discover them!';
 
   static const String tarot = 'Tarot';
   static const String todayTarot = 'Today’s Tarot';
@@ -591,19 +591,19 @@ class Strings {
   static const String dragToHere = 'Drag to Here';
   static const String selectCard = 'Select card from the package';
   static const String itIsGoodTimeTo = 'It is a good time to:';
-  static const String tarotWhatKnowMore = 'Wanna know more about your card?\nAsk ${TypicalKeys.appName} advisor for details!';
+  static const String tarotWhatKnowMore = 'Wanna know more about your card?\nAsk ${Info.appName} advisor for details!';
   static const String oneStepGetTarot = 'Only one step left to get your tarot reading.';
   static const String surePickNewCards = 'Sure to pick new cards?';
   static const String loveTarotRepealed = 'Your current result will not be saved.';
   static String freeTarotTime(int time) => 'FREE TAROT FOR $time TIME${time > 1 ? 'S' : ''}';
-  static const String tarotShare = 'I got a in-depth insight in this free psychic app ${TypicalKeys.appName},  where you can get psychic advice from gifted readers- Anywhere, at anytime and get reading insights into your life questions. I am sure you will find it fantastic too. Check it in the AppStore or in Google Play and get special first time offer! ${TypicalKeys.tarotShareLink}';
+  static const String tarotShare = 'I got a in-depth insight in this free psychic app ${Info.appName},  where you can get psychic advice from gifted readers- Anywhere, at anytime and get reading insights into your life questions. I am sure you will find it fantastic too. Check it in the AppStore or in Google Play and get special first time offer! ${Info.tarotShareLink}';
   static const String starActiveTips = 'The advisor is on the way to give you the most insightful experience...';
   static const String saveResultAndAsk = 'Save Result & Ask Tarot Reader';
 
   static const String selectAccountContinue = 'Select Account to Continue';
-  static const String findLoggedInBefore = 'We find that you have logged in ${TypicalKeys.appName} before, please select the account you want to use and continue.';
+  static const String findLoggedInBefore = 'We find that you have logged in ${Info.appName} before, please select the account you want to use and continue.';
   static const String sureContinueNew = 'Sure to continue with the new one?';
-  static const String noteCannotRecoverAccount = 'Please note that you cannot recover the previous ${TypicalKeys.appName} account once confirmed.';
+  static const String noteCannotRecoverAccount = 'Please note that you cannot recover the previous ${Info.appName} account once confirmed.';
   static const String goBack = 'Go back';
   static const String continueButton = 'Continue';
 
@@ -631,7 +631,7 @@ class Strings {
   static const String connectNow = 'Connect Now';
   static const String averagePrice = '*\$1.0=10 credits. The average price of 1 reading is 100 credits';
   static String getFreeCredits = 'Get Free ${BossManager.instance.inviteRewardStr()} Credits!';
-  static String inviteFriendsAndGetReward = 'Invite your friends to experience ${TypicalKeys.appName} and both of you will get ${BossManager.instance.inviteRewardStr()} credits as inviatation reward.';
+  static String inviteFriendsAndGetReward = 'Invite your friends to experience ${Info.appName} and both of you will get ${BossManager.instance.inviteRewardStr()} credits as inviatation reward.';
   static const String inviteNow = 'Invite Now';
 
   static const String freeCredits = 'Free Credits';

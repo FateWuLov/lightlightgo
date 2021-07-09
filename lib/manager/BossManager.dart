@@ -8,7 +8,7 @@ import 'package:encrypt/encrypt.dart' as XYQ;
 import 'package:crypto/crypto.dart';
 import 'package:lifeaste/common/events.dart';
 import 'package:lifeaste/common/strings.dart';
-import 'package:lifeaste/common/typicalKeys.dart';
+import 'package:lifeaste/common/info.dart';
 import 'package:lifeaste/logic/global.dart';
 import 'package:lifeaste/models/bossConfigModel.dart';
 import 'package:lifeaste/models/orderModel.dart';
@@ -50,7 +50,7 @@ class BossManager {
       "timestamp": timestamp.toString(),
     };
     String accessKey = generateAccessKey(param);
-    String url = TypicalKeys.BossURL + '/api/conf?accesskey=' + accessKey;
+    String url = Info.BossURL + '/api/conf?accesskey=' + accessKey;
     try {
       var response = await _dio.post(url, data: param, options: null);
       Map<String, dynamic> responseMap = response.data;
@@ -286,6 +286,6 @@ class BossManager {
   }
 
   String getFaqLink() {
-    return bossConfig.appInfoConfig.baseLink + TypicalKeys.faqRoute;
+    return bossConfig.appInfoConfig.baseLink + Info.faqRoute;
   }
 }

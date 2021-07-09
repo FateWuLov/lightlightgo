@@ -1,7 +1,7 @@
 
 import 'package:lifeaste/common/strings.dart';
 import 'package:lifeaste/common/tools.dart';
-import 'package:lifeaste/common/typicalKeys.dart';
+import 'package:lifeaste/common/info.dart';
 import 'package:lifeaste/logic/global.dart';
 import 'package:lifeaste/manager/database/databaseMagager.dart';
 import 'package:lifeaste/models/loginParams.dart';
@@ -21,8 +21,8 @@ class ApiManager {
   static String hostStr() {
     // return Config.getHostURL()
     return Global.logic().state.isDebugServer
-        ? 'http://3.236.42.87:8018'
-        : 'https://api.psych-scope.com';
+        ? Info.debugHost
+        : Info.distributionHost;
   }
 
   Future<NetResultData> getStarList() async {
@@ -135,7 +135,7 @@ class ApiManager {
   Future<NetResultData> getUserInfo(String userId,
       {bool isStar = false}) async {
     String identify =
-        isStar ? TypicalKeys.roleIdentify_star : TypicalKeys.roleIdentify_user;
+        isStar ? Info.roleIdentify_star : Info.roleIdentify_user;
     NetResultData resultData = await netRequest.getRequest(
         '${hostStr()}/user/who',
         {'user_id': userId, 'user_identify': identify});
@@ -169,7 +169,7 @@ class ApiManager {
   Future<NetResultData> searchUser(String keyword,
       {bool isStar = false}) async {
     String identify =
-        isStar ? TypicalKeys.roleIdentify_star : TypicalKeys.roleIdentify_user;
+        isStar ? Info.roleIdentify_star : Info.roleIdentify_user;
     return netRequest.postRequest('${hostStr()}/user/search', {
       'k': keyword,
       'identify': identify,
