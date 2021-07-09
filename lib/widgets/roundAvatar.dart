@@ -42,5 +42,5 @@ class RoundAvatar extends StatelessWidget {
     }
   }
 
-  Image buildPlaceholder() => Image.asset(ImageNames.defaultAvatar);
+  Image buildPlaceholder() => Image.asset(ImageNames.defaultAvatar, fit: BoxFit.cover,);
 }
