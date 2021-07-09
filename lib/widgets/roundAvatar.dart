@@ -29,8 +29,9 @@ class AvatarView extends StatelessWidget {
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(borderRadius),
               border: Border.all(color: GlobalColors.darkThemeText, width: 2),
+              color: GlobalColors.grey216,
               boxShadow: [
-                BoxShadow(color: GlobalColors.avatarShadow, blurRadius: 10, offset: Offset(0, 4))
+                BoxShadow(color: GlobalColors.squareAvatarShadow, blurRadius: 6, offset: Offset(0, 1))
               ]
           ),
           child: ClipRRect(
@@ -45,7 +46,7 @@ class AvatarView extends StatelessWidget {
             height: height,
             decoration: BoxDecoration(
                 boxShadow: [
-                  BoxShadow(color: GlobalColors.avatarShadow, blurRadius: 10, offset: Offset(0, 4))
+                  BoxShadow(color: GlobalColors.roundAvatarShadow, blurRadius: 10, offset: Offset(0, 4))
                 ]
             ),
             child: ClipRRect(

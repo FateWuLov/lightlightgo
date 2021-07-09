@@ -10,7 +10,8 @@ class GlobalColors {
   static const Color buttonBg = Color.fromRGBO(77, 126, 150, 1);
 
   static const Color shadowColor = Color.fromRGBO(222, 233, 240, 1);
-  static const Color avatarShadow = Color.fromRGBO(111, 111, 111, 0.16);
+  static const Color roundAvatarShadow = Color.fromRGBO(111, 111, 111, 0.16);
+  static const Color squareAvatarShadow = Color.fromRGBO(0, 0, 0, 0.12);
 
   static const Color clearSeen = Color.fromRGBO(33, 37, 57, 1);
   static const Color separator = Color.fromRGBO(29, 31, 33, 1);
