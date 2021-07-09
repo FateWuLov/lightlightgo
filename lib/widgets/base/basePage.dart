@@ -14,10 +14,15 @@ class BasePage extends StatelessWidget {
     return Stack(
       fit: StackFit.expand,
       children: <Widget>[
-        Positioned(
-          child: Container(
-            color: bgColor ?? GlobalColors.mainBg,
-          ),
+        Positioned.fill(
+          child: bgColor == null
+              ? Container(
+                  decoration: BoxDecoration(
+                      gradient: GlobalColors.gradientTop2Bottom(
+                          GlobalColors.gradientStart,
+                          GlobalColors.gradientEnd)),
+                )
+              : Container(color: bgColor),
         ),
         Positioned(
           child: child ?? Container(),

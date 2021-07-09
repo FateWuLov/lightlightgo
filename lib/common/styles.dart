@@ -30,8 +30,8 @@ class GlobalColors {
   static const Color tabDeselect = Color.fromRGBO(178, 200, 211, 1);
   static const Color unread = Color.fromRGBO(186, 91, 91, 1);
 
-  static const Color gradientStart = Color.fromRGBO(228, 167, 123, 1);
-  static const Color gradientEnd = Color.fromRGBO(228, 167, 123, 1);
+  static const Color gradientStart = Color.fromRGBO(241, 246, 249, 1);
+  static const Color gradientEnd = Color.fromRGBO(230, 238, 243, 1);
 
   static const Color discountGradientStart = Color.fromRGBO(255, 222, 178, 1);
   static const Color discountGradientEnd = Color.fromRGBO(224, 185, 133, 1);
