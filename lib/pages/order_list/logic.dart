@@ -2,13 +2,20 @@ import 'package:get/get.dart';
 import 'package:lifeaste/manager/net/apiManager.dart';
 import 'package:lifeaste/manager/net/networkResultData.dart';
 import 'package:lifeaste/models/orderModel.dart';
+import 'package:lifeaste/pages/order_detail/state.dart';
 
+import '../../routeConfig.dart';
 import 'state.dart';
 
 class OrderListLogic extends GetxController {
   final state = OrderListState();
 
-  void onClickOrder(OrderInfoModel model) {}
+  void onClickOrder(OrderInfoModel model) {
+    Get.toNamed(
+      RouteConfig.orderDetail,
+      arguments: OrderDetailPageArgs(model),
+    );
+  }
 
   void headerRefresh() {
     state.refreshController.loadComplete();

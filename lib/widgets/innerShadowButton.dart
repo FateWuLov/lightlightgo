@@ -144,7 +144,7 @@ class InnerShadowButton extends StatelessWidget {
                 child: Text(
                     title ?? '',
                     style: textStyleMedium(this.textSize ?? 12).copyWith(
-                        color: GlobalColors.invertText)
+                        color: GlobalColors.invert)
                 ),
               ),
         ),

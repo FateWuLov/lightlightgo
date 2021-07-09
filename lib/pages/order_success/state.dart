@@ -6,8 +6,8 @@ class OrderSuccessState {
 
   OrderSuccessState() {
     ///Initialize variables
-    OrderSuccessPageArgs? args = Get.arguments;
-    if (args != null) {
+    var args = Get.arguments;
+    if (args != null && args is OrderSuccessPageArgs) {
       order = args.order;
     }
   }

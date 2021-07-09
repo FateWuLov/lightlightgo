@@ -41,6 +41,10 @@ TextStyle themeTextStyleBold(double size) {
   return textStyleBold(size).copyWith(color: GlobalColors.themeText);
 }
 
+TextStyle subTextStyle(double size) {
+  return textStyleBold(size).copyWith(color: GlobalColors.subText);
+}
+
 TextStyle textStyleTitleBold(double size) {
   return TextStyle(
     fontFamily: 'Luminari',
@@ -1169,32 +1173,4 @@ List<String> monthStrList() => [
   'Oct',
   'Nov',
   'Dec'
-];
-
-List<String> orderStateStrList() => [
-  'Pending',
-  'Expired',
-  'Canceled',
-  'Awaiting Receipt',
-  'Completed',
-  'Declined',
-  '',
-  '',
-  '',
-  '',
-  'Draft'
-];
-
-List<Color> orderColorsList() => [
-  GlobalColors.orderPending,
-  GlobalColors.orderExpired,
-  GlobalColors.orderCanceled,
-  GlobalColors.orderAwaitingReceipt,
-  GlobalColors.orderCompleted,
-  GlobalColors.orderDecline,
-  GlobalColors.orderDecline,
-  GlobalColors.orderDecline,
-  GlobalColors.orderDecline,
-  GlobalColors.orderDecline,
-  GlobalColors.orderDraft,
 ];

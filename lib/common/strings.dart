@@ -8,6 +8,8 @@ class Strings {
   static const String question = 'Question:';
   static const String submitSuccessfully = 'Submit Successfully!';
   static const String viewDetails = "View Details";
+  static const String askNow = 'Ask Now';
+  static const String reply = 'Reply:';
 
   //title
   static const String message = 'Message';
@@ -112,7 +114,6 @@ class Strings {
   static const String submit = 'Submit';
   static const String explore = 'Explore';
   static const String save = 'Save';
-  static const String reply = 'Reply';
   static const String yes = 'Yes';
   static const String leave = 'Leave';
   static const String buy = 'Buy';
@@ -190,10 +191,10 @@ class Strings {
   static const String requestDetails = 'Request Details';
   static const String noOrderTips = 'Oops, there is no related order.';
   static const String dueTime = 'Due Time';
-  static const String deliveryTime = 'Delivery Time';
+  static const String deliveryTime = 'Delivered Time';
   static const String startTime = 'Start Time';
   static const String endTime = 'End Time';
-  static const String orderTime = 'Order Time';
+  static const String orderTime = 'Ordered Time';
   static const String canChatFor = 'You Can Chat For:';
   static const String readingServices = 'Reading Services';
   static const String servicesContent =
@@ -591,7 +592,6 @@ class Strings {
   static const String selectCard = 'Select card from the package';
   static const String itIsGoodTimeTo = 'It is a good time to:';
   static const String tarotWhatKnowMore = 'Wanna know more about your card?\nAsk ${TypicalKeys.appName} advisor for details!';
-  static const String askNow = 'Ask Now';
   static const String oneStepGetTarot = 'Only one step left to get your tarot reading.';
   static const String surePickNewCards = 'Sure to pick new cards?';
   static const String loveTarotRepealed = 'Your current result will not be saved.';

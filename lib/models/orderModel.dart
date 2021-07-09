@@ -1,4 +1,7 @@
+import 'dart:ui';
+
 import 'package:json_annotation/json_annotation.dart';
+import 'package:lifeaste/common/colors.dart';
 import 'package:lifeaste/common/strings.dart';
 import 'package:lifeaste/common/tools.dart';
 import 'package:lifeaste/common/typicalKeys.dart';
@@ -157,6 +160,36 @@ class OrderInfoModel {
     // 增值服务只有pending  hasReplied  expire  finish
     return service.type == ServiceType.serviceTypePremium.index &&
         (status == OrderStatusPending || status == OrderStatusHasReplied);
+  }
+
+  String statusTitle() {
+    switch (status) {
+      case OrderStatusPending: return Strings.pending;
+      case OrderStatusExpired: return Strings.expired;
+      case OrderStatusCancel: return Strings.canceled;
+      case OrderStatusHasReplied: return Strings.awaitingReceipt;
+      case OrderStatusCompleted: return Strings.completed;
+      case OrderStatusRejected: return Strings.declined;
+      case OrderStatusDraft: return Strings.draft;
+      default: {
+        return '';
+      }
+    }
+  }
+
+  Color statusColor() {
+    switch (status) {
+      case OrderStatusPending: return GlobalColors.orderPending;
+      case OrderStatusExpired: return GlobalColors.orderExpired;
+      case OrderStatusCancel: return GlobalColors.orderCanceled;
+      case OrderStatusHasReplied: return GlobalColors.orderAwaitingReceipt;
+      case OrderStatusCompleted: return GlobalColors.orderCompleted;
+      case OrderStatusRejected: return GlobalColors.orderDecline;
+      case OrderStatusDraft: return GlobalColors.orderDraft;
+      default: {
+        return GlobalColors.orderCanceled;
+      }
+    }
   }
 }
 

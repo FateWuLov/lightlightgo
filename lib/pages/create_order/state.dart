@@ -9,8 +9,8 @@ class CreateOrderState {
 
   CreateOrderState() {
     ///Initialize variables
-    CreateOrderPageArgs? args = Get.arguments;
-    if (args != null) {
+    var args = Get.arguments;
+    if (args != null && args is CreateOrderPageArgs) {
       star = args.star;
       service = args.service;
     }

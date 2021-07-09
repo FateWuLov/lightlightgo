@@ -17,13 +17,13 @@ class GlobalColors {
   static const Color mainTheme = Color.fromRGBO(77, 126, 150, 1);
   static const Color subTheme = Color.fromRGBO(202, 223, 235, 1);
   static const Color lightTheme = Color.fromRGBO(221, 232, 239, 1);
-  static const Color themeText = Color.fromRGBO(224, 185, 133, 1);
+  static const Color themeText = Color.fromRGBO(77, 126, 150, 1);
   static const Color darkThemeText = Colors.white;
   static const Color receiveBubble = Color.fromRGBO(114, 95, 84, 1);
   static const Color senderBubble = Color.fromRGBO(176, 154, 141, 1);
   static const Color inviteCodeText = Color.fromRGBO(220, 157, 75, 1);
 
-  static const Color themeLine = Color.fromRGBO(90, 71, 57, 1);
+  static const Color themeLine = Color.fromRGBO(209, 222, 229, 1);
   static const Color tabSelect = Color.fromRGBO(251, 139, 111, 1);
   static const Color tabDeselect = Color.fromRGBO(178, 200, 211, 1);
   static const Color unread = Color.fromRGBO(186, 91, 91, 1);
@@ -43,7 +43,7 @@ class GlobalColors {
   static const Color subText = Color.fromRGBO(133, 137, 161, 1);
   static const Color hintText = Color.fromRGBO(133, 137, 161, 1);
   // 反色文字
-  static const Color invertText = Colors.white;
+  static const Color invert = Colors.white;
 
   static const Color goldText = Color.fromRGBO(255, 163, 0, 1);
   static const Color redText = Color.fromRGBO(255, 0, 20, 1);
