@@ -94,11 +94,11 @@ class HomePage extends StatelessWidget {
                 ],
               ),
             ),
-            Text(
-              Strings.order,
-              style: Styles.textStyleMedium(12)
-                  .copyWith(color: active ? Styles.tabSelect : Styles.tabDeselect,),
-            ),
+            // Text(
+            //   Strings.order,
+            //   style: Styles.textStyleMedium(12)
+            //       .copyWith(color: active ? Styles.tabSelect : Styles.tabDeselect,),
+            // ),
           ],
         ),
       );
@@ -108,14 +108,14 @@ class HomePage extends StatelessWidget {
           children: [
             Expanded(
                 child: Image.asset(ImageNames.orders, color: active ? Styles.tabSelect : Styles.tabDeselect,)),
-            Container(
-              padding: EdgeInsets.only(left: 2),
-              child: Text(
-                Strings.order,
-                style: Styles.textStyleMedium(12)
-                    .copyWith(color: active ? Styles.tabSelect : Styles.tabDeselect,),
-              ),
-            ),
+            // Container(
+            //   padding: EdgeInsets.only(left: 2),
+            //   child: Text(
+            //     Strings.order,
+            //     style: Styles.textStyleMedium(12)
+            //         .copyWith(color: active ? Styles.tabSelect : Styles.tabDeselect,),
+            //   ),
+            // ),
           ],
         ),
       );
@@ -128,11 +128,11 @@ class HomePage extends StatelessWidget {
         children: [
           Expanded(
             child: Image.asset(active ? ImageNames.advisors : ImageNames.advisors2),),
-          Text(
-            Strings.advisor,
-            style: Styles.textStyleMedium(12)
-                .copyWith(color: active ? Styles.tabSelect : Styles.tabDeselect,),
-          ),
+          // Text(
+          //   Strings.advisor,
+          //   style: Styles.textStyleMedium(12)
+          //       .copyWith(color: active ? Styles.tabSelect : Styles.tabDeselect,),
+          // ),
         ],
       ),
     );
@@ -144,14 +144,14 @@ class HomePage extends StatelessWidget {
         children: [
           Expanded(
             child: Image.asset(active ? ImageNames.mine : ImageNames.mine2),),
-          Container(
-            padding: EdgeInsets.only(left: 2),
-            child: Text(
-              Strings.mine,
-              style: Styles.textStyleMedium(12)
-                  .copyWith(color: active ? Styles.tabSelect : Styles.tabDeselect,),
-            ),
-          ),
+          // Container(
+          //   padding: EdgeInsets.only(left: 2),
+          //   child: Text(
+          //     Strings.mine,
+          //     style: Styles.textStyleMedium(12)
+          //         .copyWith(color: active ? Styles.tabSelect : Styles.tabDeselect,),
+          //   ),
+          // ),
         ],
       ),
     );
