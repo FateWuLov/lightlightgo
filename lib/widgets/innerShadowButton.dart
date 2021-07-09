@@ -113,7 +113,7 @@ class InnerShadowButton extends StatelessWidget {
     this.onTap,
     this.child,
     this.enable = true,
-    this.borderRadius = 2,
+    this.borderRadius = 24,
     this.color = GlobalColors.buttonBg,
     this.borderColor,
     this.shadowColor,
