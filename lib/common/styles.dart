@@ -89,6 +89,9 @@ class GlobalColors {
 
   static const Color notifyApplyBackground = Color.fromRGBO(151, 104, 76, 0.9);
 
+  static const Color orderTimeColor = Color.fromRGBO(88, 98, 147, 1);
+  static const Color borderShadow = Color.fromRGBO(182, 207, 222, 0.6);
+
   static LinearGradient gradientTop2Bottom(Color start, Color end) {
     return LinearGradient(
         begin: Alignment.topCenter,
