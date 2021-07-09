@@ -45,7 +45,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
   Widget buildBaseView() {
     return BasePage(
       navBar: BaseNavBar(
-        centerItem: _navStarInfo(),
+        title: state.userInfo.name,
         leftAction: logic.onPopBack,
       ),
       child: SafeArea(
@@ -60,19 +60,6 @@ class _UserProfilePageState extends State<UserProfilePage> {
             _aboutContent(),
           ],
         )
-      ),
-    );
-  }
-
-  Widget _navStarInfo() {
-    return Container(
-      margin: EdgeInsets.only(right: 44),
-      alignment: Alignment.center,
-      child: Text(
-        breakWord(state.userInfo.name),
-        style: textStyleTitle(18),
-        maxLines: 1,
-        overflow: TextOverflow.ellipsis,
       ),
     );
   }

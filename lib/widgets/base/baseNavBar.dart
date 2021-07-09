@@ -61,7 +61,9 @@ class BaseNavBar extends StatelessWidget {
       return centerItem!;
     }
     return Container(
+      margin: EdgeInsets.only(right: showBackBtn  ? 44 : 0),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           titleLeft ?? Container(),
           Text(
