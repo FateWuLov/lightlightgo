@@ -73,13 +73,13 @@ class GlobalColors {
   static const Color tarotSection = Colors.black;
   static const Color tarotBorder = Color.fromRGBO(186, 126, 91, 1);
 
-  static const Color orderPending = Color.fromRGBO(202, 115, 86, 1);
-  static const Color orderExpired = Color.fromRGBO(64, 98, 154, 1);
-  static const Color orderCanceled = Color.fromRGBO(103, 106, 152, 1);
-  static const Color orderAwaitingReceipt = Color.fromRGBO(59, 127, 137, 1);
-  static const Color orderCompleted = Color.fromRGBO(93, 141, 90, 1);
-  static const Color orderDecline = Color.fromRGBO(182, 73, 73, 1);
-  static const Color orderDraft = Color.fromRGBO(59, 127, 137, 1);
+  static const Color orderPending = Color.fromRGBO(252, 152, 88, 1);
+  static const Color orderExpired = Color.fromRGBO(116, 111, 251, 1);
+  static const Color orderCanceled = Color.fromRGBO(178, 178, 178, 1);
+  static const Color orderAwaitingReceipt = Color.fromRGBO(255, 202, 41, 1);
+  static const Color orderCompleted = Color.fromRGBO(103, 214, 154, 1);
+  static const Color orderDecline = Color.fromRGBO(255, 117, 117, 1);
+  static const Color orderDraft = Color.fromRGBO(111, 187, 251, 1);
 
   static const Color coinsAvailable = Color.fromRGBO(251, 170, 123, 1);
   static const Color rateStarUnselected = Color.fromRGBO(87, 67, 48, 1);
