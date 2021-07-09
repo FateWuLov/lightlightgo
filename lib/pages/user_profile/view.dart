@@ -51,10 +51,10 @@ class _UserProfilePageState extends State<UserProfilePage> {
       child: SafeArea(
         child: ListView(
           shrinkWrap: true,
-          padding: EdgeInsets.symmetric(horizontal: 20),
+          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 44),
           physics: BouncingScrollPhysics(),
           children: [
-            SizedBox(height: 55,),
+            SizedBox(height: 11,),
             _userInfoView(),
             SizedBox(height: 20,),
             _aboutContent(),
