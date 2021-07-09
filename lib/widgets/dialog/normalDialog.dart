@@ -123,7 +123,7 @@ class _NormalDialogState extends State<NormalDialog>{
                           mainAxisAlignment:
                           MainAxisAlignment.spaceEvenly,
                           children: <Widget>[
-                            InnerShadowButton(
+                            CustomButton(
                               blur: 5,
                               width: 120,
                               height: 45,
@@ -150,7 +150,7 @@ class _NormalDialogState extends State<NormalDialog>{
                               height: 45,
                               onTap: _onTapMainAction,
                             ),
-                            InnerShadowButton(
+                            CustomButton(
                               blur: 5,
                               width: 120,
                               height: 45,

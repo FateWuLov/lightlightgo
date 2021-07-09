@@ -98,7 +98,7 @@ class _CreateOrderPageState extends State<CreateOrderPage> {
                   height: 48,
                   padding: const EdgeInsets.symmetric(horizontal: 12),
                   child: Obx(() {
-                    return InnerShadowButton(
+                    return CustomButton(
                       onTap: logic.onSubmit,
                       title: Strings.submit,
                       textSize: 18,

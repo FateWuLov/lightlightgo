@@ -55,7 +55,7 @@ class _OrderSuccessPageState extends State<OrderSuccessPage> {
               SizedBox(height: 11),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 12),
-                child: InnerShadowButton(
+                child: CustomButton(
                   onTap: logic.onViewDetail,
                   height: 48,
                   title: Strings.viewDetails,

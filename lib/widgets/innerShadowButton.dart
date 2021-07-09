@@ -86,7 +86,7 @@ enum ButtonType {
   solid
 }
 
-class InnerShadowButton extends StatelessWidget {
+class CustomButton extends StatelessWidget {
   final ButtonType buttonType;
   final String? title;
   final double? width;
@@ -102,7 +102,7 @@ class InnerShadowButton extends StatelessWidget {
   final Color? borderColor;
   final Color? shadowColor;
 
-  InnerShadowButton({
+  CustomButton({
     this.buttonType = ButtonType.innerShadow,
     this.title,
     this.width,

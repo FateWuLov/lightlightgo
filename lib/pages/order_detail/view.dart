@@ -70,7 +70,7 @@ class OrderDetailPage extends StatelessWidget {
     return Container(
       alignment: Alignment.center,
       padding: const EdgeInsets.only(right: 20),
-      child: InnerShadowButton(
+      child: CustomButton(
         width: 88,
         height: 26,
         title: Strings.askNow,

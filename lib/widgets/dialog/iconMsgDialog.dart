@@ -109,7 +109,7 @@ class _IconMsgDialogState extends State<IconMsgDialog> {
                     ],
                   ),
                   widget.buttonTitle != null && widget.buttonTitle?.isNotEmpty == true
-                      ? InnerShadowButton(
+                      ? CustomButton(
                     title: widget.buttonTitle,
                     textSize: 18,
                     width: 240,
