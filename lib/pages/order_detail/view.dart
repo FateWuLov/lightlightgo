@@ -7,6 +7,7 @@ import 'package:lifeaste/common/tools.dart';
 import 'package:lifeaste/models/orderModel.dart';
 import 'package:lifeaste/widgets/base/baseNavBar.dart';
 import 'package:lifeaste/widgets/base/basePage.dart';
+import 'package:lifeaste/widgets/gestureContainer.dart';
 import 'package:lifeaste/widgets/innerShadowButton.dart';
 import 'package:lifeaste/widgets/roundAvatar.dart';
 
@@ -49,7 +50,8 @@ class OrderDetailPage extends StatelessWidget {
   }
 
   Widget _navStarInfo() {
-    return Container(
+    return GestureContainer(
+      onTap: logic.onClickStar,
       child: Row(
         children: [
           RoundAvatar(32, state.starInfo.avatar),
