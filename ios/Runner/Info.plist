@@ -4,6 +4,8 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>CFBundleDisplayName</key>
+	<string>Lifeaste</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -11,7 +13,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>lifeaste</string>
+	<string>Lifeaste</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
@@ -22,6 +24,30 @@
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>Media</string>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>Bluetooth </string>
+	<key>NSCalendarsUsageDescription</key>
+	<string>Calendars</string>
+	<key>NSCameraUsageDescription</key>
+	<string>So you can conduct live video chat, record video media and take picture as profile avatar.</string>
+	<key>NSContactsUsageDescription</key>
+	<string>Contacts</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Use Location Description</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>So you can conduct live audio chat and record audio media.</string>
+	<key>NSMotionUsageDescription</key>
+	<string>Motion</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>So you can save media and upload your desirable picture from the album. </string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>So you can save media and upload your desirable picture from the album. </string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>Speech</string>
+	<key>NSUserTrackingUsageDescription</key>
+	<string>Your data will be used to help us analyze the key functional app event so we could further improve related features and services to better engage the user satisfaction.</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
