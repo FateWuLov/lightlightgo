@@ -41,6 +41,14 @@ class UserProfileLogic extends GetxController {
     }
   }
 
+  void onAskNow() {
+    ServiceInfoModel service = ServiceInfoModel.fromJson({});
+    service.type = ServiceType.serviceTypeText.index;
+    showNormalDialog(
+        arguments: CreateOrderPageArgs(state.userInfo, service),
+        child: CreateOrderPage());
+  }
+
   void onTapCollect() async {
     bool favorite = state.userInfo.favorite;
     showLoadingToast();

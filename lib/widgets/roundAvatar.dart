@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:lifeaste/common/colors.dart';
 import 'package:lifeaste/common/images.dart';
 
 class RoundAvatar extends StatelessWidget {
@@ -13,7 +14,14 @@ class RoundAvatar extends StatelessWidget {
         height: height,
         child: ClipRRect(
           borderRadius:BorderRadius.circular(height/2.0),
-          child: buildContent(),
+          child: Container(
+            decoration: BoxDecoration(
+              boxShadow: [
+                BoxShadow(color: GlobalColors.shadowColor, blurRadius: 18, offset: Offset(0, 8), spreadRadius: 0)
+              ]
+            ),
+            child: buildContent(),
+          ),
         )
     );
   }
