@@ -185,6 +185,7 @@ class Strings {
   static const String missingFile = 'Missing file.';
   static const String lackOfInformation = 'Lack of important information?';
   static const String add = 'Add';
+  static const String noOrder = 'There is no order yet, find your matched advisor and ask now.';
 
   static const String readingServiceSubTitle = 'Delivered within 24h';
   static const String checkDetails = 'Check Details';

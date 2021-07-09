@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lifeaste/common/images.dart';
 import 'package:lifeaste/common/strings.dart';
+import 'package:lifeaste/common/styles.dart';
 import 'package:lifeaste/models/orderModel.dart';
 import 'package:lifeaste/widgets/base/baseTabPage.dart';
 import 'package:lifeaste/widgets/loading.dart';
@@ -62,7 +63,22 @@ class OrderListPage extends StatelessWidget {
 
   Widget _emptyPlaceholder() {
     return Container(
-      child: Image.asset(ImageNames.ordersIllustration),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Image.asset(ImageNames.ordersIllustration),
+          SizedBox(height: 10,),
+          Container(
+            width: 260,
+            child: Text(
+              Strings.noOrder,
+              style: textStyleNormal(14).copyWith(color: GlobalColors.subText),
+              maxLines: 2,
+              textAlign: TextAlign.center,
+            ),
+          )
+        ],
+      )
     );
   }
 }
