@@ -40,46 +40,46 @@ class BossManager {
   }
 
   void requestConfig() async {
-    print('requestBossConfig');
-    int timestamp = DateTime.now().millisecondsSinceEpoch;
-    Map<String, dynamic> param = {
-      "client_name": "iOS_Genescope",
-      "client_version": Global.logic().state.packageInfo?.version,
-      "env": Global.logic().isDebugEnv() ? "dev" : "app",
-      "category": "app_info_config",
-      "timestamp": timestamp.toString(),
-    };
-    String accessKey = generateAccessKey(param);
-    String url = Info.BossURL + '/api/conf?accesskey=' + accessKey;
-    try {
-      var response = await _dio.post(url, data: param, options: null);
-      Map<String, dynamic> responseMap = response.data;
-      if (responseMap.keys.contains('d')) {
-        String string = responseMap['d'];
-        var key = XYQ.Key.fromUtf8('9g8ndXVCDLxUc3rF');
-        var encrypter = XYQ.Encrypter(XYQ.AES(key, mode: XYQ.AESMode.ecb));
-        final iv = IV.fromLength(16);
-        var decrypted = encrypter.decrypt64(string, iv: iv);
-        Map<String, dynamic> map = json.decode(decrypted);
-        responseMap = map;
-      }
-      isSynced = true;
-      print('requestBossConfig success');
-      try {
-        bossConfig = BossConfigModel.fromJson(responseMap);
-      } on Exception catch(e) {
-        print(e.toString());
-      }
-      eventBus.fire(BossConfigUpdateEvent());
-      _retryTimes = 0;
-    } on DioError catch (e) {
-      Duration duration = Duration(seconds: min(_retryTimes * 3 + _retryTimes ~/ 3 * 6, 120));
-      Future.delayed(duration, (){
-        requestConfig();
-      });
-      _retryTimes++;
-      print('requestBossConfig failed, ${e.toString()}');
-    }
+    // print('requestBossConfig');
+    // int timestamp = DateTime.now().millisecondsSinceEpoch;
+    // Map<String, dynamic> param = {
+    //   "client_name": "iOS_Genescope",
+    //   "client_version": Global.logic().state.packageInfo?.version,
+    //   "env": Global.logic().isDebugEnv() ? "dev" : "app",
+    //   "category": "app_info_config",
+    //   "timestamp": timestamp.toString(),
+    // };
+    // String accessKey = generateAccessKey(param);
+    // String url = Info.BossURL + '/api/conf?accesskey=' + accessKey;
+    // try {
+    //   var response = await _dio.post(url, data: param, options: null);
+    //   Map<String, dynamic> responseMap = response.data;
+    //   if (responseMap.keys.contains('d')) {
+    //     String string = responseMap['d'];
+    //     var key = XYQ.Key.fromUtf8('9g8ndXVCDLxUc3rF');
+    //     var encrypter = XYQ.Encrypter(XYQ.AES(key, mode: XYQ.AESMode.ecb));
+    //     final iv = IV.fromLength(16);
+    //     var decrypted = encrypter.decrypt64(string, iv: iv);
+    //     Map<String, dynamic> map = json.decode(decrypted);
+    //     responseMap = map;
+    //   }
+    //   isSynced = true;
+    //   print('requestBossConfig success');
+    //   try {
+    //     bossConfig = BossConfigModel.fromJson(responseMap);
+    //   } on Exception catch(e) {
+    //     print(e.toString());
+    //   }
+    //   eventBus.fire(BossConfigUpdateEvent());
+    //   _retryTimes = 0;
+    // } on DioError catch (e) {
+    //   Duration duration = Duration(seconds: min(_retryTimes * 3 + _retryTimes ~/ 3 * 6, 120));
+    //   Future.delayed(duration, (){
+    //     requestConfig();
+    //   });
+    //   _retryTimes++;
+    //   print('requestBossConfig failed, ${e.toString()}');
+    // }
   }
 
   String generateAccessKey(Map? params) {

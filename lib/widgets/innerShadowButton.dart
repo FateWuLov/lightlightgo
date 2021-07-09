@@ -132,7 +132,7 @@ class InnerShadowButton extends StatelessWidget {
           height: height,
           alignment: Alignment.center,
           decoration: BoxDecoration(
-            color: color,
+            color: enable ? color : GlobalColors.disableGrey,
             borderRadius: BorderRadius.circular(borderRadius),
           ),
           child: this.child ??

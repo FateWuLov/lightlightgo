@@ -1,4 +1,6 @@
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:lifeaste/common/strings.dart';
 import 'package:lifeaste/common/tools.dart';
 import 'package:lifeaste/logic/global.dart';
 import 'package:lifeaste/manager/net/apiManager.dart';
@@ -18,7 +20,20 @@ class CreateOrderLogic extends GetxController {
     Get.back();
   }
 
+  void onTapBg() {
+    FocusManager.instance.primaryFocus?.unfocus();
+  }
+
+  void onQuestionChange(String text) {
+    state.canSubmit.value = state.questionEditController.text.isNotEmpty;
+  }
+
   void onSubmit() async {
+    if (state.questionEditController.text.isEmpty) {
+      showTipsToast(Strings.inputQuestionTips);
+      return;
+    }
+    FocusManager.instance.primaryFocus?.unfocus();
     Map<String, dynamic> params = {
       'starId': state.star.userId,
       'type': state.service.type,
@@ -29,7 +44,7 @@ class CreateOrderLogic extends GetxController {
       'birthday': stringFromDate(DateTime(1991, 1, 1)),
       'gender': Global.userLogic().state.user.gender,
       'situation': 'test situation ${DateTime.now().toString()}',
-      'question': 'test question ${DateTime.now().toString()}',
+      'question': state.questionEditController.text,
       'rush': false,
       'attachedPictureUrl': ''
     };

@@ -10,6 +10,7 @@ class Strings {
   static const String viewDetails = "View Details";
   static const String askNow = 'Ask Now';
   static const String reply = 'Reply:';
+  static const String inputQuestionTips = 'Please input your question';
 
   //title
   static const String message = 'Message';
@@ -239,7 +240,6 @@ class Strings {
   static const String inputBirthTips = 'Please input your birth';
   static const String inputGenderTips = 'Please input your gender';
   static const String inputSituationTips = 'Please input your situation';
-  static const String inputQuestionTips = 'Please input your question';
   static const String messageHint = 'Message...';
   static const String selectReplyHint = 'Select message.';
 

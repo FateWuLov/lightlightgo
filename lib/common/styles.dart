@@ -51,7 +51,7 @@ class GlobalColors {
   static const Color orangeText = Color.fromRGBO(255, 172, 39, 1);
   static const Color brownText = Color.fromRGBO(108, 78, 61, 1);
 
-  static const Color disableGrey = Color.fromRGBO(112, 112, 112, 1);
+  static const Color disableGrey = Color.fromRGBO(172, 172, 172, 1);
   static const Color greyLine = Color.fromRGBO(14, 15, 16, 1);
   static const Color greyText = Color.fromRGBO(177, 177, 177, 1);
   static const Color grey102 = Color.fromRGBO(102, 102, 102, 1);
@@ -196,7 +196,7 @@ TextStyle themeTextStyleBold(double size) {
 }
 
 TextStyle subTextStyle(double size) {
-  return textStyleBold(size).copyWith(color: GlobalColors.subText);
+  return textStyleNormal(size).copyWith(color: GlobalColors.subText);
 }
 
 TextStyle textStyleTitleBold(double size) {

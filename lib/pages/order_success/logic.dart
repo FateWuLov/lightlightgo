@@ -12,6 +12,7 @@ class OrderSuccessLogic extends GetxController {
   }
 
   void onViewDetail() {
+    Get.back();
     Get.toNamed(
       RouteConfig.orderDetail,
       arguments: OrderDetailPageArgs(state.order),
