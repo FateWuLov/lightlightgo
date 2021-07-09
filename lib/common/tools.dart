@@ -5,9 +5,7 @@ import 'dart:math';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lifeaste/common/size_config.dart';
-import 'package:lifeaste/common/strings.dart';
-import 'package:lifeaste/common/info.dart';
+import 'package:lifeaste/common/common.dart';
 import 'package:lifeaste/logic/global.dart';
 import 'package:lifeaste/manager/BossManager.dart';
 import 'package:lifeaste/manager/hiveManager.dart';
@@ -50,7 +48,7 @@ showLoadingToast({double? opacity}) {
   cleanAllToast();
   BotToast.showCustomLoading(
     toastBuilder: (CancelFunc cancelFunc) => Container(
-      color: GlobalColors.tabBg.withOpacity(alpha),
+      color: Styles.tabBg.withOpacity(alpha),
       alignment: Alignment.center,
       child: LoadingView(),
     ),
@@ -68,7 +66,7 @@ showTipsToast(String string, {double? durationTime, VoidCallback? onDismiss}) {
       toastBuilder: (CancelFunc cancelFunc) => Card(
         margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
         shape: StadiumBorder(),
-        color: GlobalColors.tabBg.withOpacity(0.95),
+        color: Styles.tabBg.withOpacity(0.95),
         // elevation: 1,
         child: Container(
           decoration: BoxDecoration(
@@ -80,8 +78,7 @@ showTipsToast(String string, {double? durationTime, VoidCallback? onDismiss}) {
           child: Text(
             string,
             textAlign: TextAlign.center,
-            style: mainTextStyleNormal(14)
-                .copyWith(fontWeight: FontWeight.w700),
+            style: Styles.textStyleBold(14),
           ),
         ),
       ),

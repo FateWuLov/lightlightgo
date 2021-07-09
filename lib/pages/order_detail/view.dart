@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lifeaste/common/styles.dart';
+import 'package:lifeaste/common/common.dart';
 import 'package:lifeaste/common/size_config.dart';
-import 'package:lifeaste/common/strings.dart';
-import 'package:lifeaste/common/tools.dart';
 import 'package:lifeaste/models/orderModel.dart';
 import 'package:lifeaste/widgets/base/baseNavBar.dart';
 import 'package:lifeaste/widgets/base/basePage.dart';
@@ -59,7 +57,7 @@ class OrderDetailPage extends StatelessWidget {
           Expanded(
               child: Text(
             state.starInfo.name,
-            style: textStyleBold(18),
+            style: Styles.textStyleBold(18),
           )),
         ],
       ),
@@ -74,7 +72,7 @@ class OrderDetailPage extends StatelessWidget {
         width: 88,
         height: 26,
         title: Strings.askNow,
-        buttonType: ButtonType.solid,
+        textSize: 14,
         onTap: logic.onAsk,
       ),
     );
@@ -84,11 +82,11 @@ class OrderDetailPage extends StatelessWidget {
     return Container(
       height: 130,
       decoration: BoxDecoration(
-        color: GlobalColors.mainBg,
+        color: Styles.mainBg,
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: GlobalColors.lightTheme,
+            color: Styles.lightTheme,
             offset: Offset(0, 8),
             blurRadius: 18,
           )
@@ -101,11 +99,11 @@ class OrderDetailPage extends StatelessWidget {
             height: 53,
             margin: EdgeInsets.all(1),
             decoration: BoxDecoration(
-                color: GlobalColors.invert,
+                color: Styles.invert,
                 borderRadius: BorderRadius.circular(16),
                 boxShadow: [
                   BoxShadow(
-                    color: GlobalColors.lightTheme.withOpacity(0.5),
+                    color: Styles.lightTheme.withOpacity(0.5),
                     offset: Offset(0, 8),
                     blurRadius: 20,
                   )
@@ -114,16 +112,16 @@ class OrderDetailPage extends StatelessWidget {
             child: Row(
               children: [
                 SizedBox(width: 12),
-                Text(state.order.service.title(), style: textStyleNormal(16)),
+                Text(state.order.service.title(), style: Styles.textStyle(16)),
                 Container(
                   width: 1,
                   height: 12,
                   margin: EdgeInsets.symmetric(horizontal: 10),
-                  color: GlobalColors.themeLine,
+                  color: Styles.themeLine,
                 ),
                 Text(
                   state.seenStatusTitle(),
-                  style: textStyleBold(16)
+                  style: Styles.textStyleBold(16)
                       .copyWith(color: state.seenStatusColor()),
                 ),
               ],
@@ -137,10 +135,10 @@ class OrderDetailPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(state.startTimeTitle(), style: themeTextStyleBold(14)),
+                    Text(state.startTimeTitle(), style: Styles.themeTextStyleBold(14)),
                     SizedBox(height: 3),
                     Text(stringFromTimestamp(state.order.createTime),
-                        style: subTextStyle(10)),
+                        style: Styles.subTextStyle(10)),
                   ],
                 ),
                 Spacer(),
@@ -148,9 +146,9 @@ class OrderDetailPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(state.endTimeTitle(), style: themeTextStyleBold(14)),
+                    Text(state.endTimeTitle(), style: Styles.themeTextStyleBold(14)),
                     SizedBox(height: 3),
-                    Text(state.endTimestampStr(), style: subTextStyle(10)),
+                    Text(state.endTimestampStr(), style: Styles.subTextStyle(10)),
                   ],
                 ),
                 SizedBox(width: 12),
@@ -165,11 +163,11 @@ class OrderDetailPage extends StatelessWidget {
   Widget _questionInfo() {
     return Container(
       decoration: BoxDecoration(
-          color: GlobalColors.invert,
+          color: Styles.invert,
           borderRadius: BorderRadius.circular(16),
           boxShadow: [
             BoxShadow(
-              color: GlobalColors.lightTheme,
+              color: Styles.lightTheme,
               offset: Offset(0, 8),
               blurRadius: 18,
             )
@@ -180,12 +178,12 @@ class OrderDetailPage extends StatelessWidget {
         children: [
           Text(
             Strings.question,
-            style: textStyleBold(18),
+            style: Styles.textStyleBold(18),
           ),
           SizedBox(height: 6),
           Text(
             state.order.question,
-            style: subTextStyle(14),
+            style: Styles.subTextStyle(14),
           ),
           SizedBox(height: 6),
         ],
@@ -201,12 +199,12 @@ class OrderDetailPage extends StatelessWidget {
         children: [
           Text(
             Strings.reply,
-            style: textStyleBold(18),
+            style: Styles.textStyleBold(18),
           ),
           SizedBox(height: 20),
           Container(
             decoration: BoxDecoration(
-              color: GlobalColors.subTheme,
+              color: Styles.subTheme,
               borderRadius: BorderRadius.circular(16),
             ),
             padding: EdgeInsets.symmetric(horizontal: 12, vertical: 24),
@@ -214,7 +212,7 @@ class OrderDetailPage extends StatelessWidget {
               alignment: Alignment.centerLeft,
               child: Text(
                 state.order.answer.text,
-                style: textStyleNormal(14),
+                style: Styles.textStyle(14),
               ),
             ),
           ),
@@ -226,14 +224,14 @@ class OrderDetailPage extends StatelessWidget {
   Widget _footer() {
     return Container(
       decoration: BoxDecoration(
-        color: GlobalColors.lightTheme,
+        color: Styles.lightTheme,
       ),
       width: SizeConfig.screenWidth,
       height: 60,
       child: Center(
         child: Text(
           Strings.waitReply,
-          style: textStyleBold(16).copyWith(color: GlobalColors.tabDeselect),
+          style: Styles.textStyleBold(16).copyWith(color: Styles.tabDeselect),
         ),
       ),
     );

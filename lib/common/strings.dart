@@ -1,6 +1,5 @@
 import 'dart:io';
-
-import 'package:lifeaste/common/info.dart';
+import 'package:lifeaste/common/common.dart';
 import 'package:lifeaste/manager/BossManager.dart';
 
 class Strings {

@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:lifeaste/common/images.dart';
-import 'package:lifeaste/common/styles.dart';
+import 'package:lifeaste/common/common.dart';
 
 enum AvatarViewShape {
   round,
@@ -28,10 +27,10 @@ class AvatarView extends StatelessWidget {
           width: height,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(borderRadius),
-              border: Border.all(color: GlobalColors.darkThemeText, width: 2),
-              color: GlobalColors.grey216,
+              border: Border.all(color: Styles.invert, width: 2),
+              color: Styles.lightTheme,
               boxShadow: [
-                BoxShadow(color: GlobalColors.squareAvatarShadow, blurRadius: 6, offset: Offset(0, 1))
+                BoxShadow(color: Styles.squareAvatarShadow, blurRadius: 6, offset: Offset(0, 1))
               ]
           ),
           child: ClipRRect(
@@ -46,7 +45,7 @@ class AvatarView extends StatelessWidget {
             height: height,
             decoration: BoxDecoration(
                 boxShadow: [
-                  BoxShadow(color: GlobalColors.roundAvatarShadow, blurRadius: 10, offset: Offset(0, 4))
+                  BoxShadow(color: Styles.roundAvatarShadow, blurRadius: 10, offset: Offset(0, 4))
                 ]
             ),
             child: ClipRRect(

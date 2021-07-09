@@ -105,16 +105,9 @@ flutter:
   fonts:
     - family: Gilroy
       fonts:
-        - asset: resources/fonts/gilroy.otf
-    - family: Baskerville
+        - asset: resources/fonts/gilroy-regular.otf
+        - asset: resources/fonts/gilroy-medium.otf
+        - asset: resources/fonts/gilroy-bold.otf
+    - family: Folbo
       fonts:
-        - asset: resources/fonts/Baskerville.ttf
-    - family: Luminari
-      fonts:
-        - asset: resources/fonts/luminari.ttf
-    - family: Baskerville-SemiBold
-      fonts:
-        - asset: resources/fonts/Baskerville-SemiBold.ttf
-    - family: Jost-SemiBold
-      fonts:
-        - asset: resources/fonts/Jost-SemiBold.ttf
+        - asset: resources/fonts/fulbo-argenta.otf

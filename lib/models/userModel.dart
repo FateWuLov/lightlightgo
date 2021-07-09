@@ -5,10 +5,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:lifeaste/common/styles.dart';
-import 'package:lifeaste/common/strings.dart';
-import 'package:lifeaste/common/tools.dart';
-import 'package:lifeaste/common/info.dart';
+import 'package:lifeaste/common/common.dart';
 import 'package:lifeaste/logic/global.dart';
 import 'package:lifeaste/manager/BossManager.dart';
 import 'package:lifeaste/manager/hiveManager.dart';
@@ -605,16 +602,16 @@ class UserInfoModel {
 
   Color liveStatusColor() {
     if (workStatus != WorkStatusAvailable) {
-      return GlobalColors.grey166;
+      return Styles.grey166;
     }
     switch (liveStatus) {
       case OnlineModeOnline:
         {
-          return GlobalColors.online;
+          return Styles.online;
         }
       case OnlineModeBusy:
         {
-          return GlobalColors.busy;
+          return Styles.busy;
         }
       default:
         return Colors.transparent;

@@ -1,7 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:lifeaste/common/strings.dart';
-import 'package:lifeaste/common/tools.dart';
+import 'package:lifeaste/common/common.dart';
 import 'package:lifeaste/logic/global.dart';
 import 'package:lifeaste/manager/net/apiManager.dart';
 import 'package:lifeaste/manager/net/networkResultData.dart';

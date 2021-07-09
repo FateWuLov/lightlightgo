@@ -1,10 +1,7 @@
 import 'dart:ui';
 
 import 'package:json_annotation/json_annotation.dart';
-import 'package:lifeaste/common/styles.dart';
-import 'package:lifeaste/common/strings.dart';
-import 'package:lifeaste/common/tools.dart';
-import 'package:lifeaste/common/info.dart';
+import 'package:lifeaste/common/common.dart';
 import 'package:lifeaste/logic/global.dart';
 import 'package:lifeaste/manager/BossManager.dart';
 
@@ -179,15 +176,15 @@ class OrderInfoModel {
 
   Color statusColor() {
     switch (status) {
-      case OrderStatusPending: return GlobalColors.orderPending;
-      case OrderStatusExpired: return GlobalColors.orderExpired;
-      case OrderStatusCancel: return GlobalColors.orderCanceled;
-      case OrderStatusHasReplied: return GlobalColors.orderAwaitingReceipt;
-      case OrderStatusCompleted: return GlobalColors.orderCompleted;
-      case OrderStatusRejected: return GlobalColors.orderDecline;
-      case OrderStatusDraft: return GlobalColors.orderDraft;
+      case OrderStatusPending: return Styles.orderPending;
+      case OrderStatusExpired: return Styles.orderExpired;
+      case OrderStatusCancel: return Styles.orderCanceled;
+      case OrderStatusHasReplied: return Styles.orderAwaitingReceipt;
+      case OrderStatusCompleted: return Styles.orderCompleted;
+      case OrderStatusRejected: return Styles.orderDecline;
+      case OrderStatusDraft: return Styles.orderDraft;
       default: {
-        return GlobalColors.orderCanceled;
+        return Styles.orderCanceled;
       }
     }
   }

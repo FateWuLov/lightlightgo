@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lifeaste/common/styles.dart';
-import 'package:lifeaste/common/images.dart';
-import 'package:lifeaste/common/strings.dart';
-import 'package:lifeaste/common/tools.dart';
+import 'package:lifeaste/common/common.dart';
 import 'package:lifeaste/widgets/innerShadowButton.dart';
 
 import 'logic.dart';
@@ -33,7 +30,7 @@ class _OrderSuccessPageState extends State<OrderSuccessPage> {
         padding: EdgeInsets.symmetric(horizontal: 22),
         child: Container(
           decoration: BoxDecoration(
-            color: GlobalColors.mainBg,
+            color: Styles.mainBg,
             borderRadius: BorderRadius.circular(16)
           ),
           child: Column(
@@ -51,7 +48,7 @@ class _OrderSuccessPageState extends State<OrderSuccessPage> {
               SizedBox(height: 11),
               Image.asset(ImageNames.illustration),
               SizedBox(height: 1),
-              Text(Strings.submitSuccessfully, style: textStyleBold(18),),
+              Text(Strings.submitSuccessfully, style: Styles.textStyleBold(18),),
               SizedBox(height: 11),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 12),

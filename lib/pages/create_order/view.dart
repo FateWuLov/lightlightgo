@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lifeaste/common/styles.dart';
-import 'package:lifeaste/common/images.dart';
-import 'package:lifeaste/common/strings.dart';
-import 'package:lifeaste/common/tools.dart';
+import 'package:lifeaste/common/common.dart';
 import 'package:lifeaste/widgets/gestureContainer.dart';
 import 'package:lifeaste/widgets/innerShadowButton.dart';
 
@@ -37,7 +34,7 @@ class _CreateOrderPageState extends State<CreateOrderPage> {
         child: Center(
           child: Container(
             decoration: BoxDecoration(
-              color: GlobalColors.mainBg,
+              color: Styles.mainBg,
               borderRadius: BorderRadius.circular(16),
             ),
             child: Column(
@@ -51,7 +48,7 @@ class _CreateOrderPageState extends State<CreateOrderPage> {
                       SizedBox(width: 26),
                       Text(
                         Strings.question,
-                        style: textStyleBold(18),
+                        style: Styles.textStyleBold(18),
                       ),
                       Spacer(),
                       IconButton(
@@ -66,11 +63,11 @@ class _CreateOrderPageState extends State<CreateOrderPage> {
                   height: 118,
                   margin: EdgeInsets.symmetric(horizontal: 12),
                   decoration: BoxDecoration(
-                      color: GlobalColors.invert,
+                      color: Styles.invert,
                       borderRadius: BorderRadius.circular(16),
                       boxShadow: [
                         BoxShadow(
-                          color: GlobalColors.lightTheme,
+                          color: Styles.lightTheme,
                           blurRadius: 18,
                           offset: Offset(0, 8),
                         )
@@ -79,8 +76,8 @@ class _CreateOrderPageState extends State<CreateOrderPage> {
                     onChanged: logic.onQuestionChange,
                     controller: state.questionEditController,
                     decoration: InputDecoration(
-                      focusColor: GlobalColors.mainTheme,
-                      hintStyle: subTextStyle(14),
+                      focusColor: Styles.mainTheme,
+                      hintStyle: Styles.subTextStyle(14),
                       enabledBorder: InputBorder.none,
                       disabledBorder: InputBorder.none,
                       focusedBorder: InputBorder.none,
@@ -89,7 +86,7 @@ class _CreateOrderPageState extends State<CreateOrderPage> {
                           horizontal: 12, vertical: 18),
                     ),
                     maxLines: 5,
-                    style: textStyleNormal(14),
+                    style: Styles.textStyle(14),
                     scrollPadding: EdgeInsets.only(bottom: 50),
                   ),
                 ),

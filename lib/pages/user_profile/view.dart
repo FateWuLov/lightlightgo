@@ -1,14 +1,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lifeaste/common/styles.dart';
-import 'package:lifeaste/common/images.dart';
+import 'package:lifeaste/common/common.dart';
 import 'package:lifeaste/common/size_config.dart';
-import 'package:lifeaste/common/strings.dart';
-import 'package:lifeaste/common/tools.dart';
 import 'package:lifeaste/pages/user_profile/state.dart';
 import 'package:lifeaste/widgets/base/baseNavBar.dart';
 import 'package:lifeaste/widgets/base/basePage.dart';
+import 'package:lifeaste/widgets/innerShadowButton.dart';
 import 'package:lifeaste/widgets/roundAvatar.dart';
 
 import 'logic.dart';
@@ -58,10 +56,9 @@ class _UserProfilePageState extends State<UserProfilePage> {
             _userInfoView(),
             SizedBox(height: 20,),
             _aboutContent(),
-          ],
-        )
-      ),
-    );
+        ],
+      )
+    ));
   }
 
   Widget _userInfoView() {
@@ -77,30 +74,20 @@ class _UserProfilePageState extends State<UserProfilePage> {
               width: getProportionateScreenWidth(335),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(16),
-                  color: GlobalColors.darkThemeText,
+                  color: Styles.invert,
                   boxShadow: [
-                    BoxShadow(color: GlobalColors.shadowColor, blurRadius: 18, offset: Offset(0, 8), spreadRadius: 0)
+                    BoxShadow(color: Styles.shadowColor, blurRadius: 18, offset: Offset(0, 8), spreadRadius: 0)
                   ]
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   SizedBox(height: 70,),
-                  GestureDetector(
+                  CustomButton(
                     onTap: logic.onAskNow,
-                    child: Container(
-                      width: 311,
-                      height: 41,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(24),
-                        color: GlobalColors.buttonBg
-                      ),
-                      alignment: Alignment.center,
-                      child: Text(
-                        Strings.askNow,
-                        style: textStyleBold(18).copyWith(color: GlobalColors.darkThemeText),
-                      ),
-                    ),
+                    width: 311,
+                    height: 41,
+                    title: Strings.askNow,
                   ),
                   SizedBox(height: 24,)
                 ],
@@ -128,9 +115,9 @@ class _UserProfilePageState extends State<UserProfilePage> {
       padding: EdgeInsets.fromLTRB(12, 18, 12, 23),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
-          color: GlobalColors.darkThemeText,
+          color: Styles.invert,
           boxShadow: [
-            BoxShadow(color: GlobalColors.shadowColor, blurRadius: 18, offset: Offset(0, 8), spreadRadius: 0)
+            BoxShadow(color: Styles.shadowColor, blurRadius: 18, offset: Offset(0, 8), spreadRadius: 0)
           ]
       ),
       child: Align(
@@ -140,7 +127,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
           children: <Widget>[
             Text(
               Strings.about,
-              style: textStyleBold(18),
+              style: Styles.textStyleBold(18),
             ),
             SizedBox(
               height: 6,
@@ -149,7 +136,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
               state.userInfo.about.length > 0
                   ? state.userInfo.about
                   : Strings.aboutHold,
-              style: subTextStyleNormal(14),
+              style: Styles.subTextStyle(14),
               softWrap: true,
             )
           ],

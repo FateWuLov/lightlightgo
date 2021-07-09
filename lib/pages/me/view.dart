@@ -1,11 +1,8 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lifeaste/common/styles.dart';
-import 'package:lifeaste/common/images.dart';
+import 'package:lifeaste/common/common.dart';
 import 'package:lifeaste/common/size_config.dart';
-import 'package:lifeaste/common/strings.dart';
-import 'package:lifeaste/common/tools.dart';
 import 'package:lifeaste/logic/global.dart';
 import 'package:lifeaste/widgets/base/baseTabPage.dart';
 import 'package:lifeaste/widgets/roundAvatar.dart';
@@ -39,14 +36,14 @@ class MePage extends StatelessWidget {
                     child: Text(
                       Global.logic().getVersionStr(),
                       textAlign: TextAlign.center,
-                      style: greyTextStyleNormal(12),
+                      style: Styles.subTextStyle(12),
                     )),
                 SizedBox(height: 10),
                 Visibility(
                   child: Center(
                       child: Text(
                         runtimeType.toString(),
-                        style: subTextStyleNormal(12),
+                        style: Styles.subTextStyle(12),
                       )),
                   visible: runtimeType.toString().toLowerCase() ==
                       'profileview',
@@ -67,9 +64,9 @@ class MePage extends StatelessWidget {
         padding: EdgeInsets.fromLTRB(12, 0, 9, 0),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16),
-            color: GlobalColors.darkThemeText,
+            color: Styles.invert,
             boxShadow: [
-              BoxShadow(color: GlobalColors.shadowColor, blurRadius: 18, offset: Offset(0, 8), spreadRadius: 0)
+              BoxShadow(color: Styles.shadowColor, blurRadius: 18, offset: Offset(0, 8), spreadRadius: 0)
             ]
         ),
         child: Row(
@@ -82,7 +79,7 @@ class MePage extends StatelessWidget {
             ),
             Text(
               title,
-              style: textStyleMedium(16),
+              style: Styles.textStyleMedium(16),
             ),
             Expanded(
               child: Container(),
@@ -112,9 +109,9 @@ class MePage extends StatelessWidget {
                 width: getProportionateScreenWidth(335),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(16),
-                    color: GlobalColors.darkThemeText,
+                    color: Styles.invert,
                     boxShadow: [
-                      BoxShadow(color: GlobalColors.shadowColor, blurRadius: 18, offset: Offset(0, 8), spreadRadius: 0)
+                      BoxShadow(color: Styles.shadowColor, blurRadius: 18, offset: Offset(0, 8), spreadRadius: 0)
                     ]
                 ),
                 child: Column(
@@ -129,7 +126,7 @@ class MePage extends StatelessWidget {
                             state.userInfo.value.name,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
-                            style: textStyleTitleBold(18).copyWith(color: GlobalColors.mainText),
+                            style: Styles.textStyleBold(18),
                           );
                         }),
                         // SizedBox(width: 3),
@@ -152,8 +149,7 @@ class MePage extends StatelessWidget {
                           padding: EdgeInsets.only(left: 25, right: 25),
                           child: AutoSizeText(
                             state.userInfo.value.bio,
-                            style: textStyleMedium(14)
-                                .copyWith(color: GlobalColors.mainText),
+                            style: Styles.textStyleMedium(14),
                             maxLines: 4,
                             minFontSize: 12,
                           ),
@@ -199,9 +195,9 @@ class MePage extends StatelessWidget {
               width: getProportionateScreenWidth(335),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(16),
-                  color: GlobalColors.darkThemeText,
+                  color: Styles.invert,
                   boxShadow: [
-                    BoxShadow(color: GlobalColors.shadowColor, blurRadius: 18, offset: Offset(0, 8), spreadRadius: 0)
+                    BoxShadow(color: Styles.shadowColor, blurRadius: 18, offset: Offset(0, 8), spreadRadius: 0)
                   ]
               ),
               child: Column(
@@ -215,7 +211,7 @@ class MePage extends StatelessWidget {
                           state.userInfo.value.name,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
-                          style: textStyleTitleBold(18).copyWith(color: GlobalColors.mainText),
+                          style: Styles.textStyleBold(18),
                         );
                       }),
                       // SizedBox(width: 3),
@@ -238,8 +234,7 @@ class MePage extends StatelessWidget {
                         padding: EdgeInsets.only(left: 25, right: 25),
                         child: AutoSizeText(
                           state.userInfo.value.bio,
-                          style: textStyleMedium(14)
-                              .copyWith(color: GlobalColors.mainText),
+                          style: Styles.textStyleMedium(14),
                           maxLines: 4,
                           minFontSize: 12,
                         ),

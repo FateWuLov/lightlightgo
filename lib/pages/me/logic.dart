@@ -1,8 +1,7 @@
 import 'dart:io';
 
 import 'package:get/get.dart';
-import 'package:lifeaste/common/tools.dart';
-import 'package:lifeaste/common/info.dart';
+import 'package:lifeaste/common/common.dart';
 import 'package:lifeaste/manager/analyticsManager.dart';
 
 import '../../routeConfig.dart';

@@ -77,14 +77,14 @@ showCatchError() {
                 children: [
                   Text(
                     details.exception.toString(),
-                    style: mainTextStyleNormal(12),
+                    style: Styles.textStyle(12),
                   ),
                   SizedBox(
                     height: 8,
                   ),
                   Text(
                     details.stack.toString(),
-                    style: mainTextStyleNormal(10),
+                    style: Styles.textStyle(10),
                   ),
                 ],
               ),

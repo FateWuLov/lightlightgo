@@ -1,7 +1,6 @@
 
-
-import 'package:lifeaste/common/tools.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:lifeaste/common/common.dart';
 
 part 'rewardModel.g.dart';
 

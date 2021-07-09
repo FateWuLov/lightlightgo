@@ -1,8 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:lifeaste/common/styles.dart';
-import 'package:lifeaste/common/strings.dart';
-import 'package:lifeaste/common/tools.dart';
+import 'package:lifeaste/common/common.dart';
 import 'package:lifeaste/logic/global.dart';
 import 'package:lifeaste/models/userModel.dart';
 import 'package:lifeaste/widgets/gestureContainer.dart';
@@ -22,9 +20,9 @@ class StarCard extends StatelessWidget {
       margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
-          color: GlobalColors.darkThemeText,
+          color: Styles.invert,
           boxShadow: [
-            BoxShadow(color: GlobalColors.shadowColor, blurRadius: 18, offset: Offset(0, 8), spreadRadius: 0)
+            BoxShadow(color: Styles.shadowColor, blurRadius: 18, offset: Offset(0, 8), spreadRadius: 0)
           ]
       ),
       child: GestureContainer(
@@ -41,13 +39,13 @@ class StarCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(star.name, style: textStyleBold(16),),
+                    Text(star.name, style: Styles.textStyleBold(16),),
                     SizedBox(height: 3,),
                     Container(
                       width: 245,
                       child: AutoSizeText(
                         star.bio,
-                        style: textStyleNormal(12),
+                        style: Styles.textStyle(12),
                         minFontSize: 6,
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
@@ -58,21 +56,11 @@ class StarCard extends StatelessWidget {
               ],
             ),
             SizedBox(height: 17,),
-            GestureDetector(
+            CustomButton(
               onTap: onAsk,
-              child: Container(
-                height: 41,
-                width: 311,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(24),
-                    color: GlobalColors.buttonBg
-                ),
-                alignment: Alignment.center,
-                child: Text(
-                  Strings.askNow,
-                  style: textStyleBold(18).copyWith(color: GlobalColors.darkThemeText),
-                ),
-              ),
+              height: 41,
+              width: 311,
+              title: Strings.askNow,
             ),
             SizedBox(height: 17,),
           ],

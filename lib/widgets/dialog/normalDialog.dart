@@ -2,11 +2,8 @@ import 'package:get/get.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-import 'package:lifeaste/common/styles.dart';
-import 'package:lifeaste/common/images.dart';
+import 'package:lifeaste/common/common.dart';
 import 'package:lifeaste/common/size_config.dart';
-import 'package:lifeaste/common/strings.dart';
-import 'package:lifeaste/common/tools.dart';
 
 import '../innerShadowButton.dart';
 
@@ -95,9 +92,9 @@ class _NormalDialogState extends State<NormalDialog>{
                           child: Text(
                             widget.title ?? '',
                             textAlign: TextAlign.center,
-                            style: textStyleNormal(18).copyWith(
+                            style: Styles.textStyle(18).copyWith(
                               color: widget.titleColor ??
-                                  GlobalColors.mainText,
+                                  Styles.mainText,
                             ),
                           ),
                         ),
@@ -112,7 +109,7 @@ class _NormalDialogState extends State<NormalDialog>{
                           child: Text(
                             widget.content ?? '',
                             // textAlign: TextAlign.center,
-                            style: subTextStyleNormal(14),
+                            style: Styles.subTextStyle(14),
                           ),
                         ),
                         SizedBox(

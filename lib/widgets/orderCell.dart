@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:lifeaste/common/common.dart';
 import 'package:lifeaste/common/size_config.dart';
-import 'package:lifeaste/common/styles.dart';
-import 'package:lifeaste/common/tools.dart';
 import 'package:lifeaste/models/orderModel.dart';
 import 'package:lifeaste/widgets/roundAvatar.dart';
 
@@ -54,7 +53,7 @@ class OrderCell extends StatelessWidget {
                 width: getProportionateScreenWidth(335),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(16),
-                    color: GlobalColors.subTheme,
+                    color: Styles.subTheme,
                 ),
               ),
             ),
@@ -65,15 +64,15 @@ class OrderCell extends StatelessWidget {
                 width: getProportionateScreenWidth(335),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(16),
-                  color: GlobalColors.darkThemeText,
+                  color: Styles.invert,
                   boxShadow: [
                     BoxShadow(
-                      color: GlobalColors.shadowColor,
+                      color: Styles.shadowColor,
                       blurRadius: 18,
                       offset: Offset(0, 8),
                     ),
                     BoxShadow(
-                      color: GlobalColors.borderShadow,
+                      color: Styles.borderShadow,
                       blurRadius: 12,
                       offset: Offset(0, -6),
                     ),
@@ -86,16 +85,16 @@ class OrderCell extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                        Text(order.service.title(), style: textStyleNormal(16)),
+                        Text(order.service.title(), style: Styles.textStyle(16)),
                         Container(
                           width: 1,
                           height: 12,
                           margin: EdgeInsets.symmetric(horizontal: 10),
-                          color: GlobalColors.themeLine,
+                          color: Styles.themeLine,
                         ),
                         Text(
                           seenStatusTitle(),
-                          style: textStyleBold(16)
+                          style: Styles.textStyleBold(16)
                               .copyWith(color: seenStatusColor()),
                         ),
                       ],
@@ -103,7 +102,7 @@ class OrderCell extends StatelessWidget {
                     SizedBox(height: 10,),
                     Text(
                       order.question,
-                      style: textStyleNormal(14),
+                      style: Styles.textStyle(14),
                     ),
                   ],
                 ),
@@ -126,7 +125,7 @@ class OrderCell extends StatelessWidget {
                           margin: EdgeInsets.only(top: 15),
                           child: Text(
                             order.starInfo.name,
-                            style: textStyleBold(18),
+                            style: Styles.textStyleBold(18),
                           ),
                         ),
                       ],
@@ -134,7 +133,7 @@ class OrderCell extends StatelessWidget {
                     Container(
                       margin: EdgeInsets.only(top: 15),
                       child: Text(stringFromTimestamp(order.createTime),
-                          style: textStyleNormal(8).copyWith(color: GlobalColors.orderTimeColor)),
+                          style: Styles.textStyle(8).copyWith(color: Styles.orderTimeColor)),
                     ),
                   ],
                 ),

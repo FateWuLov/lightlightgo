@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lifeaste/common/styles.dart';
+import 'package:lifeaste/common/common.dart';
 import 'package:lifeaste/widgets/base/baseNavBar.dart';
 
 class BasePage extends StatelessWidget {
@@ -16,7 +16,7 @@ class BasePage extends StatelessWidget {
       children: <Widget>[
         Positioned(
           child: Container(
-            color: bgColor ?? GlobalColors.mainBg,
+            color: bgColor ?? Styles.mainBg,
           ),
         ),
         Positioned(
@@ -38,7 +38,7 @@ class BasePage extends StatelessWidget {
         child: Container(
           height: 44,
           decoration: BoxDecoration(
-              color: navBar?.decoration?.color ?? GlobalColors.navBg),
+              color: navBar?.decoration?.color ?? Styles.navBg),
           child: navBar,
         ),
       );

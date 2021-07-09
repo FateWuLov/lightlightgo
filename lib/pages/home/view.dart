@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lifeaste/common/styles.dart';
-import 'package:lifeaste/common/images.dart';
+import 'package:lifeaste/common/common.dart';
 import 'package:lifeaste/common/size_config.dart';
-import 'package:lifeaste/common/strings.dart';
-import 'package:lifeaste/common/tools.dart';
 import 'package:lifeaste/pages/me/view.dart';
 import 'package:lifeaste/pages/order_list/view.dart';
 import 'package:lifeaste/pages/star_list/view.dart';
@@ -40,7 +37,7 @@ class HomePage extends StatelessWidget {
         bottomNavigationBar: Obx(
             () => BottomNavigationBar(
               type: BottomNavigationBarType.fixed,
-              backgroundColor: GlobalColors.tabBg,
+              backgroundColor: Styles.tabBg,
               items: _tabItems(),
               onTap: (int index) {
                 logic.changeIndex(index);
@@ -90,7 +87,7 @@ class HomePage extends StatelessWidget {
                       height: 8,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(4),
-                        color: GlobalColors.unread,
+                        color: Styles.unread,
                       ),
                     ),
                   ),
@@ -99,8 +96,8 @@ class HomePage extends StatelessWidget {
             ),
             Text(
               Strings.order,
-              style: textStyleMedium(12)
-                  .copyWith(color: active ? GlobalColors.tabSelect : GlobalColors.tabDeselect,),
+              style: Styles.textStyleMedium(12)
+                  .copyWith(color: active ? Styles.tabSelect : Styles.tabDeselect,),
             ),
           ],
         ),
@@ -110,13 +107,13 @@ class HomePage extends StatelessWidget {
         child: Column(
           children: [
             Expanded(
-                child: Image.asset(ImageNames.orders, color: active ? GlobalColors.tabSelect : GlobalColors.tabDeselect,)),
+                child: Image.asset(ImageNames.orders, color: active ? Styles.tabSelect : Styles.tabDeselect,)),
             Container(
               padding: EdgeInsets.only(left: 2),
               child: Text(
                 Strings.order,
-                style: textStyleMedium(12)
-                    .copyWith(color: active ? GlobalColors.tabSelect : GlobalColors.tabDeselect,),
+                style: Styles.textStyleMedium(12)
+                    .copyWith(color: active ? Styles.tabSelect : Styles.tabDeselect,),
               ),
             ),
           ],
@@ -133,8 +130,8 @@ class HomePage extends StatelessWidget {
             child: Image.asset(active ? ImageNames.advisors : ImageNames.advisors2),),
           Text(
             Strings.advisor,
-            style: textStyleMedium(12)
-                .copyWith(color: active ? GlobalColors.tabSelect : GlobalColors.tabDeselect,),
+            style: Styles.textStyleMedium(12)
+                .copyWith(color: active ? Styles.tabSelect : Styles.tabDeselect,),
           ),
         ],
       ),
@@ -151,8 +148,8 @@ class HomePage extends StatelessWidget {
             padding: EdgeInsets.only(left: 2),
             child: Text(
               Strings.mine,
-              style: textStyleNormal(12)
-                  .copyWith(color: active ? GlobalColors.tabSelect : GlobalColors.tabDeselect,),
+              style: Styles.textStyleMedium(12)
+                  .copyWith(color: active ? Styles.tabSelect : Styles.tabDeselect,),
             ),
           ),
         ],

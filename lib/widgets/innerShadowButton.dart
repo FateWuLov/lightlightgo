@@ -1,8 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:lifeaste/common/styles.dart';
-import 'package:lifeaste/common/tools.dart';
+import 'package:lifeaste/common/common.dart';
 
 class MainButton extends StatelessWidget {
   final String title;
@@ -37,13 +36,13 @@ class MainButton extends StatelessWidget {
         padding: padding,
         margin: margin,
         decoration: BoxDecoration(
-          color: GlobalColors.buttonBg,
+          color: Styles.buttonBg,
           borderRadius: new BorderRadius.all(Radius.circular(4)),
         ),
         child: child ?? Center(
           child: AutoSizeText(
             title,
-            style: opacityTextStyleNormal(textSize),
+            style: Styles.invertTextStyleBold(textSize),
             minFontSize: 6,
             maxLines: 1,
           ),
@@ -65,12 +64,12 @@ class SubButton extends StatelessWidget {
       padding: EdgeInsets.all(1),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(4),
-          border: Border.all(color: GlobalColors.themeText, width: 1)
+          border: Border.all(color: Styles.themeText, width: 1)
       ),
       alignment: Alignment.center,
       child: AutoSizeText(
         title,
-        style: themeTextStyleNormal(textSize),
+        style: Styles.themeTextStyle(textSize),
         minFontSize: 6,
         maxLines: 1,
       ),
@@ -92,7 +91,7 @@ class CustomButton extends StatelessWidget {
   final double? width;
   final double? height;
   final TextStyle? style;
-  final double? textSize;
+  final double textSize;
   final double? blur;
   final GestureTapCallback? onTap;
   final Widget? child;
@@ -103,18 +102,18 @@ class CustomButton extends StatelessWidget {
   final Color? shadowColor;
 
   CustomButton({
-    this.buttonType = ButtonType.innerShadow,
+    this.buttonType = ButtonType.solid,
     this.title,
     this.width,
     this.height = 34,
     this.style,
-    this.textSize,
+    this.textSize = 18,
     this.blur,
     this.onTap,
     this.child,
     this.enable = true,
     this.borderRadius = 24,
-    this.color = GlobalColors.buttonBg,
+    this.color = Styles.buttonBg,
     this.borderColor,
     this.shadowColor,
   });
@@ -122,7 +121,7 @@ class CustomButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Color _borderColor = borderColor ??
-        (this.enable ? GlobalColors.buttonBorder : GlobalColors.grey166
+        (this.enable ? Styles.buttonBorder : Styles.grey166
             .withOpacity(0.5));
     if (buttonType == ButtonType.solid) {
       return GestureDetector(
@@ -132,7 +131,7 @@ class CustomButton extends StatelessWidget {
           height: height,
           alignment: Alignment.center,
           decoration: BoxDecoration(
-            color: enable ? color : GlobalColors.disableGrey,
+            color: enable ? color : Styles.disableGrey,
             borderRadius: BorderRadius.circular(borderRadius),
           ),
           child: this.child ??
@@ -143,8 +142,7 @@ class CustomButton extends StatelessWidget {
                 color: Colors.transparent,
                 child: Text(
                     title ?? '',
-                    style: textStyleMedium(this.textSize ?? 12).copyWith(
-                        color: GlobalColors.invert)
+                    style: Styles.invertTextStyleBold(this.textSize)
                 ),
               ),
         ),
@@ -155,7 +153,7 @@ class CustomButton extends StatelessWidget {
       height: height,
       alignment: Alignment.center,
       decoration: BoxDecoration(
-          color: GlobalColors.buttonBg,
+          color: Styles.buttonBg,
           borderRadius: BorderRadius.circular(borderRadius),
           border: Border.all(color: _borderColor)
       ),
@@ -170,10 +168,9 @@ class CustomButton extends StatelessWidget {
               child: Text(
                 title ?? '',
                 style: !this.enable
-                    ? textStyleMedium(this.textSize ?? 16)
-                    .copyWith(color: GlobalColors.grey166)
+                    ? Styles.subTextStyleBold(this.textSize)
                     : this.style ??
-                    textStyleMedium(this.textSize ?? 16),
+                      Styles.invertTextStyleBold(this.textSize),
               ),
             ),
       ),
@@ -213,14 +210,14 @@ class GradientText extends StatelessWidget {
     if (this.overflow != null) {
       return Text(
         title,
-        style: this.style != null ? this.style : textStyleNormal(textSize),
+        style: this.style != null ? this.style : Styles.textStyle(textSize),
         overflow: this.overflow,
         textAlign: textAlign,
       );
     }
     return AutoSizeText(
       title,
-      style: this.style != null ? this.style : textStyleNormal(textSize),
+      style: this.style != null ? this.style : Styles.textStyle(textSize),
       textAlign: textAlign,
       maxLines: 1,
       minFontSize: 6,
@@ -245,8 +242,7 @@ class SpecialText extends StatelessWidget {
   Widget build(BuildContext context) {
     return AutoSizeText(
       title ?? '',
-      style: textStyleTitleBold(textSize ?? 16).copyWith(
-          color: GlobalColors.mainTheme),
+      style: Styles.themeTextStyleBold(textSize ?? 16),
       textAlign: textAlign,
       maxLines: maxLines ?? 1,
       minFontSize: 6,

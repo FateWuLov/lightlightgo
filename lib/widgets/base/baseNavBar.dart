@@ -1,9 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:lifeaste/common/images.dart';
-import 'package:lifeaste/common/styles.dart';
-import 'package:lifeaste/common/tools.dart';
+import 'package:lifeaste/common/common.dart';
 import 'package:lifeaste/widgets/gestureContainer.dart';
 
 class BaseNavBar extends StatelessWidget {
@@ -68,7 +66,7 @@ class BaseNavBar extends StatelessWidget {
           titleLeft ?? Container(),
           Text(
             title,
-            style: titleStyle ?? textStyleBold(18),
+            style: titleStyle ?? Styles.textStyleBold(18),
           ),
         ],
       ),

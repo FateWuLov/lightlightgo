@@ -1,8 +1,6 @@
 
 import 'package:json_annotation/json_annotation.dart';
-import 'package:lifeaste/common/strings.dart';
-import 'package:lifeaste/common/tools.dart';
-import 'package:lifeaste/common/info.dart';
+import 'package:lifeaste/common/common.dart';
 import 'package:lifeaste/manager/hiveManager.dart';
 
 part 'bossConfigModel.g.dart';

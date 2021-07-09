@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lifeaste/common/styles.dart';
-import 'package:lifeaste/common/tools.dart';
+import 'package:lifeaste/common/common.dart';
 
 class BaseTabPage extends StatelessWidget {
   final String title;
@@ -14,7 +13,7 @@ class BaseTabPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: GlobalColors.mainBg,
+      backgroundColor: Styles.mainBg,
       body: SafeArea(
         child: Column(
           children: [
@@ -29,13 +28,13 @@ class BaseTabPage extends StatelessWidget {
   Widget _navBar() {
     return Container(
       height: 70,
-      padding: EdgeInsets.only(top: 30),
+      padding: EdgeInsets.only(top: 30, left: 20),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           Text(
             title,
-            style: textStyleTitle(26),
+            style: Styles.titleTextStyle(26),
           ),
           Spacer(),
         ],

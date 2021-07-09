@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lifeaste/common/strings.dart';
+import 'package:lifeaste/common/common.dart';
 import 'package:lifeaste/models/userModel.dart';
 import 'package:lifeaste/widgets/base/baseTabPage.dart';
 import 'package:lifeaste/widgets/loading.dart';

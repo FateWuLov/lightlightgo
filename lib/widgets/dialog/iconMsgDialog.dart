@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lifeaste/common/styles.dart';
-import 'package:lifeaste/common/images.dart';
-import 'package:lifeaste/common/tools.dart';
+import 'package:lifeaste/common/common.dart';
 
 import '../innerShadowButton.dart';
 
@@ -103,7 +101,7 @@ class _IconMsgDialogState extends State<IconMsgDialog> {
                         child: Text(
                           widget.message ?? '',
                           textAlign: TextAlign.center,
-                          style: themeTextStyleNormal(14),
+                          style: Styles.themeTextStyle(14),
                         ),
                       ),
                     ],

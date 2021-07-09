@@ -3,7 +3,7 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class GlobalColors {
+class Styles {
   static const Color mainBg = Color.fromRGBO(241, 246, 249, 1);
   static const Color tabBg = Color.fromRGBO(241, 246, 250, 1);
   static const Color navBg = Color.fromRGBO(241, 246, 250, 1);
@@ -20,7 +20,6 @@ class GlobalColors {
   static const Color subTheme = Color.fromRGBO(202, 223, 235, 1);
   static const Color lightTheme = Color.fromRGBO(221, 232, 239, 1);
   static const Color themeText = Color.fromRGBO(77, 126, 150, 1);
-  static const Color darkThemeText = Colors.white;
   static const Color receiveBubble = Color.fromRGBO(114, 95, 84, 1);
   static const Color senderBubble = Color.fromRGBO(176, 154, 141, 1);
   static const Color inviteCodeText = Color.fromRGBO(220, 157, 75, 1);
@@ -44,6 +43,7 @@ class GlobalColors {
   static const Color mainText = Color.fromRGBO(33, 37, 57, 1);
   static const Color subText = Color.fromRGBO(133, 137, 161, 1);
   static const Color hintText = Color.fromRGBO(133, 137, 161, 1);
+
   // 反色文字
   static const Color invert = Colors.white;
 
@@ -55,16 +55,7 @@ class GlobalColors {
 
   static const Color disableGrey = Color.fromRGBO(172, 172, 172, 1);
   static const Color greyLine = Color.fromRGBO(14, 15, 16, 1);
-  static const Color greyText = Color.fromRGBO(177, 177, 177, 1);
-  static const Color grey102 = Color.fromRGBO(102, 102, 102, 1);
-  static const Color grey243 = Color.fromRGBO(243, 243, 243, 1);
-  static const Color grey216 = Color.fromRGBO(216, 216, 216, 1);
   static const Color grey166 = Color.fromRGBO(166, 166, 166, 1);
-  static const Color r151g140b167 = Color.fromRGBO(151, 140, 167, 1);
-  static const Color greyWhiteBg = Color.fromRGBO(244, 243, 247, 1);
-
-  static const Color placeholderColor = Colors.black;
-  static const Color placeholderColor2 = Colors.black;
 
   static const Color online = Color.fromARGB(255, 126, 211, 33);
   static const Color busy = Color.fromARGB(255, 238, 21, 46);
@@ -107,252 +98,100 @@ class GlobalColors {
         end: Alignment.centerRight,
         colors: [start, end]);
   }
-}
 
-LinearGradient whiteGradient() {
-  return LinearGradient(
-      begin: Alignment.centerLeft,
-      end: Alignment.centerRight,
-      colors: [Colors.white, Colors.white]);
-}
+  static LinearGradient mainGradientL2R() {
+    return Styles.gradientLeft2Right(
+        Styles.gradientStart, Styles.gradientEnd);
+  }
 
-LinearGradient transparentGradient() {
-  return LinearGradient(
-      begin: Alignment.centerLeft,
-      end: Alignment.centerRight,
-      colors: [Colors.transparent, Colors.transparent]);
-}
+  static LinearGradient mainGradientT2B() {
+    return Styles.gradientTop2Bottom(
+        Styles.gradientStart, Styles.gradientEnd);
+  }
 
-LinearGradient mainGradientLeft2Right() {
-  return LinearGradient(
-      begin: Alignment.centerLeft,
-      end: Alignment.centerRight,
-      colors: [GlobalColors.gradientStart, GlobalColors.gradientEnd]);
-}
+  /// 常规体，一级字体色
+  static TextStyle textStyle(double size) {
+    return _textStyleNormal(size).copyWith(color: Styles.mainText);
+  }
+  /// 中体，一级字体色
+  static TextStyle textStyleMedium(double size) {
+    return _textStyleMedium(size).copyWith(color: Styles.mainText);
+  }
+  /// 粗体，一级字体色
+  static TextStyle textStyleBold(double size) {
+    return _textStyleBold(size).copyWith(color: Styles.mainText);
+  }
+  /// 花体，一级字体色
+  static TextStyle titleTextStyle(double size) {
+    return _textStyleFolboBold(size).copyWith(color: Styles.mainText);
+  }
+  
+  /// 常规体，二级字体色
+  static TextStyle subTextStyle(double size) {
+    return _textStyleNormal(size).copyWith(color: Styles.subText);
+  }
+  /// 中体，二级字体色
+  static TextStyle subTextStyleMedium(double size) {
+    return _textStyleMedium(size).copyWith(color: Styles.subText);
+  }
+  /// 粗体，二级字体色
+  static TextStyle subTextStyleBold(double size) {
+    return _textStyleBold(size).copyWith(color: Styles.subText);
+  }
 
-LinearGradient mainGradientTop2Bottom() {
-  return LinearGradient(
-      begin: Alignment.topCenter,
-      end: Alignment.bottomCenter,
-      colors: [GlobalColors.gradientStart, GlobalColors.gradientEnd]);
-}
+  /// 常规体，主题字体色
+  static TextStyle themeTextStyle(double size) {
+    return _textStyleNormal(size).copyWith(color: Styles.themeText);
+  }
+  /// 中体，主题字体色
+  static TextStyle themeTextStyleMedium(double size) {
+    return _textStyleMedium(size).copyWith(color: Styles.themeText);
+  }
+  /// 粗体，主题字体色
+  static TextStyle themeTextStyleBold(double size) {
+    return _textStyleBold(size).copyWith(color: Styles.themeText);
+  }
 
-LinearGradient mainDisableGradientLeft2Right() {
-  return LinearGradient(
-      begin: Alignment.centerLeft,
-      end: Alignment.centerRight,
-      colors: [
-        GlobalColors.gradientStart.withOpacity(0.36),
-        GlobalColors.gradientEnd.withOpacity(0.36)
-      ]);
-}
+  /// 粗体，反色
+  static TextStyle invertTextStyleBold(double size) {
+    return _textStyleBold(size).copyWith(color: Styles.invert);
+  }
 
-LinearGradient mainGradientLeftTop2RightBottom() {
-  return LinearGradient(
-      begin: Alignment.topLeft,
-      end: Alignment.bottomRight,
-      colors: [GlobalColors.gradientStart, GlobalColors.gradientEnd]);
-}
+  static TextStyle _textStyleNormal(double size) {
+    return TextStyle(
+      fontFamily: 'Gilroy',
+      fontWeight: FontWeight.w400,
+      color: Styles.mainText,
+      decoration: TextDecoration.none,
+      fontSize: size,
+    );
+  }
 
-LinearGradient discountGradientLeft2Right() {
-  return LinearGradient(
-      begin: Alignment.centerLeft,
-      end: Alignment.centerRight,
-      colors: [
-        GlobalColors.discountGradientStart,
-        GlobalColors.discountGradientEnd
-      ]);
-}
+  static TextStyle _textStyleMedium(double size) {
+    return TextStyle(
+      fontFamily: 'Gilroy',
+      fontWeight: FontWeight.w500,
+      color: Styles.mainText,
+      decoration: TextDecoration.none,
+      fontSize: size,
+    );
+  }
 
-LinearGradient darkGoldGradientTop2Bottom() {
-  return LinearGradient(
-      begin: Alignment.topRight,
-      end: Alignment.bottomLeft,
-      colors: [
-        GlobalColors.darkGoldGradientStart,
-        GlobalColors.darkGoldGradientEnd
-      ]);
-}
-
-LinearGradient redGradientLeftTop2RightBottom() {
-  return LinearGradient(
-      begin: Alignment.topLeft,
-      end: Alignment.bottomRight,
-      colors: [Color.fromRGBO(255, 21, 24, 1), Color.fromRGBO(238, 21, 46, 1)]);
-}
-
-LinearGradient disableGradient() {
-  return LinearGradient(
-      begin: Alignment.centerLeft,
-      end: Alignment.centerRight,
-      colors: [GlobalColors.hintText, GlobalColors.hintText]);
-}
-
-BoxDecoration mainGradientDecoration() {
-  return BoxDecoration(gradient: mainGradientLeft2Right());
-}
-
-TextStyle mainTextStyleRegular(double size) {
-  return textStyleNormal(size).copyWith(color: GlobalColors.mainText);
-}
-
-TextStyle themeTextStyleBold(double size) {
-  return textStyleBold(size).copyWith(color: GlobalColors.themeText);
-}
-
-TextStyle subTextStyle(double size) {
-  return textStyleNormal(size).copyWith(color: GlobalColors.subText);
-}
-
-TextStyle textStyleTitleBold(double size) {
-  return TextStyle(
-    fontFamily: 'Luminari',
-    color: GlobalColors.mainText,
-    decoration: TextDecoration.none,
-    fontWeight: FontWeight.w700,
-    fontSize: size,
-    height: 1.4,
-  );
-}
-
-TextStyle textStyleTitle(double size) {
-  return TextStyle(
-    fontFamily: 'Luminari',
-    color: GlobalColors.mainText,
-    decoration: TextDecoration.none,
-    fontWeight: FontWeight.w400,
-    fontSize: size,
-    height: 1.4,
-  );
-}
-
-TextStyle textStyleNormal(double size) {
-  return TextStyle(
-    fontFamily: 'Baskerville',
-    fontStyle: FontStyle.normal,
-    fontWeight: FontWeight.w400,
-    color: GlobalColors.mainText,
-    decoration: TextDecoration.none,
-    fontSize: size,
-    height: 1.2,
-  );
-}
-
-TextStyle inviteCodeTextStyle(double size) {
-  return TextStyle(
-    fontFamily: 'Gilroy',
-    fontWeight: FontWeight.w400,
-    color: GlobalColors.mainText,
-    decoration: TextDecoration.none,
-    fontSize: size,
-    height: 1.4,
-  );
-}
-
-TextStyle textStyleBold(double size) {
-  return TextStyle(
-    fontFamily: 'Baskerville-SemiBold',
-    color: GlobalColors.mainText,
-    fontStyle: FontStyle.normal,
-    fontWeight: FontWeight.w700,
-    decoration: TextDecoration.none,
-    fontSize: size,
-    height: 1.2,
-  );
-}
-
-TextStyle textStyleMedium(double size) {
-  return TextStyle(
-    fontFamily: 'Baskerville-SemiBold',
-    fontWeight: FontWeight.w600,
-    color: GlobalColors.mainText,
-    decoration: TextDecoration.none,
-    fontSize: size,
-    height: 1.2,
-  );
-}
-
-TextStyle textStyleGenevaBold(double size, {height: 1.4, color: GlobalColors.mainText}) {
-  return TextStyle(
-      fontFamily: 'Baskerville',
+  static TextStyle _textStyleBold(double size) {
+    return TextStyle(
+      fontFamily: 'Gilroy',
+      color: Styles.mainText,
       fontWeight: FontWeight.w700,
-      color: color,
       decoration: TextDecoration.none,
       fontSize: size,
-      height: height);
-}
+    );
+  }
 
-TextStyle textStyleJostSemiBold(double size,
-    {height: 1.4, color: GlobalColors.mainText}) {
-  return TextStyle(
-      fontFamily: 'Jost-SemiBold',
-      fontWeight: FontWeight.w600,
-      color: color,
-      decoration: TextDecoration.none,
-      fontSize: size,
-      height: height);
-}
-
-TextStyle textStyleJostBold(double size, {height: 1.4, color: GlobalColors.mainText}) {
-  return TextStyle(
-      fontFamily: 'Jost-SemiBold',
-      fontWeight: FontWeight.w700,
-      color: color,
-      decoration: TextDecoration.none,
-      fontSize: size,
-      height: height);
-}
-
-TextStyle textStyleBitterExtraBoldItalic(double size,
-    {height: 1.4, color: GlobalColors.mainText}) {
-  return TextStyle(
-    fontFamily: 'Baskerville',
-    fontWeight: FontWeight.w700,
-    fontStyle: FontStyle.italic,
-    color: color,
-    decoration: TextDecoration.none,
-    fontSize: size,
-    height: height,
-  );
-}
-
-TextStyle textStyleAppleChancery(double size,
-    {height: 1.4, color: GlobalColors.mainText}) {
-  return TextStyle(
-    fontFamily: 'Baskerville',
-    fontStyle: FontStyle.normal,
-    fontWeight: FontWeight.w600,
-    color: color,
-    decoration: TextDecoration.none,
-    fontSize: size,
-    height: height,
-  );
-}
-
-TextStyle mainTextStyleNormal(double size) {
-  return textStyleNormal(size).copyWith(color: GlobalColors.mainText);
-}
-
-TextStyle subTextStyleNormal(double size) {
-  return textStyleNormal(size).copyWith(color: GlobalColors.subText);
-}
-
-TextStyle greyTextStyleNormal(double size) {
-  return textStyleNormal(size).copyWith(color: GlobalColors.greyText);
-}
-
-TextStyle themeTextStyleNormal(double size) {
-  return textStyleNormal(size).copyWith(color: GlobalColors.themeText);
-}
-
-TextStyle darkThemeTextStyleNormal(double size) {
-  return textStyleNormal(size).copyWith(color: GlobalColors.darkThemeText);
-}
-
-TextStyle themeTextStyleMedium(double size) {
-  return textStyleMedium(size).copyWith(color: GlobalColors.themeText);
-}
-
-TextStyle opacityTextStyleNormal(double size) {
-  return textStyleNormal(size).copyWith(color: GlobalColors.tabBg);
+  static TextStyle _textStyleFolboBold(double size) {
+    return TextStyle(
+        fontFamily: 'Folbo',
+        color: Styles.mainText,
+        decoration: TextDecoration.none,
+        fontSize: size);
+  }
 }

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lifeaste/common/images.dart';
-import 'package:lifeaste/common/strings.dart';
-import 'package:lifeaste/common/styles.dart';
+import 'package:lifeaste/common/common.dart';
 import 'package:lifeaste/models/orderModel.dart';
 import 'package:lifeaste/widgets/base/baseTabPage.dart';
 import 'package:lifeaste/widgets/loading.dart';
@@ -43,6 +41,7 @@ class OrderListPage extends StatelessWidget {
     }
     if (state.dataList.isNotEmpty) {
       return ListView.builder(
+        padding: EdgeInsets.only(bottom: 40),
         itemBuilder: (BuildContext context, int index) {
           if (index >= state.dataList.length) return Container();
           OrderInfoModel model = state.dataList[index];
@@ -72,7 +71,7 @@ class OrderListPage extends StatelessWidget {
             width: 260,
             child: Text(
               Strings.noOrder,
-              style: textStyleNormal(14).copyWith(color: GlobalColors.subText),
+              style: Styles.subTextStyle(14),
               maxLines: 2,
               textAlign: TextAlign.center,
             ),

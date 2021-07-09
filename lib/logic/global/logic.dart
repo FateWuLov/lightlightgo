@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:devicelocale/devicelocale.dart';
 import 'package:get/get.dart';
+import 'package:lifeaste/common/common.dart';
 import 'package:lifeaste/common/fn_method_channel.dart';
-import 'package:lifeaste/common/info.dart';
 import 'package:lifeaste/manager/hiveManager.dart';
 import 'package:package_info/package_info.dart';
 import '../global.dart';

@@ -1,9 +1,8 @@
 import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:encrypt/encrypt.dart';
+import 'package:lifeaste/common/common.dart';
 import 'package:lifeaste/common/fn_method_channel.dart';
-import 'package:lifeaste/common/tools.dart';
-import 'package:lifeaste/common/info.dart';
 import 'package:lifeaste/logic/global.dart';
 import '../hiveManager.dart';
 import 'networkResultData.dart';
