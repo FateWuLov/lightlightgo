@@ -28,6 +28,10 @@ class DebugToolsLogic extends GetxController {
     );
   }
 
+  void onPopBack() {
+    Get.back();
+  }
+
   void onLogout() {
     Global.userLogic().logout();
   }

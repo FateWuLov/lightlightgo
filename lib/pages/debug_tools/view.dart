@@ -18,6 +18,7 @@ class DebugToolsPage extends StatelessWidget {
     return BasePage(
       navBar: BaseNavBar(
         title: 'Debug Tools',
+        leftAction: logic.onPopBack,
       ),
       child: Scaffold(
         backgroundColor: GlobalColors.mainBg,
@@ -26,11 +27,14 @@ class DebugToolsPage extends StatelessWidget {
             padding: EdgeInsets.symmetric(vertical: 44),
             children: [
               GestureContainer(
-                height: 60,
+                //height: 60,
                 child: Container(
                   alignment: Alignment.center,
+                  margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  padding: EdgeInsets.symmetric(vertical: 10),
                   decoration: BoxDecoration(
-                    border: Border.all(color: GlobalColors.mainTheme)
+                    border: Border.all(color: GlobalColors.mainTheme),
+                    borderRadius: BorderRadius.circular(16)
                   ),
                   child: Text(
                     '重置游客登录账号',
