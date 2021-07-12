@@ -81,7 +81,15 @@ class _UserProfilePageState extends State<UserProfilePage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  SizedBox(height: 70,),
+                  SizedBox(height: 60,),
+                  state.userInfo.bio.isNotEmpty
+                      ? Text(
+                    state.userInfo.bio,
+                    style: Styles.textStyleMedium(14),
+                    overflow: TextOverflow.ellipsis,
+                  )
+                      : Container(),
+                  SizedBox(height: 17,),
                   CustomButton(
                     onTap: logic.onAskNow,
                     width: 311,

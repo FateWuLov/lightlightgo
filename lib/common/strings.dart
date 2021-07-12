@@ -804,4 +804,5 @@ class Strings {
   static String bindSignInMessage = 'To safely keep your information and purchase history, it is suggested to link the guest ID with one account and use it to sign in later.';
   static const String bindAccountFailMsg = 'Oops, failed to bind the account. Please check your internet connection and try again. If it still doesn\'t work, please contact us for further help.';
   static const String alreadySignInMsg = 'We found that you have already signed in Pocket Insight with an account on this device, please log in to continue.';
+  static const String describeSituation = 'Describe your situation in certain sentences to help your advisor know better your status to further…';
 }

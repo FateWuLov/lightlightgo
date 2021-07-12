@@ -18,6 +18,7 @@ class StarCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      padding: EdgeInsets.symmetric(horizontal: 12),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
           color: Styles.invert,
@@ -29,10 +30,9 @@ class StarCard extends StatelessWidget {
         onTap: onTap,
         child: Column(
           children: [
-            SizedBox(height: 5,),
+            SizedBox(height: 12,),
             Row(
               children: [
-                SizedBox(width: 12,),
                 AvatarView(60, star.avatar, shape: AvatarViewShape.square,),
                 SizedBox(width: 8,),
                 Column(
@@ -40,26 +40,30 @@ class StarCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(star.name, style: Styles.textStyleBold(16),),
-                    SizedBox(height: 3,),
-                    Container(
-                      width: 245,
-                      child: AutoSizeText(
-                        star.bio,
-                        style: Styles.textStyle(12),
-                        minFontSize: 6,
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    )
                   ],
                 )
               ],
+            ),
+            SizedBox(height: 8,),
+            Container(
+              alignment: Alignment.centerLeft,
+              child: AutoSizeText(
+                star.bio,
+                style: Styles.textStyleBold(12),
+                minFontSize: 6,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+            SizedBox(height: 4,),
+            Text(
+              Strings.describeSituation,
+              style: Styles.subTextStyle(12),
             ),
             SizedBox(height: 17,),
             CustomButton(
               onTap: onAsk,
               height: 41,
-              width: 311,
               title: Strings.askNow,
             ),
             SizedBox(height: 17,),
