@@ -37,6 +37,22 @@ class StarListPage extends StatelessWidget {
         itemBuilder: (BuildContext context, int index) {
           if (index >= state.dataList.length) return Container();
           UserInfoModel model = state.dataList[index];
+          if (index == state.dataList.length - 1) {
+            return Column(
+              children: [
+                StarCard(
+                  model,
+                  onTap: () {
+                    logic.onClickStar(model);
+                  },
+                  onAsk: () {
+                    logic.onAskStar(model);
+                  },
+                ),
+                SizedBox(height: 70,)
+              ],
+            );
+          }
           return StarCard(
             model,
             onTap: () {

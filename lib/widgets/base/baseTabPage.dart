@@ -28,7 +28,6 @@ class BaseTabPage extends StatelessWidget {
               children: [
                 _navBar(),
                 child ?? Container(),
-                SizedBox(height: 65)
               ],
             ),
           ),
