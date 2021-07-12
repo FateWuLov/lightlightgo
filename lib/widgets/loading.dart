@@ -4,7 +4,7 @@ import 'package:lottie/lottie.dart';
 
 class LoadingView extends StatelessWidget {
   final double size;
-  LoadingView({this.size = 120});
+  LoadingView({this.size = 100});
 
   @override
   Widget build(BuildContext context) {
