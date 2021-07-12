@@ -13,6 +13,7 @@
 		0428BDBF2696E7D50081DD5A /* AppFrameworkInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0428BDBD2696E7D50081DD5A /* AppFrameworkInfo.plist */; };
 		0428BDCE2696E8330081DD5A /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 0428BDCC2696E8330081DD5A /* Debug.xcconfig */; };
 		0428BDCF2696E8330081DD5A /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 0428BDCD2696E8330081DD5A /* Release.xcconfig */; };
+		04E6E6F3269C556100F84E47 /* Profile.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 04E6E6F2269C556100F84E47 /* Profile.xcconfig */; };
 		1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */ = {isa = PBXBuildFile; fileRef = 1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */; };
 		8CAB25C066A335FF3BC4FD54 /* Pods_Runner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0995F2FFEA07C71AC78EA0D3 /* Pods_Runner.framework */; };
 		978B8F6F1D3862AE00F588F7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AFFD8EE1D35381100E5BB4D /* AppDelegate.m */; };
@@ -45,6 +46,7 @@
 		0428BDBD2696E7D50081DD5A /* AppFrameworkInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = AppFrameworkInfo.plist; path = Flutter/AppFrameworkInfo.plist; sourceTree = "<group>"; };
 		0428BDCC2696E8330081DD5A /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Debug.xcconfig; path = Flutter/Debug.xcconfig; sourceTree = "<group>"; };
 		0428BDCD2696E8330081DD5A /* Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Release.xcconfig; path = Flutter/Release.xcconfig; sourceTree = "<group>"; };
+		04E6E6F2269C556100F84E47 /* Profile.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Profile.xcconfig; path = Flutter/Profile.xcconfig; sourceTree = "<group>"; };
 		0995F2FFEA07C71AC78EA0D3 /* Pods_Runner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Runner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1498D2321E8E86230040F4C2 /* GeneratedPluginRegistrant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GeneratedPluginRegistrant.h; sourceTree = "<group>"; };
 		1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneratedPluginRegistrant.m; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 			children = (
 				9740EEB31CF90195004384FC /* Generated.xcconfig */,
 				0428BDCC2696E8330081DD5A /* Debug.xcconfig */,
+				04E6E6F2269C556100F84E47 /* Profile.xcconfig */,
 				0428BDCD2696E8330081DD5A /* Release.xcconfig */,
 				0428BDBD2696E7D50081DD5A /* AppFrameworkInfo.plist */,
 			);
@@ -232,6 +235,7 @@
 			files = (
 				97C147011CF9000F007C117D /* LaunchScreen.storyboard in Resources */,
 				0428BDBF2696E7D50081DD5A /* AppFrameworkInfo.plist in Resources */,
+				04E6E6F3269C556100F84E47 /* Profile.xcconfig in Resources */,
 				0428BDCF2696E8330081DD5A /* Release.xcconfig in Resources */,
 				97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */,
 				0428BDCE2696E8330081DD5A /* Debug.xcconfig in Resources */,
@@ -399,7 +403,7 @@
 		};
 		249021D4217E4FDB00AE95B9 /* Profile */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D9E645E3FFAD02746B93EF11 /* Pods-Runner.profile.xcconfig */;
+			baseConfigurationReference = 04E6E6F2269C556100F84E47 /* Profile.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COCOAPODS_PARALLEL_CODE_SIGN = true;
