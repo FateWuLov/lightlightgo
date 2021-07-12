@@ -402,9 +402,12 @@
 			baseConfigurationReference = D9E645E3FFAD02746B93EF11 /* Pods-Runner.profile.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COCOAPODS_PARALLEL_CODE_SIGN = true;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
+				DART_DEFINES = "Zmx1dHRlci5pbnNwZWN0b3Iuc3RydWN0dXJlZEVycm9ycz10cnVl,RkxVVFRFUl9XRUJfQVVUT19ERVRFQ1Q9dHJ1ZQ==";
+				DART_OBFUSCATION = true;
 				DEVELOPMENT_TEAM = PCQW2SLVCV;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
@@ -415,6 +418,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.test.life.aste;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = lifeaste_adhoc;
+				SPLIT_DEBUG_INFO = "${SRCROOT}/obfuscation";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Profile;
@@ -529,8 +533,11 @@
 			baseConfigurationReference = 0428BDCC2696E8330081DD5A /* Debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COCOAPODS_PARALLEL_CODE_SIGN = true;
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
+				DART_DEFINES = "Zmx1dHRlci5pbnNwZWN0b3Iuc3RydWN0dXJlZEVycm9ycz10cnVl,RkxVVFRFUl9XRUJfQVVUT19ERVRFQ1Q9dHJ1ZQ==";
+				DART_OBFUSCATION = true;
 				DEVELOPMENT_TEAM = PCQW2SLVCV;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
@@ -541,6 +548,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.test.life.aste;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = lifeaste_dev;
+				SPLIT_DEBUG_INFO = "${SRCROOT}/obfuscation";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -550,7 +558,10 @@
 			baseConfigurationReference = 0428BDCD2696E8330081DD5A /* Release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COCOAPODS_PARALLEL_CODE_SIGN = true;
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
+				DART_DEFINES = "Zmx1dHRlci5pbnNwZWN0b3Iuc3RydWN0dXJlZEVycm9ycz10cnVl,RkxVVFRFUl9XRUJfQVVUT19ERVRFQ1Q9dHJ1ZQ==";
+				DART_OBFUSCATION = true;
 				ENABLE_BITCODE = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
@@ -564,6 +575,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ask.lifeaste;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SPLIT_DEBUG_INFO = "${SRCROOT}/obfuscation";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;

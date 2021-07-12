@@ -46,7 +46,7 @@ class MePage extends StatelessWidget {
                         style: Styles.subTextStyle(12),
                       )),
                   visible: runtimeType.toString().toLowerCase() ==
-                      'profileview',
+                      'mepage',
                 ),
               ],
             )),
