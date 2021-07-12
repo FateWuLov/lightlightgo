@@ -45,6 +45,21 @@ class OrderListPage extends StatelessWidget {
         itemBuilder: (BuildContext context, int index) {
           if (index >= state.dataList.length) return Container();
           OrderInfoModel model = state.dataList[index];
+          if (index == state.dataList.length - 1) {
+            return Column(
+              children: [
+                OrderCell(
+                  model,
+                  onTap: () {
+                    logic.onClickOrder(model);
+                  },
+                ),
+                SizedBox(
+                  height: 65,
+                )
+              ],
+            );
+          }
           return OrderCell(
             model,
             onTap: () {

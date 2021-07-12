@@ -48,6 +48,7 @@ class MePage extends StatelessWidget {
                   visible: runtimeType.toString().toLowerCase() ==
                       'mepage',
                 ),
+                SizedBox(height: 70),
               ],
             )),
       ),
