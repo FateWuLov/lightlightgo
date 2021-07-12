@@ -13,15 +13,27 @@ class BaseTabPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Styles.mainBg,
-      body: SafeArea(
-        child: Column(
-          children: [
-            _navBar(),
-            child ?? Container(),
-          ],
-        ),
-      ),
+      //backgroundColor: Styles.mainBg,
+      body: Stack(
+        children: [
+          Positioned.fill(
+            child: Container(
+              decoration: BoxDecoration(
+                gradient: Styles.mainGradientT2B(),
+              ),
+            ),
+          ),
+          SafeArea(
+            child: Column(
+              children: [
+                _navBar(),
+                child ?? Container(),
+                SizedBox(height: 65)
+              ],
+            ),
+          ),
+        ],
+      )
     );
   }
 

@@ -28,23 +28,40 @@ class HomePage extends StatelessWidget {
       },
       child: Scaffold(
         body: Obx(
-            () => IndexedStack(
-              index: state.index.value,
-              children: pages,
-              key: key,
+            () => Stack(
+              children: [
+                IndexedStack(
+                  index: state.index.value,
+                  children: pages,
+                  key: key,
+                ),
+                Positioned(
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  child: bottomNavigationBar(),
+                ),
+              ],
             ),
         ),
-        bottomNavigationBar: Obx(
-            () => BottomNavigationBar(
-              type: BottomNavigationBarType.fixed,
-              backgroundColor: Styles.tabBg,
-              items: _tabItems(),
-              onTap: (int index) {
-                logic.changeIndex(index);
-              },
-              currentIndex: state.index.value,
-            )
-        ),
+      ),
+    );
+  }
+
+  Widget bottomNavigationBar() {
+    return ClipRRect(
+      borderRadius: BorderRadius.only(
+        topRight: Radius.circular(24),
+        topLeft: Radius.circular(24),
+      ),
+      child: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        backgroundColor: Styles.tabBg,
+        items: _tabItems(),
+        onTap: (int index) {
+          logic.changeIndex(index);
+        },
+        currentIndex: state.index.value,
       ),
     );
   }
