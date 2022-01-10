@@ -32,7 +32,7 @@ class Info {
   static const faqLink = baseWebLink + faqRoute;
 
   static String debugHostLeading = "3.236.";
-  static String debugHostTrailing = "42.87:8018";
+  static String debugHostTrailing = "42.87:8019";
   static String debugHost = "http://$debugHostLeading$debugHostTrailing";
   static const String distributionHost = "https://api.sparkling-insights.com";
   static const String XiEventURL = "http://etl.sparkling-insights.com";
