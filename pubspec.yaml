@@ -31,7 +31,6 @@ dependencies:
   dio: 4.0.0
   http: 0.13.3
   package_info: 2.0.2
-  device_info: 2.0.2
   url_launcher: 6.0.9
   cached_network_image: 3.0.0
   event_bus: 2.0.0

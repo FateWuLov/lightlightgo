@@ -56,4 +56,7 @@ flutter {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'androidx.ads:ads-identifier:1.0.0-alpha01'
+    // Used for the calls to addCallback() in the snippets on this page.
+    implementation 'com.google.guava:guava:28.0-android'
 }
