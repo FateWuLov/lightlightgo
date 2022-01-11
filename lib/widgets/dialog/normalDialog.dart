@@ -5,7 +5,7 @@ import 'package:flutter/painting.dart';
 import 'package:lifeaste/common/common.dart';
 import 'package:lifeaste/common/size_config.dart';
 
-import '../innerShadowButton.dart';
+import '../buttons.dart';
 
 
 class NormalDialog extends StatefulWidget {

@@ -6,7 +6,7 @@ import 'package:lifeaste/models/orderModel.dart';
 import 'package:lifeaste/widgets/base/baseNavBar.dart';
 import 'package:lifeaste/widgets/base/basePage.dart';
 import 'package:lifeaste/widgets/gestureContainer.dart';
-import 'package:lifeaste/widgets/innerShadowButton.dart';
+import 'package:lifeaste/widgets/buttons.dart';
 import 'package:lifeaste/widgets/roundAvatar.dart';
 
 import 'logic.dart';

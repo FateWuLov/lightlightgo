@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lifeaste/common/common.dart';
 import 'package:lifeaste/widgets/gestureContainer.dart';
-import 'package:lifeaste/widgets/innerShadowButton.dart';
+import 'package:lifeaste/widgets/buttons.dart';
 
 import 'logic.dart';
 import 'state.dart';

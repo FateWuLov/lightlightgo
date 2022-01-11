@@ -4,7 +4,7 @@ import 'package:lifeaste/common/common.dart';
 import 'package:lifeaste/logic/global.dart';
 import 'package:lifeaste/models/userModel.dart';
 import 'package:lifeaste/widgets/gestureContainer.dart';
-import 'package:lifeaste/widgets/innerShadowButton.dart';
+import 'package:lifeaste/widgets/buttons.dart';
 import 'package:lifeaste/widgets/roundAvatar.dart';
 
 class StarCard extends StatelessWidget {

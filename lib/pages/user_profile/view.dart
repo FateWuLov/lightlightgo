@@ -5,7 +5,7 @@ import 'package:lifeaste/common/common.dart';
 import 'package:lifeaste/pages/user_profile/state.dart';
 import 'package:lifeaste/widgets/base/baseNavBar.dart';
 import 'package:lifeaste/widgets/base/basePage.dart';
-import 'package:lifeaste/widgets/innerShadowButton.dart';
+import 'package:lifeaste/widgets/buttons.dart';
 import 'package:lifeaste/widgets/roundAvatar.dart';
 
 import 'logic.dart';

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lifeaste/common/common.dart';
 
-import '../innerShadowButton.dart';
+import '../buttons.dart';
 
 class IconMsgDialog extends StatefulWidget {
   final String? imageName;
