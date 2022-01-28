@@ -891,7 +891,6 @@ showNormalDialog({
   Color? barrierColor,
   String? barrierLabel,
   bool useSafeArea = true,
-  bool useRootNavigator = true,
   RouteSettings? routeSettings,
 }) {
   if (child == null) return;
@@ -902,7 +901,6 @@ showNormalDialog({
       barrierDismissible: barrierDismissible,
       barrierColor: barrierColor ?? Colors.black.withOpacity(0.7),
       useSafeArea: useSafeArea,
-      useRootNavigator: useRootNavigator,
       routeSettings: routeSettings,
       name: RouteConfig.dialog
   );
