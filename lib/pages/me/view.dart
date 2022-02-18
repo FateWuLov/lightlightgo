@@ -13,8 +13,6 @@ import 'state.dart';
 class MePage extends StatelessWidget {
   final MeLogic logic = Get.put(MeLogic());
   final MeState state = Get.find<MeLogic>().state;
-  // final XmppState xmppState = Global.xmppLogic().state;
-  // final PushState pushState = Global.pushLogic().state;
 
   @override
   Widget build(BuildContext context) {

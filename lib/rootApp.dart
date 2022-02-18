@@ -31,8 +31,6 @@ class RootApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Global.logic().finishLaunching();
-    // 经测试，启动时build会执行两遍，来源不明
-    // 但是GetMaterialApp，onInit只会执行一次
     print('[LaunchApp] RootApp build');
     Get.lazyPut(() => RootPageLogic());
     routeObserver = MyObserver();

@@ -5,7 +5,6 @@ import 'package:lifeaste/models/userModel.dart';
 class AnalyticsManager {
   static AnalyticsManager get instance => _getInstance();
   static AnalyticsManager? _instance;
-  // AppsflyerSdk appsflyerSdk;
 
   static AnalyticsManager _getInstance() {
     var obj = _instance ?? AnalyticsManager();
@@ -13,31 +12,6 @@ class AnalyticsManager {
       _instance = obj;
     }
     return obj;
-  }
-
-  Future<void> initAppsFlyer() async {
-    // AppsFlyerOptions options = AppsFlyerOptions(
-    //   afDevKey: TypicalKeys.appsflyerDevKey,
-    //   showDebug: isDebug(),
-    //   appId: TypicalKeys.appId_IOS,
-    // );
-    // if(Platform.isIOS) {
-    //   IosDeviceInfo iOSInfo = await DeviceInfoPlugin().iosInfo;
-    //   if (iOSInfo.systemVersion.compareTo('14.0') >= 0) {
-    //     print("iOS 版本大于14");
-    //     TypicalKeys.methodChannel.invokeMethod(
-    //         methodNameRequestAccessATTracking);
-    //     options = AppsFlyerOptions(
-    //         afDevKey: TypicalKeys.appsflyerDevKey,
-    //         showDebug: isDebug(),
-    //         appId: TypicalKeys.appId_IOS,
-    //         timeToWaitForATTUserAuthorization: 60
-    //     );
-    //   } else {
-    //     print("iOS 版本小于14");
-    //   }
-    // }
-    // _instance.appsflyerSdk = AppsflyerSdk(options);
   }
 
   logAfEvent(String name, {Map<String, dynamic>? parameters}) async {

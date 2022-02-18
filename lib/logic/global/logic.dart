@@ -6,7 +6,6 @@ import 'package:lifeaste/common/common.dart';
 import 'package:lifeaste/common/fn_method_channel.dart';
 import 'package:lifeaste/manager/hiveManager.dart';
 import 'package:package_info/package_info.dart';
-import '../global.dart';
 import 'state.dart';
 
 class GlobalLogic extends GetxController {
@@ -45,19 +44,8 @@ class GlobalLogic extends GetxController {
   }
 
   String getVersionStr()  {
-    String schemeInfo = "";
-    if(Platform.isIOS && state.isDevelopScheme) {
-      // schemeInfo = this._nativeMacroInfo["isDevelop"] ? "\nscheme: 开发中（生产环境不应出现）" : "";
-    }
-
-    String serverInfo = (state.isDebugServer ? "\n服务器: 测试服（生产环境不应出现）" : "");
-
-    String abTest = '';
-    // if (isDebugEnv() || Global.userLogic().state.user.isDebugUser()) {
-    //   abTest = '\n测试或debug登录可见->\nab测试: ';
-    // }
-
-    return "version:" + '${state.packageInfo?.version}' + serverInfo + schemeInfo + abTest;
+    String serverInfo = state.isDebugServer ? "\n服务器: 测试服（生产环境不应出现）" : "";
+    return "version:" + '${state.packageInfo?.version}' + serverInfo;
   }
 
   @override

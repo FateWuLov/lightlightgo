@@ -17,7 +17,6 @@ final apiManager = ApiManager();
 
 class ApiManager {
   static String hostStr() {
-    // return Config.getHostURL()
     return Global.logic().state.isDebugServer
         ? Info.debugHost
         : Info.distributionHost;
@@ -42,19 +41,6 @@ class ApiManager {
       return null;
     }
   }
-
-  // Future<NetResultData> filterStar(FilterModel model, {int sort = StarSortType_Default}) async {
-  //   Map<String, dynamic> params = {
-  //     'serviceType': model.serviceList(),
-  //     'needOnline': model.needOnline,
-  //     'canRush': model.canRush,
-  //     'price': [model.minPrice, model.maxPrice]
-  //   };
-  //   if(sort > StarSortType_Default && sort <= StarSortType_TopRated) {
-  //     params['sort'] = StarSortStrs[sort];
-  //   }
-  //   return netRequest.postRequest('${hostStr()}/filter/stars', params);
-  // }
 
   ///拉取周推荐神婆
   Future<NetResultData> getDiscoverStars() async {
@@ -245,10 +231,6 @@ class ApiManager {
       return;
     }
     Map<String, dynamic> params = {};
-    // String afId = await AnalyticsManager.instance.appsflyerSdk.getAppsFlyerUID();
-    // if (afId.isNotEmpty) {
-    //   params['afId'] = afId;
-    // }
     if (Global.logic().state.uuid.isNotEmpty) {
       params['uuid'] = Global.logic().state.uuid;
     }
@@ -412,37 +394,6 @@ class ApiManager {
         '${hostStr()}/order/user/reply', {'orderId': orderId, 'reply': reply});
   }
 
-  /// 发送push
-  /// 可选参数：target、targetIdentify、title、message、image、action、sound、iosLimitVersion、androidLimitVersion
-  /// 接收方没有fcmToken的话会报参数错误
-  // Future<NetResultData> messagePush(
-  //     String message, PushActionModel model) async {
-  //   Map param = {
-  //     "message": message,
-  //     "action": jsonEncode(model.toJson()).toString(),
-  //     "target": model.receiverId,
-  //     "targetIdentify": model.receiverIdentify,
-  //   };
-  //   if (model.senderAvatar.isNotEmpty) {
-  //     param["image"] = model.senderAvatar;
-  //   }
-  //   if (model.sound.isNotEmpty) {
-  //     param["sound"] = model.sound;
-  //   }
-  //   return netRequest.postRequest('${hostStr()}/message/push', param);
-  // }
-
-  // Future<List<StarTagsModel>> getAllTags() async {
-  //   NetResultData resultData =
-  //       await netRequest.getRequest('${hostStr()}/star/tags', null);
-  //   if (resultData.result) {
-  //     return (resultData.data as List).map((e) {
-  //       return StarTagsModel.fromJson(e);
-  //     }).toList();
-  //   }
-  //   return [];
-  // }
-
   //获取推荐的神婆列
   Future<List<UserInfoModel>> getRecommendAdvisorList() async {
     NetResultData resultData =
@@ -455,23 +406,6 @@ class ApiManager {
     return [];
   }
 
-  // Future<NetResultData> consumeUserAward(String awardId) async {
-  //   Map param = {
-  //     "awardId": awardId,
-  //   };
-  //   var result = await netRequest.postRequest('${hostStr()}/user/award', param);
-  //   if (result.result) {
-  //     RewardModel reward = RewardModel.fromJson(result.data);
-  //     result.data = reward;
-  //     Global.userLogic().addCoin(reward.count);
-  //     Global.userLogic().state.user.awards.removeWhere((element) {
-  //       return element.awardId == awardId;
-  //     });
-  //     apiManager.getMyInfo();
-  //   }
-  //   return result;
-  // }
-
   Future<NetResultData> inputInviteCode(String code) async {
     Map<String, dynamic> param = {
       "code": code,
@@ -483,25 +417,6 @@ class ApiManager {
     return resultData;
   }
 
-  // Future<List<InviteRecordModel>> inviteRecords(int page, int countPerPage) async {
-  //   NetResultData resultData = await netRequest.getRequest('${hostStr()}/user/invite/records', {
-  //     'countPerPage': countPerPage,
-  //     'page': page,
-  //   });
-  //   if (resultData.result) {
-  //     List items = resultData.data['rows'];
-  //     return items.map((e) {
-  //       InviteRecordModel element = InviteRecordModel.fromJson(e);
-  //       if (element.awardCount == 0) {
-  //         element.awardCount = int.parse(BossManager.instance.bossConfig?.appInfoConfig?.inviteReward ?? '0');
-  //       }
-  //       return element;
-  //     }).toList();
-  //   } else {
-  //     return null;
-  //   }
-  // }
-
   Future<List<UserInfoModel>?> searchStars(
       String key, int page, int countPerPage) async {
     Map<String, String> param = {
@@ -512,7 +427,6 @@ class ApiManager {
 
     NetResultData resultData =
         await netRequest.getRequest('${hostStr()}/search/stars', param);
-    // print(resultData);
     if (resultData.result) {
       List items = resultData.data['rows'];
       return items.map((e) => UserInfoModel.fromJson(e)).toList();

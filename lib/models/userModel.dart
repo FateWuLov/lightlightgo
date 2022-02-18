@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:lifeaste/common/common.dart';
 import 'package:lifeaste/logic/global.dart';
-import 'package:lifeaste/manager/BossManager.dart';
 import 'package:lifeaste/manager/hiveManager.dart';
 import 'package:lifeaste/models/rewardModel.dart';
 import 'package:lifeaste/models/tarotModel.dart';
@@ -204,7 +203,7 @@ class UserInfoModel {
   String coverVideo; //1.5新增背景视频
   @JsonKey(defaultValue: '')
   String featureCover;
-  @JsonKey(defaultValue: Strings.liveAutoMessage)
+  @JsonKey(defaultValue: '')
   String liveAutoMessage;
 
   //神婆管理
@@ -412,9 +411,7 @@ class UserInfoModel {
 
   //显示top accuracy标志
   bool isTopAccuracy() {
-    return this.accuracy >= 0.9 &&
-        this.accuracyCount >=
-            BossManager.instance.bossConfig.appInfoConfig.accuracyMinCount;
+    return this.accuracy >= 0.9;
   }
 
   //在神婆主页显示准确度数值
@@ -461,14 +458,6 @@ class UserInfoModel {
         workStatus == WorkStatusAvailable;
   }
 
-  String workStatusDesc() {
-    if (workStatus == WorkStatusAvailable) {
-      return Strings.inService;
-    } else {
-      return Strings.outOfService;
-    }
-  }
-
   // 是否有为领取的奖励
   List<RewardModel> levelUpRewards() {
     List<RewardModel> result = [];
@@ -508,14 +497,7 @@ class UserInfoModel {
   /// 需要小红花的话，就不需要完成订单
   /// 不需要小红花的话，需要完成订单
   bool canShowInviteCode() {
-    if (BossManager.instance.bossConfig.appInfoConfig.inviteCodeNeedsFlower) {
-      if (getFlower()) {
-        return totalCost > 0 && inviteCode.isNotEmpty;
-      }
-      return false;
-    } else {
-      return totalCost > 0 && orderCompleted >= 1 && inviteCode.isNotEmpty;
-    }
+    return totalCost > 0 && orderCompleted >= 1 && inviteCode.isNotEmpty;
   }
 
   ///已经领取了被邀请的奖励
@@ -582,41 +564,6 @@ class UserInfoModel {
     return false;
   }
 
-  String liveStatusStr() {
-    if (workStatus == WorkStatusAbsent) {
-      return Strings.absent;
-    }
-    switch (liveStatus) {
-      case OnlineModeOnline:
-        {
-          return Strings.online;
-        }
-      case OnlineModeBusy:
-        {
-          return Strings.busy;
-        }
-      default:
-        return '';
-    }
-  }
-
-  Color liveStatusColor() {
-    if (workStatus != WorkStatusAvailable) {
-      return Styles.grey166;
-    }
-    switch (liveStatus) {
-      case OnlineModeOnline:
-        {
-          return Styles.online;
-        }
-      case OnlineModeBusy:
-        {
-          return Styles.busy;
-        }
-      default:
-        return Colors.transparent;
-    }
-  }
 
   String avgDeliverHourStr() {
     if (avgDeliverHour() > 0) {

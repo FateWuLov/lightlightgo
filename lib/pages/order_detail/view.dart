@@ -135,7 +135,7 @@ class OrderDetailPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(state.startTimeTitle(), style: Styles.themeTextStyleBold(14)),
+                    Text(state.startTimeTitle(), style: Styles.mainThemeStyleBold(14)),
                     SizedBox(height: 3),
                     Text(stringFromTimestamp(state.order.createTime),
                         style: Styles.subTextStyle(10)),
@@ -146,7 +146,7 @@ class OrderDetailPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(state.endTimeTitle(), style: Styles.themeTextStyleBold(14)),
+                    Text(state.endTimeTitle(), style: Styles.mainThemeStyleBold(14)),
                     SizedBox(height: 3),
                     Text(state.endTimestampStr(), style: Styles.subTextStyle(10)),
                   ],

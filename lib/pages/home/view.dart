@@ -56,7 +56,7 @@ class HomePage extends StatelessWidget {
       ),
       child: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
-        backgroundColor: Styles.tabBg,
+        backgroundColor: Styles.mainBg,
         items: _tabItems(),
         onTap: (int index) {
           logic.changeIndex(index);

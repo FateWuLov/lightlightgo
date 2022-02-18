@@ -29,10 +29,6 @@ class UserLogic extends GetxController {
       state.existFirstReadingOff.value = user.nrtOrderCount <= 0;
       state.exist3MinFreeChat.value = canFreeChat3min();
       state.coins.value = user.coin;
-
-      if (user.awards.isNotEmpty && user.assistantId.isNotEmpty) {
-        _handleAssistantMsg();
-      }
       eventBus.fire(UserInfoChangedEvent());
     }
   }
@@ -77,10 +73,6 @@ class UserLogic extends GetxController {
     await DatabaseManager.instance.initDb(userInfoModel.userId);
     updateLocalUserInfo(userInfoModel, newUser: true);
     _syncLocalInfoToService();
-    // TarotManager.instance.config();
-    Future.delayed(Duration(seconds: 1), () {
-      _handleGreetImMsg();
-    });
   }
 
   /// 新登录用户，直接更新
@@ -117,7 +109,7 @@ class UserLogic extends GetxController {
       params.loginType = Info.loginType_guest;
       params.loginId = guestId;
       LoginUserInfo userInfo = LoginUserInfo.fromJson({});
-      userInfo.name = 'Guest_' + randomUsername();
+      userInfo.name = randomUsername();
       userInfo.avatar = getMatchAvatar();
       params.userInfo = userInfo;
 
@@ -129,7 +121,6 @@ class UserLogic extends GetxController {
 
   void debugLogin(String loginId, bool debugLogin) async {
     if (loginId.isEmpty) {
-      showTipsToast(Strings.notNull);
       return;
     }
 
@@ -216,67 +207,17 @@ class UserLogic extends GetxController {
     }
   }
 
-  void googleLogin() async {
-
-    // Trigger the authentication flow
-    // final GoogleSignInAccount googleUser = await GoogleSignIn().signIn();
-    // if (googleUser == null) return;
-    //
-    // showLoadingToast();
-    // // Obtain the auth details from the request
-    // final GoogleSignInAuthentication googleAuth =
-    // await googleUser.authentication;
-    //
-    // // Create a new credential
-    // final credential = GoogleAuthProvider.credential(
-    //   accessToken: googleAuth.accessToken,
-    //   idToken: googleAuth.idToken,
-    // );
-    //
-    // print('googleLogin start');
-    // // Once signed in, return the UserCredential
-    // UserCredential userCredential =
-    // await FirebaseAuth.instance.signInWithCredential(credential);
-    // print('googleLogin back');
-    // String loginId = userCredential?.user?.uid;
-    // print('googleLogin user ${userCredential?.user?.toString()}');
-    // if (loginId == null || loginId.isEmpty) {
-    //   showTipsToast(Strings.googleFailed);
-    // } else {
-    //   LoginParams params = LoginParams();
-    //   params.loginType = TypicalKeys.loginType_google;
-    //   params.loginId = loginId;
-    //   params.userInfo = LoginUserInfo();
-    //   params.userInfo.name = userCredential?.user?.displayName ?? randomUsername();
-    //   params.userInfo.avatar = userCredential?.user?.photoURL ?? getMatchAvatar();
-    //   String email = userCredential?.user?.email;
-    //   if (email != null && email.isNotEmpty) {
-    //     params.userInfo.googleEmail = email;
-    //   }
-    //   String phoneNumber = userCredential?.user?.phoneNumber;
-    //   if (phoneNumber != null && phoneNumber.isNotEmpty) {
-    //     params.userInfo.googlePhone = phoneNumber;
-    //   }
-    //   await _loginWithUserInfo(params);
-    // }
-  }
-
   Future<void> logout() async {
     showLoadingToast();
-    // Global.pushLogic().unregister();
     HiveManager.instance.set(Info.userInfoKey, '');
     HiveManager.instance.set(Info.requestSessionKey, '');
-    AnalyticsManager.instance.logInternalEvent(IEN_Logout);
-    // xmppDisconnect();
-    // Global.xmppLogic().updateConnect(false);
 
     await DatabaseManager.instance.closeDb();
-    // MsgManager.getInstance().release();
 
     // Get.find<RootPageLogic>().setPage(RootPageNameLogin);
     // Get.until((route) => Get.currentRoute == RouteConfig.root);
-    //
-    // cleanAllToast();
+
+    cleanAllToast();
     Get.delete<UserLogic>(force: true);
   }
 
@@ -306,50 +247,6 @@ class UserLogic extends GetxController {
         state.user.rtOrderCompleted <= 0;
   }
 
-  ///没有人填过该用户邀请码，则每天弹出一次
-  ///- 查看已完成订单详情，点击返回键时跳出
-  ///- 通话完成时，关闭结束页时跳出
-  bool showInviteDialogIfNeeded(String fromWhere) {
-    // if (state.user.userId.isEmpty ||
-    //     state.user.inviteCount > 0 ||
-    //     !state.user.canShowInviteCode()) {
-    //   return false;
-    // }
-    // String showKey = getPrefixKey(UD_showInviteDialogTime);
-    // int time = HiveManager.instance.get(showKey) ?? 0;
-    // // 一天一次
-    // if (isSameDay(time, DateTime.now().millisecondsSinceEpoch)) {
-    //   return false;
-    // }
-    // HiveManager.instance.set(showKey, DateTime.now().millisecondsSinceEpoch);
-    // showNormalDialog(
-    //   barrierDismissible: false,
-    //   child: InviteFriendsDialog(fromWhere: fromWhere,),
-    // );
-    return true;
-  }
-
-  /// 当前是游客登录时，显示绑定账号弹窗
-  void showBindSignInDialog() {
-    // if (!state.user.isGuest()) return;
-    // showNormalDialog(
-    //   child: TwoBtnDialog(
-    //     imageName: ImageNames.bindSignIn,
-    //     message: Strings.bindSignInMessage,
-    //     mainBtnTitle: Strings.linkAccount,
-    //     subBtnTitle: Strings.maybeLater,
-    //     mainAction: () async {
-    //       AnalyticsManager.instance.logEvent(EventName_LogPopupLinkClick);
-    //       Get.offNamed(RouteConfig.login, arguments: LoginPageArgs(forBinding: true));
-    //     },
-    //     subAction: () async {
-    //       AnalyticsManager.instance.logEvent(EventName_LogPopupLaterClick);
-    //       Get.back();
-    //     },
-    //   ),
-    // );
-  }
-
   Future<bool> _loginWithUserInfo(LoginParams params) async {
     NetResultData resultData;
     // 当前登录的是游客帐号时，执行绑定账号操作，否则执行登录操作
@@ -363,48 +260,11 @@ class UserLogic extends GetxController {
       resultData = await apiManager.loginV2(params);
     }
 
-    // 绑定账号报错
-    if (!resultData.result && resultData.errorCode == ERROR_CODE_USER_BIND_REPEAT) {
-      cleanAllToast();
-      // 提示绑定错误
-      showNormalDialog(
-        child: NormalDialog(
-          content: Strings.bindAccountFailMsg,
-          mainTitle: Strings.tryAgain,
-          subTitle: Strings.contactUs,
-          needCloseBtn: true,
-          rightPrefer: true,
-          mainAction: () async {
-            AnalyticsManager.instance.logEvent(EventName_LinkFailTryClick);
-          },
-          subAction: () async {
-            AnalyticsManager.instance.logEvent(EventName_LinkFailContactClick);
-            // ConversationModel conversationModel = officialConversationModel();
-            // Get.offNamed(RouteConfig.imChat, arguments: ImChatPageArgs(conversationModel));
-          },
-          closeAction: () {
-            AnalyticsManager.instance.logEvent(EventName_LinkFailCloseClick);
-            // 弹窗已经关闭，此处关闭登录页
-            Get.back();
-          },
-        ),
-      );
-      return false;
-    }
-
     if (resultData.result) {
       UserInfoModel userInfo = UserInfoModel.fromJson(resultData.data['userInfo']);
       print('[LaunchApp] guest login success');
       await Global.userLogic().initForNewLogin(userInfo);
 
-      // List<dynamic> abTest = resultData.data['abTest'] ?? [];
-      // List<AbTestModel> abTestModels = abTest.map((e) => AbTestModel.fromJson(e)).toList();
-      // await Global.userLogic().handleAbTestVariant(abTestModels, fromLogin: true);
-      //
-      // PushState pushState = Global.pushLogic().state;
-      // if (pushState.fcmToken.isNotEmpty) {
-      //   apiManager.messageRegister(pushState.fcmToken.value);
-      // }
       AnalyticsManager.instance.logEvent(
         EventName_LoginSuccess,
         parameters: {
@@ -413,9 +273,6 @@ class UserLogic extends GetxController {
       );
       AnalyticsManager.instance.logAfEvent(AFLogin);
       Global.userLogic().bindAdChannelIfNeeded();
-      if (userInfo.xmppPwd.isNotEmpty) {
-        // xmppLogin();
-      }
       HiveManager.instance.set(UD_DID_LOGIN_BEFORE, true);
     }
     // 若没有启动完成，不需要显示提示语，不需要切换页面
@@ -435,65 +292,6 @@ class UserLogic extends GetxController {
     if (hasLogin()) {
       apiManager.syncUserInfo();
     }
-  }
-
-  void _handleGreetImMsg() {
-    // if (state.user.isOfficialSupport()) return;
-    // bool hasShown = hasShownGreetImMsg();
-    // if (!hasShown) {
-    //   //官号向新用户打招呼
-    //   UserInfoModel officialModel = UserInfoModel.fromJson({});
-    //   officialModel.userId = TypicalKeys.officialAccountUserId;
-    //   officialModel.avatar = TypicalKeys.officialAccountAvatar;
-    //   officialModel.name = TypicalKeys.officialAccountName;
-    //   XMPPMessageModel message =
-    //   xmppTextMessageFromUser(BossManager.instance.bossConfig.appInfoConfig.newerGreet, officialModel);
-    //   message.easyMsg = true;
-    //   message.didRead = false;
-    //   message.showTime = true;
-    //   xmppHandleReceiveNormalMsg(message);
-    //   setShownGreetImMsg();
-    // }
-  }
-
-  void _handleAssistantMsg() async {
-    // if (state.user.isAssistantIdSupport()) return;
-    // bool hasShown = hasShownAssistantImMsg();
-    // if (!hasShown) {
-    //   //小助手向用户打招呼
-    //   XMPPMessageModel message = xmppTextMessageFromUser(
-    //       Strings.assistentGreet.replaceAll("%s", state.user.name),
-    //       assistantUserInfoModel());
-    //   message.easyMsg = true;
-    //   message.didRead = false;
-    //   message.showTime = true;
-    //   xmppHandleReceiveNormalMsg(message);
-    //   setShownAssistantImMsg();
-    // }
-    //
-    // //升级奖励才需要发小助手消息
-    // for (RewardModel model in state.user.levelUpRewards()) {
-    //   bool flag = await MsgManager.getInstance().isSendRewardMessage(model);
-    //   if (!flag) {
-    //     XMPPMessageModel message = xmppTextMessageFromUser(
-    //         BossManager.instance.bossConfig.appInfoConfig.levelUpRewardGreet
-    //             .replaceAll('%s', state.user.name),
-    //         assistantUserInfoModel());
-    //     message.easyMsg = true;
-    //     message.didRead = false;
-    //     message.showTime = (await MsgManager.getInstance()
-    //         .isMessageNeedShowTime(message));
-    //     message.orderId = "rewardId_" + model.awardId;
-    //     await xmppHandleReceiveNormalMsg(message, needNewMsgEvent: true);
-    //
-    //     //发送网站提醒消息
-    //     XMPPMessageModel websiteMessage = xmppTextMessageFromUser(Strings.moreSurprisesInWebsite, assistantUserInfoModel());
-    //     websiteMessage.easyMsg = true;
-    //     websiteMessage.didRead = false;
-    //     websiteMessage.showTime = (await MsgManager.getInstance().isMessageNeedShowTime(websiteMessage));
-    //     await xmppHandleReceiveNormalMsg(websiteMessage, needNewMsgEvent: true);
-    //   }
-    // }
   }
 
   //用户投放渠道确定

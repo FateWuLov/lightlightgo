@@ -1,9 +1,11 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:encrypt/encrypt.dart';
 import 'package:lifeaste/common/common.dart';
 import 'package:lifeaste/common/fn_method_channel.dart';
 import 'package:lifeaste/logic/global.dart';
+import 'package:lifeaste/models/userModel.dart';
 import '../hiveManager.dart';
 import 'networkResultData.dart';
 import 'package:crypto/crypto.dart';
@@ -92,7 +94,7 @@ class NetRequest {
       storeSessionHeader(response.headers.map);
       resultData = handleResult(response, true);
     } on DioError catch (e) {
-      resultData = handleResult(e.response, false); //NetResultData(null,false,400,null);
+      resultData = handleResult(e.response, false);
       segmentationLog('[http]====请求失败 POST $url\n'+ e.response.toString());
     }
     return resultData;
@@ -190,5 +192,17 @@ class NetRequest {
       return;
     }
     segmentationLog(log);
+  }
+
+  String requestUserInfo() {
+    String agent = '';
+    var packageInfo = Global.logic().state.packageInfo;
+    if (Platform.isIOS) {
+      agent = AppProductLifeaste + '_ios';
+    } else if (Platform.isAndroid) {
+      agent = AppProductLifeaste + '_android';
+    }
+    agent = agent + '_${packageInfo?.version}_${packageInfo?.buildNumber}';
+    return agent;
   }
 }

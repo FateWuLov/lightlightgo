@@ -51,9 +51,7 @@ class HomeLogic extends GetxController {
   }
 
   void _updateUnreadMsg() async {
-    // int count = await MsgManager.getInstance().getUnreadMessageCount();
-    // state.unreadMsgCount = count;
-    // _updateUnread();
+
   }
 
   void _initEventBus() {
@@ -72,54 +70,12 @@ class HomeLogic extends GetxController {
   /// 登录过非游客账号则不是
   /// 首次启动时更新，确认之后，后续不用再作请求；未确认则每次启动都作请求
   void _prepareForDialog() async {
-    var needLogin = needLoginOldAccountFromPref();
-    // 已登录了非游客账号的话，就不需要做登录限制了
-    if (Global.userLogic().hasLogin() &&
-        !Global.userLogic().state.user.isGuest()) {
-      needLogin = false;
-      setNeedLoginOldAccountToPref(false);
-      print('_prepareForDialog 已登录了非游客账号');
-    }
-    // 未确定，则检查
-    if (needLogin == null) {
-      NetResultData resultData = await apiManager.deviceCheck();
-      if (resultData.result) {
-        // 非游客设备，需要登录老帐号
-        bool isGuestDevice = resultData.data['isGuestDevice'] ?? false;
-        needLogin = !isGuestDevice;
-        setNeedLoginOldAccountToPref(needLogin);
-      }
-    }
-    if (needLogin) {
-      showNormalDialog(
-        barrierDismissible: Global.logic().isDebugEnv(),
-        child: IconMsgDialog(
-          message: Strings.alreadySignInMsg,
-          buttonTitle: Strings.logIn,
-          needCloseIcon: false,
-          buttonAction: () async {
-            AnalyticsManager.instance.logEvent(EventName_OldAccountPopupSignClick);
-            Global.userLogic().logout();
-          },
-        ),
-      );
-      return;
-    }
-    // Future.delayed(Duration(seconds: 5), () {
-    //   if (Global.userLogic().canFreeChat3min()) {
-    //     showNormalDialog(
-    //       barrierDismissible: false,
-    //       useSafeArea: false,
-    //       child: FreeThreeMinutesDialog(),
-    //     );
-    //   }
-    // });
+
   }
 
   @override
   void onInit() {
     super.onInit();
-    // TarotManager.instance.config();
     _updateUnreadMsg();
     Get.lazyPut(() => StarListLogic());
   }

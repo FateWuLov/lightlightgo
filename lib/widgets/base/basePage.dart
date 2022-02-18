@@ -41,7 +41,7 @@ class BasePage extends StatelessWidget {
         child: Container(
           height: 44,
           decoration:
-              BoxDecoration(color: navBar?.decoration?.color ?? Styles.navBg),
+              BoxDecoration(color: navBar?.decoration?.color ?? Styles.mainBg),
           child: navBar,
         ),
       );

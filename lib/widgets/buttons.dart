@@ -36,7 +36,7 @@ class MainButton extends StatelessWidget {
         padding: padding,
         margin: margin,
         decoration: BoxDecoration(
-          color: Styles.buttonBg,
+          color: Styles.mainTheme,
           borderRadius: new BorderRadius.circular(50),
         ),
         child: child ?? Center(
@@ -64,12 +64,12 @@ class SubButton extends StatelessWidget {
       padding: EdgeInsets.all(1),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(4),
-          border: Border.all(color: Styles.themeText, width: 1)
+          border: Border.all(color: Styles.mainTheme, width: 1)
       ),
       alignment: Alignment.center,
       child: AutoSizeText(
         title,
-        style: Styles.themeTextStyle(textSize),
+        style: Styles.mainThemeStyle(textSize),
         minFontSize: 6,
         maxLines: 1,
       ),
@@ -113,7 +113,7 @@ class CustomButton extends StatelessWidget {
     this.child,
     this.enable = true,
     this.borderRadius = 24,
-    this.color = Styles.buttonBg,
+    this.color = Styles.mainTheme,
     this.borderColor,
     this.shadowColor,
   });
@@ -121,7 +121,7 @@ class CustomButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Color _borderColor = borderColor ??
-        (this.enable ? Styles.buttonBorder : Styles.grey166
+        (this.enable ? Styles.buttonBorder : Styles.disableGrey
             .withOpacity(0.5));
     if (buttonType == ButtonType.solid) {
       return GestureDetector(
@@ -153,7 +153,7 @@ class CustomButton extends StatelessWidget {
       height: height,
       alignment: Alignment.center,
       decoration: BoxDecoration(
-          color: Styles.buttonBg,
+          color: Styles.mainTheme,
           borderRadius: BorderRadius.circular(borderRadius),
           border: Border.all(color: _borderColor)
       ),

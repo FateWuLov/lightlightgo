@@ -22,12 +22,6 @@ class GradientText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return _text();
-    // return ShaderMask(
-    //   shaderCallback: (bounds) {
-    //     return (this.gradient ?? mainGradientLeft2Right()).createShader(Offset.zero & bounds.size);
-    //   },
-    //   child:
-    // );
   }
 
   Widget _text() {
@@ -66,7 +60,7 @@ class SpecialText extends StatelessWidget {
   Widget build(BuildContext context) {
     return AutoSizeText(
       title ?? '',
-      style: Styles.themeTextStyleBold(textSize ?? 16),
+      style: Styles.mainThemeStyleBold(textSize ?? 16),
       textAlign: textAlign,
       maxLines: maxLines ?? 1,
       minFontSize: 6,

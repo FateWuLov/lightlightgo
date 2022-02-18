@@ -105,7 +105,7 @@ class _IconMsgDialogState extends State<IconMsgDialog> {
                         child: Text(
                           widget.message ?? '',
                           textAlign: TextAlign.center,
-                          style: Styles.themeTextStyle(14),
+                          style: Styles.mainThemeStyle(14),
                         ),
                       ),
                     ],

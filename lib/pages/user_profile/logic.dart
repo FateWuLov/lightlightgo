@@ -63,10 +63,9 @@ class UserProfileLogic extends GetxController {
       state.userInfo.favorite = !favorite;
       update([state.favoriteIconGId]);
       if (state.userInfo.favorite) {
-        // subscribeNotification(state.userInfo, NotifyAlways, NotifyAlways);
         AnalyticsManager.instance.logEvent(AdvisorLikeAdvisorSuccess);
       } else {
-        // subscribeNotification(state.userInfo, NotifyNever, NotifyNever);
+
       }
     }
   }
@@ -80,28 +79,6 @@ class UserProfileLogic extends GetxController {
       return [];
     }
     List<ServiceInfoModel> services = [];
-    // if (state.selectTab.value == ServiceSegmentType.premium) {
-    //   //增值服务
-    //   for (PremiumService obj in state.userInfo.premiumServices) {
-    //     ServiceInfoModel model = serviceFromPremium(obj);
-    //     services.add(model);
-    //   }
-    // } else if (state.selectTab.value == ServiceSegmentType.live) {
-    //   //普通服务
-    //   state.userInfo.availableService.sort((a, b) {
-    //     return a.type.compareTo(b.type);
-    //   });
-    //   for (ServiceInfoModel model in state.userInfo.availableService) {
-    //     if (model.isRealTime()) {
-    //       if (state.userInfo.canChatFree() &&
-    //           model.type == ServiceType.serviceTypeTextCall.index) {
-    //         services.insert(0, model);
-    //       } else {
-    //         services.add(model);
-    //       }
-    //     }
-    //   }
-    // } else {
     //普通服务
     state.userInfo.availableService.sort((a, b) {
       return a.type.compareTo(b.type);
@@ -112,7 +89,6 @@ class UserProfileLogic extends GetxController {
         services.add(model);
       }
     }
-    // }
     return services;
   }
 
@@ -138,63 +114,8 @@ class UserProfileLogic extends GetxController {
   }
 
   void _refreshRecentView() async {
-    //记录最近浏览的神婆
-    if (!state.userInfo.isOfficialSupport() &&
-        !state.userInfo.isAssistantIdSupport()) {
-      //非官号,非小助手才记录
-      // Get.find<StarListLogic>().updateRecentViewedAdvisor(state.userInfo.userId);
-    }
-  }
 
-  //
-  // void _logSegmentShow() {
-  //   if (state.selectTab.value == ServiceSegmentType.reading) {
-  //     AnalyticsManager.instance
-  //         .logEvent(EventName_ReadingSegmentShow, parameters: {
-  //       'from': ParamFromAdvisorCard,
-  //     });
-  //   } else if (state.selectTab.value == ServiceSegmentType.live) {
-  //     AnalyticsManager.instance
-  //         .logEvent(EventName_LiveSegmentShow, parameters: {
-  //       'from': ParamFromAdvisorCard,
-  //     });
-  //   } else if (state.selectTab.value == ServiceSegmentType.premium) {
-  //     AnalyticsManager.instance
-  //         .logEvent(EventName_PremiumSegmentShow, parameters: {
-  //       'from': ParamFromAdvisorCard,
-  //     });
-  //   }
-  // }
-  //
-  // void _onConsult(ServiceSegmentType segment) {
-  //   showNormalDialog(
-  //     child: ServiceListDialog(
-  //       state.userInfo,
-  //       from: ParamFromAdvisorPageConnect,
-  //       initTab: segment,
-  //       attachPicturePath: state.attachPicturePath,
-  //       onSelect: (service) {
-  //         AnalyticsManager.instance.clickServiceType(
-  //             state.userInfo, service, ParamFromAdvisorPageConnect);
-  //         AnalyticsManager.instance.logEvent(
-  //           EventName_OrderDetailAskAgainClick,
-  //           parameters: {Param_Type: service.eventName()},
-  //         );
-  //         if (state.userInfo.isFollowUpPeriod()) {
-  //           //入口统计
-  //           AnalyticsManager.instance
-  //               .logEvent(EventName_FollowUpServiceClick, parameters: {
-  //             'value': 'askagain_popup',
-  //           });
-  //         }
-  //       },
-  //       discountDeadline: state.userInfo.followUpDeadline,
-  //     ),
-  //   );
-  //   AnalyticsManager.instance.logEvent(
-  //     EventName_OrderDetailAskAgainPopup,
-  //   );
-  // }
+  }
 
   @override
   void onInit() {
@@ -204,9 +125,6 @@ class UserProfileLogic extends GetxController {
     state.attachPicturePath = arg.attachPicturePath;
     state.fromPage = arg.fromPage;
 
-    // Global.xmppLogic().connect();
-    // xmppSubscribeOnlineMode(state.userInfo.userId);
-
     AnalyticsManager.instance
         .logEvent(EventName_AdvisorProfilePageShow, parameters: {
       'from': state.fromPage,
@@ -215,7 +133,6 @@ class UserProfileLogic extends GetxController {
       EventName_ServiceTypeShow,
       parameters: {'from': ParamFromAdvisorCard},
     );
-    // _logSegmentShow();
   }
 
   @override

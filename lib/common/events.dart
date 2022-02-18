@@ -45,10 +45,6 @@ class ReAddCoinsSuccessEvent {
   ReAddCoinsSuccessEvent();
 }
 
-class ReceiveXMPPNormalMsgEvent {
-  XMPPMessageModel model;
-  ReceiveXMPPNormalMsgEvent(this.model);
-}
 
 class XMPPOnlineModeChangeEvent {
   String userId;

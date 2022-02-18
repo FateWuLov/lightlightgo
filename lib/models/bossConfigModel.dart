@@ -26,7 +26,7 @@ class AppInfoConfig {
   List<String> limitWordsScene2;
   @JsonKey(fromJson: defaultEventSaleConfig)
   EventSaleConfig eventSaleConfig;
-  @JsonKey(defaultValue: Strings.defaultHotWords)
+  @JsonKey(defaultValue: [])
   List<String> hotWordList;
   @JsonKey(defaultValue: '')
   String inviteReward;
@@ -49,7 +49,7 @@ class AppInfoConfig {
   String levelUpLunaWebMsg;
 
   //宝箱奖励领取
-  @JsonKey(defaultValue: Strings.levelUpRewardGreet)
+  @JsonKey(defaultValue: '')
   String levelUpRewardGreet;
   @JsonKey(defaultValue: '')
   String discoverBannerTitleForOldUser;
@@ -75,7 +75,7 @@ class AppInfoConfig {
   int yesNoTarotPrice;
 
   /// 回复模板
-  @JsonKey(defaultValue: Strings.defaultPresetReplyWords)
+  @JsonKey(defaultValue: [])
   List<String> presetReplyWords;
 
   /// General Situation 最大字数
@@ -83,7 +83,7 @@ class AppInfoConfig {
   int generalSituationMaxWordNum;
 
   /// General Situation placeholder
-  @JsonKey(defaultValue: Strings.situationHold)
+  @JsonKey(defaultValue: '')
   String generalSituationPlaceholder;
 
   /// Specific Question 最大字数
@@ -91,29 +91,29 @@ class AppInfoConfig {
   int specificQuestionMaxWordNum;
 
   /// Specific Question placeholder
-  @JsonKey(defaultValue: Strings.questionHold)
+  @JsonKey(defaultValue: '')
   String specificQuestionPlaceholder;
 
   /// 官号auto greeting
-  @JsonKey(defaultValue: Strings.newerGreet)
+  @JsonKey(defaultValue: '')
   String newerGreet;
 
   /// 申请为神婆greeting文案
-  @JsonKey(defaultValue: Strings.becomeAnAdvisorGreet)
+  @JsonKey(defaultValue: '')
   String becomeAnAdvisorGreet;
 
   /// 差评文案
-  @JsonKey(defaultValue: Strings.badRatingGreet)
+  @JsonKey(defaultValue: '')
   String badRatingGreet;
 
   /// inviteNormalShareText
-  @JsonKey(defaultValue: Strings.shareText)
+  @JsonKey(defaultValue: '')
   String inviteNormalShareText;
 
-  @JsonKey(defaultValue: Strings.shareTextWithCredits)
+  @JsonKey(defaultValue: '')
   String invitePosterShareText;
 
-  @JsonKey(defaultValue: Strings.newShareTextWithCredits)
+  @JsonKey(defaultValue: '')
   String newInvitePosterShareText;
 
   @JsonKey(defaultValue: 20)

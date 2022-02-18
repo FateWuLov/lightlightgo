@@ -42,20 +42,6 @@ class DebugToolsPage extends StatelessWidget {
                 ),
                 onTap: logic.onResetGuestId,
               ),
-              // GestureContainer(
-              //   height: 60,
-              //   child: Container(
-              //     alignment: Alignment.center,
-              //     decoration: BoxDecoration(
-              //         border: Border.all(color: GS.mainTheme)
-              //     ),
-              //     child: Text(
-              //       '退出当前账号',
-              //       style: mainTextStyleNormal(18),
-              //     ),
-              //   ),
-              //   onTap: logic.onLogout,
-              // ),
             ],
           ),
         ),

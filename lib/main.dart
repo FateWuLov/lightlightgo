@@ -4,9 +4,7 @@ import 'package:lifeaste/pages/root_page/logic.dart';
 import 'package:lifeaste/rootApp.dart';
 
 import 'common/styles.dart';
-import 'common/tools.dart';
 import 'logic/global.dart';
-import 'manager/BossManager.dart';
 import 'manager/analyticsManager.dart';
 import 'manager/hiveManager.dart';
 import 'manager/net/apiManager.dart';
@@ -28,20 +26,11 @@ void launchApp() async {
   }
 
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-  // _initCrashlytics();
-  // // 先执行af初始化，以便后续能拿到afId
-  // await _initAf();
   // 初始化本地用户信息
   await Global.userLogic().initForLaunch();
 
   _logLaunchEvent();
-  // syncIapProductsToNative();
-  BossManager.instance.requestConfig();
-  // AppRateManager.getInstance().init();
-
   _showRootPage();
-  // TypicalKeys.nativeActionFlutterMethodChannel
-  //     .setMethodCallHandler(nativeActionFlutterHandle);
 }
 
 void _showRootPage() async {
@@ -106,7 +95,4 @@ void _logLaunchEvent() {
     //新安装，记录版本号
     setAppFirstLaunchVersion();
   }
-  // if (setAppFirstLaunchTime()) {
-  //   XiEventManager.getInstance().saveEvent(XiEventNameFirstLaunch);
-  // }
 }

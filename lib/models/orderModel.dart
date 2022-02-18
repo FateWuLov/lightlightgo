@@ -3,7 +3,6 @@ import 'dart:ui';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:lifeaste/common/common.dart';
 import 'package:lifeaste/logic/global.dart';
-import 'package:lifeaste/manager/BossManager.dart';
 
 import 'userModel.dart';
 
@@ -167,7 +166,6 @@ class OrderInfoModel {
       case OrderStatusHasReplied: return Strings.awaitingReceipt;
       case OrderStatusCompleted: return Strings.completed;
       case OrderStatusRejected: return Strings.declined;
-      case OrderStatusDraft: return Strings.draft;
       default: {
         return '';
       }
@@ -175,18 +173,7 @@ class OrderInfoModel {
   }
 
   Color statusColor() {
-    switch (status) {
-      case OrderStatusPending: return Styles.orderPending;
-      case OrderStatusExpired: return Styles.orderExpired;
-      case OrderStatusCancel: return Styles.orderCanceled;
-      case OrderStatusHasReplied: return Styles.orderAwaitingReceipt;
-      case OrderStatusCompleted: return Styles.orderCompleted;
-      case OrderStatusRejected: return Styles.orderDecline;
-      case OrderStatusDraft: return Styles.orderDraft;
-      default: {
-        return Styles.orderCanceled;
-      }
-    }
+    return Styles.orderPending;
   }
 }
 
@@ -255,49 +242,6 @@ class ServiceInfoModel {
         {
           return Strings.textServiceTitle;
         }
-      case ServiceType.serviceTypeAudio:
-        {
-          return Strings.audioServiceTitle;
-        }
-      case ServiceType.serviceTypeVideo:
-        {
-          return Strings.videoServiceTitle;
-        }
-      case ServiceType.serviceTypeTextCall:
-        {
-          return Strings.liveTextChat;
-        }
-      case ServiceType.serviceTypeAudioCall:
-        {
-          return Strings.liveAudioChat;
-        }
-      case ServiceType.serviceTypeVideoCall:
-        {
-          return Strings.liveVideoChat;
-        }
-      case ServiceType.serviceTypePremium:
-        {
-          return premiumService?.name ?? '';
-        }
-      default:
-        return '';
-    }
-  }
-
-  String subTitle() {
-    switch (ServiceType.values[type]) {
-      case ServiceType.serviceTypeText:
-      case ServiceType.serviceTypeAudio:
-      case ServiceType.serviceTypeVideo:
-        {
-          return Strings.readingServiceSubTitle;
-        }
-      case ServiceType.serviceTypePremium:
-        {
-          return Strings.duration +
-              ': ' +
-              (premiumService?.durationStr() ?? '');
-        }
       default:
         return '';
     }
@@ -337,13 +281,6 @@ class ServiceInfoModel {
       // 文字订单实时折扣
       num = num * star.textCallCoupon();
     }
-    //主题折扣
-    if (BossManager.instance.hasDiscount(serviceType: type)) {
-      double discount =
-          BossManager.instance.eventSaleDiscount(serviceType: type);
-      num = num * discount;
-    }
-
     return num.ceil();
   }
 
@@ -477,11 +414,6 @@ class PremiumService {
 
   int day() {
     return duration ~/ 24;
-  }
-
-  String durationStr() {
-    int count = day();
-    return '$count ${Strings.day(count)}';
   }
 }
 

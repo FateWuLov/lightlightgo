@@ -11,30 +11,8 @@ class RouteConfig {
 
   /// 用户主页
   static final String user = "/user";
-  static final String login = "/login";
-  /// 增值服务搜索
-  static final String premiumSearch = "/premiumSearch";
-  static final String starSearch = "/starSearch";
-
   static final String orderDetail = "/orderDetail";
-
-  static final String myFavoriteList = "/myFavoriteList";
-  static final String enterInviteCode = "/enterInviteCode";
-  static final String editUserInfo = "/editUserInfo";
-  static final String allStar = "/allStar";
-  static final String queryType = "/queryType";
-  static final String inviteFriends = "/inviteFriends";
-  static final String notifySetting = "/notifySetting";
-  static final String videoPreview = "/videoPreview";
-  static final String imChat = "/imChat";
-  static final String jsWeb = "/jsWeb";
-  static final String categoryStars = "/categoryStars";
   static final String debugTools = "/debugTools";
-  static final String awaitTextCall = "/awaitTextCall";
-  static final String awaitAgoraCall = "/awaitAgoraCall";
-  static final String textCall = "/textCall";
-  static final String agoraCall = "/agoraCall";
-  static final String callResult = "/callResult";
 
   ///别名映射页面
   static final List<GetPage> getPages = [

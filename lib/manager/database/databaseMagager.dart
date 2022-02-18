@@ -19,7 +19,7 @@ class DatabaseManager {
   static DatabaseManager? _databaseManager;
 
   // 数据库名
-  String databaseName = 'genescope';
+  String databaseName = 'lifeaste';
 
   // 数据库路径
   String? databasePath;
@@ -214,18 +214,6 @@ class DatabaseManager {
   UserDao getUserDao() {
     return UserDao(_database);
   }
-  //
-  // OrderDao getOrderDao() {
-  //   return OrderDao(_database);
-  // }
-  //
-  // XmppDao getXmppDao() {
-  //   return XmppDao(_database);
-  // }
-  //
-  // ConversationDao getConversationDao() {
-  //   return ConversationDao(_database);
-  // }
 
   Future<UserInfoModel?> getUser(String userId) async {
     if (_database?.isOpen != true) Future.value(null);

@@ -7,9 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lifeaste/common/common.dart';
 import 'package:lifeaste/logic/global.dart';
-import 'package:lifeaste/manager/BossManager.dart';
-import 'package:lifeaste/manager/hiveManager.dart';
-import 'package:lifeaste/manager/net/apiManager.dart';
 import 'package:lifeaste/manager/net/networkResultData.dart';
 import 'package:lifeaste/models/orderModel.dart';
 import 'package:lifeaste/models/userModel.dart';
@@ -20,16 +17,6 @@ import 'package:url_launcher/url_launcher.dart';
 import 'dart:ui' as ui;
 import '../routeConfig.dart';
 import 'styles.dart';
-
-Color getModeColor(int onlineMode) {
-  if (onlineMode == 0) {
-    return Colors.grey;
-  } else if (onlineMode == 1) {
-    return Color.fromARGB(255, 126, 211, 33);
-  } else {
-    return Color.fromARGB(255, 238, 21, 46);
-  }
-}
 
 /// 关闭弹窗，直到路由栈顶部不是弹窗
 closeAllTopDialog() {
@@ -48,7 +35,7 @@ showLoadingToast({double? opacity}) {
   cleanAllToast();
   BotToast.showCustomLoading(
     toastBuilder: (CancelFunc cancelFunc) => Container(
-      color: Styles.tabBg.withOpacity(alpha),
+      color: Styles.mainBg.withOpacity(alpha),
       alignment: Alignment.center,
       child: LoadingView(),
     ),
@@ -66,7 +53,7 @@ showTipsToast(String string, {double? durationTime, VoidCallback? onDismiss}) {
       toastBuilder: (CancelFunc cancelFunc) => Card(
         margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
         shape: StadiumBorder(),
-        color: Styles.tabBg.withOpacity(0.95),
+        color: Styles.mainBg.withOpacity(0.95),
         // elevation: 1,
         child: Container(
           decoration: BoxDecoration(
@@ -381,21 +368,6 @@ bool containsKeyword(String sentence, String keyword) {
   return false;
 }
 
-/// 1.神婆用户间实时聊天
-/// 2.用户向神婆下单时，填写订单信息表（general situation+specific question）
-/// 3.用户回复追问
-/// 4.神婆用户非实时聊天
-/// 5.增值服务聊天
-bool isLimitWordScene1(String sentence) {
-  List<String> list = BossManager.instance.limitWordsScene1();
-  for (String keyword in list) {
-    if (containsKeyword(sentence, keyword)) {
-      return true;
-    }
-  }
-  return false;
-}
-
 String breakWord(String? word) {
   if (word == null || word.isEmpty) {
     return '';
@@ -550,251 +522,6 @@ Map<String, dynamic> fixToJson(Map<String, dynamic>? map) {
   return temp;
 }
 
-Future<ui.Image> mergeImages(List<ui.Image> imageList,
-    {Axis direction = Axis.vertical,
-      bool fit = true,
-      Color? backgroundColor,
-      ui.Image? bgImage}) {
-
-  int maxWidth = bgImage?.width ?? SizeConfig.screenWidth.toInt();
-  int maxHeight = 0;
-//calculate max width/height of image
-  imageList.forEach((image) {
-    if (maxWidth < image.width) maxWidth = image.width;
-  });
-  int totalHeight = maxHeight;
-  int totalWidth = maxWidth;
-  ui.PictureRecorder recorder = ui.PictureRecorder();
-  final paint = Paint();
-  Canvas canvas = Canvas(recorder);
-  double dx = 0;
-  double dy = 0;
-//set background color
-  if (backgroundColor != null)
-    canvas.drawColor(backgroundColor, BlendMode.srcOver);
-
-  if (bgImage != null) {
-    canvas.save();
-    canvas.scale(maxWidth / bgImage.width);
-    canvas.drawImage(bgImage, Offset(0, 0), paint);
-    canvas.restore();
-  }
-//draw images into canvas
-  imageList.forEach((image) {
-    double scaleDx = dx;
-    double scaleDy = dy;
-    double imageHeight = image.height.toDouble();
-    double imageWidth = image.width.toDouble();
-    if (fit) {
-//scale the image to same width/height
-      canvas.save();
-      if (image.width != maxWidth) {
-        canvas.scale(maxWidth / image.width);
-        scaleDy *= imageWidth / maxWidth;
-        imageHeight *= maxWidth / imageWidth;
-      }
-      canvas.drawImage(image, Offset(scaleDx, scaleDy), paint);
-      canvas.restore();
-    } else {
-//draw directly
-      canvas.drawImage(image, Offset(dx, dy), paint);
-    }
-//accumulate dx/dy
-    if (direction == Axis.vertical) {
-      dy += imageHeight;
-      totalHeight += imageHeight.floor();
-    } else {
-      dx += imageWidth;
-      totalWidth += imageWidth.floor();
-    }
-  });
-//output image
-  return recorder.endRecording().toImage(totalWidth, totalHeight);
-}
-
-String requestUserInfo() {
-  String agent = '';
-  var packageInfo = Global.logic().state.packageInfo;
-  if (Platform.isIOS) {
-    agent = AppProductLifeaste + '_ios';
-  } else if (Platform.isAndroid) {
-    agent = AppProductLifeaste + '_android';
-  }
-  agent = agent + '_${packageInfo?.version}_${packageInfo?.buildNumber}';
-  return agent;
-}
-
-String completeUrl(String url) {
-  print('completeUrl start $url');
-  String agent = requestUserInfo();
-  Uri uri = Uri.parse(url);
-  Map<String, String> queryParameters = uri.queryParameters;
-  if (queryParameters.isEmpty) {
-    url = url + '?p=' + agent;
-  } else {
-    url = url + '&p=' + agent;
-  }
-  print('completeUrl finish $url');
-  return url;
-}
-
-void openStarLeaderboard(BuildContext context) {
-  // 待恢复，不许删此注释
-  // String url = BossManager.instance.bossConfig.appInfoConfig.starLeaderboardLink;
-  // Map<String, String> userInfo = {
-  //   "userId": Global.userLogic().state.user.userId,
-  //   "avatar": Global.userLogic().state.user.avatar,
-  //   "name": Global.userLogic().state.user.name,
-  //   "identify": Global.userLogic().state.user.identify
-  // };
-  // String userInfoBase64 =  Uri.encodeComponent(jsonEncode(userInfo));
-  // url = url + '?u=' + userInfoBase64;
-  // url = completeUrl(url);
-  // Navigator.of(context).push(MaterialPageRoute(builder: (_) {
-  //   String userTapStarHandler = 'userTapStarHandler';
-  //   return JSWebPage(
-  //     title: Strings.advisorLeaderboard,
-  //     url: url,
-  //     channelNames: [userTapStarHandler],
-  //     onMessage: (String name, JavascriptMessage message, BuildContext webContext) async {
-  //       if (name == userTapStarHandler) {
-  //         showLoadingToast();
-  //         Map<String, dynamic> map = jsonDecode(message.message);
-  //         UserInfoModel user = UserInfoModel.fromJson(map['starInfo']);
-  //         UserInfoModel cacheInfo = await DatabaseManager.getInstance().getUser(user.userId);
-  //         if (cacheInfo == null) {
-  //           NetResultData resultData = await apiManager.getUserInfo(user.userId, isStar: !user.isNormalUser());
-  //           if (resultData.result) {
-  //             user = UserInfoModel.fromJson(resultData.data);
-  //           }
-  //         } else {
-  //           user = cacheInfo;
-  //         }
-  //         cleanAllToast();
-  //         Navigator.of(webContext).push(MaterialPageRoute(builder: (_) {
-  //           return UserInfoWidgets(user, fromPage: 'starLeaderboard',);
-  //         }));
-  //       }
-  //     },
-  //   );
-  // }));
-}
-
-/// 在浏览器打开官网，不在app内打开
-void openOurWebsite(BuildContext context) {
-  String url = BossManager.instance.ourWebsiteLink();
-  if (url.isEmpty) return;
-  var sessionKey = HiveManager.instance.get(Info.requestSessionKey);
-  if (sessionKey != null && sessionKey.isNotEmpty) {
-    url = url + '?t=' + sessionKey;
-  }
-  url = completeUrl(url);
-  CommonFunction.openUrl(url);
-}
-
-/// 在浏览器打开官网shangpin页，不在app内打开
-void openWebPackage(BuildContext context, {String? productId}) {
-  String url =
-      BossManager.instance.bossConfig.appInfoConfig.webPackageLink;
-  if (url.isEmpty) {
-    url = BossManager.instance.ourWebsiteLink();
-  }
-  if (url.isEmpty) return;
-  url = completeUrl(url);
-  var sessionKey = HiveManager.instance.get(Info.requestSessionKey);
-  if (sessionKey != null && sessionKey.isNotEmpty) {
-    url = url + '?t=' + sessionKey;
-    if (productId != null) {
-      url = url + '&d=' + productId;
-    }
-  }
-  CommonFunction.openUrl(url);
-}
-
-/// 在浏览器打开官网shangpin页，不在app内打开
-void openWebPackageInApp(BuildContext context, {String? productId}) {
-  // 待恢复，不许删此注释
-  // String url = BossManager.instance.bossConfig.appInfoConfig.webPackageLink;
-  // if (url.isEmpty) {
-  //   url = BossManager.instance.ourWebsiteLink();
-  // }
-  // if (url.isEmpty) return;
-  // String sessionKey = TempDataManager.instance.sessionKey;
-  // if (sessionKey != null && sessionKey.isNotEmpty) {
-  //   url = url + '?t=' + sessionKey;
-  //   if (productId != null) {
-  //     url = url + '&p=' + productId;
-  //   }
-  // }
-  // url = completeUrl(url);
-  // Navigator.of(context).push(MaterialPageRoute(builder: (_) {
-  //   return JSWebPage(
-  //     title: Strings.purchasePageTitle,
-  //     url: url,
-  //   );
-  // }));
-}
-
-void openOurWebsiteFaq() {
-  // String url = BossManager.instance.getFaqLink();
-  // if (url.isEmpty) return;
-  // url = completeUrl(url);
-  // Get.toNamed(
-  //   RouteConfig.jsWeb,
-  //   arguments: JSWebPageArgs(
-  //     title: Strings.faq,
-  //     url: url,
-  //   ),
-  //   preventDuplicates: false,
-  // );
-}
-
-void openDailySignIn(BuildContext context) {
-  // 待恢复，不许删此注释
-  // String url = BossManager.instance.bossConfig.appInfoConfig.dailyBounsLink;
-  // if (url.isEmpty) return;
-  // Map<String, String> userInfo = {
-  //   "userId": Global.userLogic().state.user.userId,
-  //   "avatar": Global.userLogic().state.user.avatar,
-  //   "name": Global.userLogic().state.user.name,
-  //   "identify": Global.userLogic().state.user.identify
-  // };
-  // String userInfoString =  Uri.encodeComponent(jsonEncode(userInfo));
-  // url = url + 'wheel/reward?u=' + userInfoString;
-  // String sessionKey = TempDataManager.instance.sessionKey;
-  // if (sessionKey != null && sessionKey.isNotEmpty) {
-  //   url = url + '&t=' + sessionKey;
-  // }
-  // url = completeUrl(url);
-  // Navigator.of(context).push(MaterialPageRoute(builder: (_) {
-  //   String userInfoUpdateHandle = 'userInfoUpdateHandle';
-  //   String tryTarotHandle = 'tryTarotHandle';
-  //   String browseAdvisorsHandle = 'browseAdvisorsHandle';
-  //   return JSWebPage(
-  //     title: Strings.dailyBonus,
-  //     url: url,
-  //     channelNames: [userInfoUpdateHandle, tryTarotHandle, browseAdvisorsHandle],
-  //     onMessage: (String name, JavascriptMessage message, BuildContext webContext) async {
-  //       if (name == userInfoUpdateHandle) {
-  //         apiManager.getMyInfo();
-  //       } else if (name == tryTarotHandle) {
-  //
-  //       } else if (name == browseAdvisorsHandle) {
-  //         showLoadingToast();
-  //         NetResultData resultData = await apiManager.getMyInfo();
-  //         cleanAllToast();
-  //         if (resultData.result) {
-  //           Navigator.of(webContext).pop();
-  //           Future.delayed(Duration(milliseconds: 100), () {
-  //             Get.put(HomeLogic()).changeIndex(TabIndexStarList);
-  //           });
-  //         }
-  //       }
-  //     },
-  //   );
-  // }));
-}
-
 Widget sheetWithPainterBorder({
   @required Widget? child,
   EdgeInsets? padding,
@@ -802,15 +529,6 @@ Widget sheetWithPainterBorder({
 }) {
   return Stack(
     children: [
-      // Positioned(
-      //   top: 0,
-      //   left: 1,
-      //   right: 1,
-      //   bottom: 0,
-      //   child: CustomPaint(
-      //     painter: ThemeBoxPainter(),
-      //   ),
-      // ),
       Positioned(
           top: 20,
           left: 0,
