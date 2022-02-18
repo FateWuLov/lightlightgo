@@ -1,9 +1,9 @@
 import 'package:get/get.dart';
 import 'package:lifeaste/common/events.dart';
 import 'package:lifeaste/common/common.dart';
-import 'package:lifeaste/logic/global.dart';
 import 'package:lifeaste/manager/analyticsManager.dart';
 import 'package:lifeaste/manager/database/databaseMagager.dart';
+import 'package:lifeaste/manager/globalManager.dart';
 import 'package:lifeaste/manager/net/apiManager.dart';
 import 'package:lifeaste/manager/net/networkResultData.dart';
 import 'package:lifeaste/models/orderModel.dart';
@@ -14,6 +14,35 @@ import 'package:lifeaste/pages/user_profile/state.dart';
 
 class UserProfileLogic extends GetxController {
   final state = UserProfileState();
+
+  @override
+  void onInit() {
+    super.onInit();
+    AnalyticsManager.instance
+        .logEvent(EventName_AdvisorProfilePageShow, parameters: {
+      'from': state.fromPage,
+    });
+    AnalyticsManager.instance.logEvent(
+      EventName_ServiceTypeShow,
+      parameters: {'from': ParamFromAdvisorCard},
+    );
+  }
+
+  @override
+  void onReady() {
+    Future.delayed(Duration(milliseconds: 500), () {
+      _refreshRecentView();
+    });
+    _requestUserInfo();
+    super.onReady();
+  }
+
+  @override
+  void onClose() {
+    GlobalManager.instance.liveOnlineStars = [];
+    GlobalManager.instance.inWorkStars = [];
+    super.onClose();
+  }
 
   void onPopBack() {
     Get.back();
@@ -115,39 +144,5 @@ class UserProfileLogic extends GetxController {
 
   void _refreshRecentView() async {
 
-  }
-
-  @override
-  void onInit() {
-    super.onInit();
-    UserPageArgs arg = Get.arguments;
-    state.userInfo = arg.userModel;
-    state.attachPicturePath = arg.attachPicturePath;
-    state.fromPage = arg.fromPage;
-
-    AnalyticsManager.instance
-        .logEvent(EventName_AdvisorProfilePageShow, parameters: {
-      'from': state.fromPage,
-    });
-    AnalyticsManager.instance.logEvent(
-      EventName_ServiceTypeShow,
-      parameters: {'from': ParamFromAdvisorCard},
-    );
-  }
-
-  @override
-  void onReady() {
-    Future.delayed(Duration(milliseconds: 500), () {
-      _refreshRecentView();
-    });
-    _requestUserInfo();
-    super.onReady();
-  }
-
-  @override
-  void onClose() {
-    Global.logic().state.liveOnlineStars = [];
-    Global.logic().state.inWorkStars = [];
-    super.onClose();
   }
 }

@@ -10,6 +10,18 @@ import 'state.dart';
 class OrderListLogic extends GetxController {
   final state = OrderListState();
 
+  @override
+  void onInit() {
+    super.onInit();
+    _loadData(true);
+  }
+
+  @override
+  void onClose() {
+    state.refreshController.dispose();
+    super.onClose();
+  }
+
   void onClickOrder(OrderInfoModel model) {
     Get.toNamed(
       RouteConfig.orderDetail,
@@ -55,11 +67,5 @@ class OrderListLogic extends GetxController {
         state.refreshController.loadFailed();
       }
     }
-  }
-
-  @override
-  void onInit() {
-    super.onInit();
-    _loadData(true);
   }
 }

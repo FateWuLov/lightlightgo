@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:hive/hive.dart';
 import 'package:lifeaste/common/file_path_util.dart';
 import 'package:lifeaste/common/common.dart';
-import 'package:lifeaste/logic/global.dart';
+import 'package:lifeaste/manager/userManager.dart';
 import 'package:lifeaste/models/discoverInfoModel.dart';
 import 'package:lifeaste/models/orderModel.dart';
 import 'package:package_info/package_info.dart';
@@ -134,7 +134,7 @@ void initialSP() async {
 }
 /// 不注释
 bool getFlower() {
-  bool isDeveloper = isDebug() || Global.userLogic().state.user.isDebugUser();
+  bool isDeveloper = isDebug() || UserManager.instance.user.isDebugUser();
   String info = HiveManager.instance.get(KEY_ACCOUNT_INFO);
   bool order = HiveManager.instance.get(KEY_AVAILABLE_ORDER) ?? false;
   bool flower = HiveManager.instance.get(KEY_HAS_FLOWER) ?? isDeveloper;
@@ -163,7 +163,7 @@ bool getPrefBool(String key) {
 
 //只用在纯flutter中 跟底层交互不要用
 String getPrefixKey(String key) {
-  return "${Global.userLogic().state.user.userId}$key";
+  return "${UserManager.instance.user.userId}$key";
 }
 
 bool hasShownGreetImMsg() {
@@ -191,7 +191,7 @@ Future<void> setShownAssistantImMsg() {
 }
 
 Future<void> setDiscoverListInfo(DiscoverInfoModel model) async {
-  if (!Global.userLogic().hasLogin()) {
+  if (!UserManager.instance.hasLogin()) {
     return Future.value(false);
   }
   String jsonStr = jsonEncode(model.toJson());
@@ -199,7 +199,7 @@ Future<void> setDiscoverListInfo(DiscoverInfoModel model) async {
 }
 
 DiscoverInfoModel? getDiscoverListInfo() {
-  if (!Global.userLogic().hasLogin()) {
+  if (!UserManager.instance.hasLogin()) {
     return null;
   }
   String jsonStr = HiveManager.instance.get(getPrefixKey(UD_DISCOVER_LIST_INFO)) ?? '';
@@ -211,14 +211,14 @@ DiscoverInfoModel? getDiscoverListInfo() {
 }
 
 setLastOrderFromPref(String jsonStr) async {
-  if (!Global.userLogic().hasLogin()) {
+  if (!UserManager.instance.hasLogin()) {
     return;
   }
   return HiveManager.instance.set(getPrefixKey(KEY_LAST_ORDER), jsonStr);
 }
 
 String getLastOrderFromPref() {
-  if (!Global.userLogic().hasLogin()) {
+  if (!UserManager.instance.hasLogin()) {
     return '';
   }
   return HiveManager.instance.get(getPrefixKey(KEY_LAST_ORDER)) ?? "";

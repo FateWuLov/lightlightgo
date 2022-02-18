@@ -1,6 +1,6 @@
 import 'package:lifeaste/common/common.dart';
 import 'package:lifeaste/common/tools.dart';
-import 'package:lifeaste/logic/global.dart';
+import 'package:lifeaste/manager/userManager.dart';
 import 'package:lifeaste/models/userModel.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -179,11 +179,11 @@ class XMPPMessageModel {
   }
 
   bool senderIsMe() {
-    return senderId == Global.userLogic().state.user.userId;
+    return senderId == UserManager.instance.user.userId;
   }
 
   bool receiverIsMe() {
-    return receiverId == Global.userLogic().state.user.userId;
+    return receiverId == UserManager.instance.user.userId;
   }
 
   bool isLevelUpRewardMsg() {

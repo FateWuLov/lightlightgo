@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:json_annotation/json_annotation.dart';
 import 'package:lifeaste/common/common.dart';
-import 'package:lifeaste/logic/global.dart';
+import 'package:lifeaste/manager/userManager.dart';
 
 import 'userModel.dart';
 
@@ -134,7 +134,7 @@ class OrderInfoModel {
 
   ///该订单能否加急
   ///条件1：距离订单完成剩余时间超过1小时
-  ///条件2：该神婆此时还支持本服务加急
+  ///条件2：该顾问此时还支持本服务加急
   bool canRush() {
     return status == OrderStatusPending &&
         rushStatus == RushStatusNone &&
@@ -274,7 +274,7 @@ class ServiceInfoModel {
         num = num / 2;
       }
       //首单折扣
-      if (Global.userLogic().state.existFirstReadingOff.value) {
+      if (UserManager.instance.existFirstReadingOff.value) {
         num = num * 0.7;
       }
     } else if (type == ServiceType.serviceTypeTextCall.index) {
@@ -390,7 +390,7 @@ class PremiumService {
   @JsonKey(defaultValue: 0)
   int updateTime;
 
-  /// 神婆信息，用于增值服务列表
+  /// 顾问信息，用于增值服务列表
   UserInfoModel? starInfo;
 
   PremiumService(
@@ -466,7 +466,7 @@ class AnswerModel {
   Map<String, dynamic> toJson() => fixToJson(_$AnswerModelToJson(this));
 }
 
-///神婆回复评论的审核状态，0：未回复，1：未审核，2：审核通过，3: 审核不通过
+///顾问回复评论的审核状态，0：未回复，1：未审核，2：审核通过，3: 审核不通过
 const int COMMENT_REPLY_STATUS_NO_REPLY = 0;
 const int COMMENT_REPLY_STATUS_UNCHECK = 1;
 const int COMMENT_REPLY_STATUS_APPROVED = 2;
@@ -488,11 +488,11 @@ class CommentModel {
   @JsonKey(defaultValue: false)
   bool withAccuracy;
 
-  ///神婆给评论的回复
+  ///顾问给评论的回复
   @JsonKey(defaultValue: '')
   String reply;
 
-  ///神婆回复评论的时间
+  ///顾问回复评论的时间
   @JsonKey(defaultValue: 0)
   int replyTime;
 

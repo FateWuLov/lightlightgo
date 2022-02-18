@@ -1,9 +1,6 @@
 import 'package:get/get.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
 import 'package:lifeaste/common/common.dart';
-import 'package:lifeaste/common/size_config.dart';
 
 import '../buttons.dart';
 

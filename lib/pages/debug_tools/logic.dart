@@ -1,7 +1,8 @@
 import 'package:get/get.dart';
 import 'package:lifeaste/common/fn_method_channel.dart';
 import 'package:lifeaste/common/common.dart';
-import 'package:lifeaste/logic/global.dart';
+import 'package:lifeaste/manager/globalManager.dart';
+import 'package:lifeaste/manager/userManager.dart';
 import 'package:lifeaste/widgets/dialog/iconMsgDialog.dart';
 import 'package:lifeaste/widgets/dialog/normalDialog.dart';
 import 'state.dart';
@@ -18,9 +19,9 @@ class DebugToolsLogic extends GetxController {
         mainAction: () async {
           showLoadingToast();
           await Info.methodChannel.invokeMethod(methodNameResetGuestId);
-          await Global.logic().loadNativeInfo();
-          await Global.userLogic().logout();
-          await Global.userLogic().guestLogin(checkBefore: false);
+          await GlobalManager.instance.loadNativeInfo();
+          await UserManager.instance.logout();
+          await UserManager.instance.guestLogin(checkBefore: false);
 
           showNormalDialog(
             barrierDismissible: false,
@@ -39,6 +40,6 @@ class DebugToolsLogic extends GetxController {
   }
 
   void onLogout() {
-    Global.userLogic().logout();
+    UserManager.instance.logout();
   }
 }

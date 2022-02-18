@@ -14,6 +14,18 @@ import 'state.dart';
 class StarListLogic extends GetxController {
   final state = StarListState();
 
+  @override
+  void onInit() {
+    super.onInit();
+    _loadData(true);
+  }
+
+  @override
+  void onClose() {
+    state.refreshController.dispose();
+    super.onClose();
+  }
+
   void onClickStar(UserInfoModel model) {
     Get.toNamed(
       RouteConfig.user,
@@ -61,11 +73,5 @@ class StarListLogic extends GetxController {
         state.refreshController.loadFailed();
       }
     }
-  }
-
-  @override
-  void onInit() {
-    super.onInit();
-    _loadData(true);
   }
 }

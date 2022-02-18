@@ -6,8 +6,8 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:lifeaste/common/common.dart';
-import 'package:lifeaste/logic/global.dart';
 import 'package:lifeaste/manager/hiveManager.dart';
+import 'package:lifeaste/manager/userManager.dart';
 import 'package:lifeaste/models/rewardModel.dart';
 import 'package:lifeaste/models/tarotModel.dart';
 
@@ -98,19 +98,19 @@ class UserInfoModel {
   @JsonKey(defaultValue: true)
   bool dailyBonus;
 
-  /// 用户的兴趣标签,用来推荐神婆
+  /// 用户的兴趣标签,用来推荐顾问
   @JsonKey(defaultValue: [])
   List<String> interestTags;
 
-  /// 用户神婆category,用来推荐神婆
+  /// 用户顾问category,用来推荐顾问
   @JsonKey(defaultValue: [])
   List<String> interestCategories;
 
-  /// 用户喜欢的表达方式,用来推荐神婆
+  /// 用户喜欢的表达方式,用来推荐顾问
   @JsonKey(defaultValue: -1)
   int expressionWay;
 
-  /// 用户喜欢的神婆等级,用来推荐神婆
+  /// 用户喜欢的顾问等级,用来推荐顾问
   @JsonKey(defaultValue: -1)
   int starExperience;
 
@@ -192,7 +192,7 @@ class UserInfoModel {
   @JsonKey(defaultValue: 0)
   int inviteCount;
 
-  //神婆附加信息
+  //顾问附加信息
   @JsonKey(defaultValue: '')
   String orderInstruction;
   @JsonKey(defaultValue: '')
@@ -206,7 +206,7 @@ class UserInfoModel {
   @JsonKey(defaultValue: '')
   String liveAutoMessage;
 
-  //神婆管理
+  //顾问管理
   @JsonKey(defaultValue: 0)
   int hot;
   @JsonKey(defaultValue: 0)
@@ -237,7 +237,7 @@ class UserInfoModel {
   int commentCount;
 
   ///平均回复等待时间
-  ///第一个数字代表平均时间(ms)，第二个数字代表计算平均时间的订单数量，神婆回复订单的时候自动机算
+  ///第一个数字代表平均时间(ms)，第二个数字代表计算平均时间的订单数量，顾问回复订单的时候自动机算
   @JsonKey(defaultValue: [0, 0])
   List<int> avgDeliverTime;
 
@@ -356,8 +356,8 @@ class UserInfoModel {
   }
 
   bool isAssistantIdSupport() {
-    if (Global.userLogic().state.user.assistantId.isNotEmpty) {
-      return userId == Global.userLogic().state.user.assistantId;
+    if (UserManager.instance.user.assistantId.isNotEmpty) {
+      return userId == UserManager.instance.user.assistantId;
     }
     return false;
   }
@@ -387,7 +387,7 @@ class UserInfoModel {
     return this.accuracy >= 0.9;
   }
 
-  //在神婆主页显示准确度数值
+  //在顾问主页显示准确度数值
   bool canShowAccuracy() {
     return this.accuracy >= 0.9 && this.accuracyCount >= 1;
   }
@@ -424,9 +424,9 @@ class UserInfoModel {
     }
   }
 
-  //用于判断当前神婆是否折扣
+  //用于判断当前顾问是否折扣
   bool isFollowUpPeriod() {
-    //关停的神婆不显示折扣
+    //关停的顾问不显示折扣
     return followUpDeadline > DateTime.now().millisecondsSinceEpoch &&
         workStatus == WorkStatusAvailable;
   }
@@ -511,7 +511,7 @@ class UserInfoModel {
   }
 
   ///某服务能否加急
-  ///条件：神婆quick mode设置中打开了该类型
+  ///条件：顾问quick mode设置中打开了该类型
   bool canRushService(int serviceType) {
     for (int obj in quickReadingMode) {
       if (serviceType == obj) {
@@ -583,12 +583,12 @@ class UserInfoModel {
     return serviceModelWithType(ServiceType.serviceTypeTextCall);
   }
 
-  /// 是否能向该神婆发起免费聊天
+  /// 是否能向该顾问发起免费聊天
   bool canChatFree() {
     if (isNormalUser()) return false;
     if (liveStatus != OnlineModeOnline || workStatus != WorkStatusAvailable)
       return false;
-    if (!Global.userLogic().canFreeChat3min()) return false;
+    if (!UserManager.instance.canFreeChat3min()) return false;
     return textCallService() != null;
   }
 
@@ -609,7 +609,7 @@ class UserInfoModel {
     return (premiumServices.isNotEmpty || realtimeServices().isNotEmpty);
   }
 
-  /// 该神婆的live text折扣券
+  /// 该顾问的live text折扣券
   /// 实付价格 = 原价 * 返回值
   /// 可叠加其他折扣
   double textCallCoupon() {

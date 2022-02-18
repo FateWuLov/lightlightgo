@@ -1,7 +1,7 @@
 
 import 'package:lifeaste/common/common.dart';
-import 'package:lifeaste/logic/global.dart';
 import 'package:lifeaste/manager/database/databaseMagager.dart';
+import 'package:lifeaste/manager/globalManager.dart';
 import 'package:lifeaste/models/loginParams.dart';
 import 'package:lifeaste/models/orderModel.dart';
 import 'package:lifeaste/models/tarotModel.dart';
@@ -10,6 +10,7 @@ import 'package:lifeaste/pages/star_list/state.dart';
 import 'package:lifeaste/widgets/dialog/iconMsgDialog.dart';
 
 import '../hiveManager.dart';
+import '../userManager.dart';
 import 'networkRequest.dart';
 import 'networkResultData.dart';
 
@@ -17,7 +18,7 @@ final apiManager = ApiManager();
 
 class ApiManager {
   static String hostStr() {
-    return Global.logic().state.isDebugServer
+    return GlobalManager.instance.isDebugServer
         ? Info.debugHost
         : Info.distributionHost;
   }
@@ -42,7 +43,7 @@ class ApiManager {
     }
   }
 
-  ///拉取周推荐神婆
+  ///拉取周推荐顾问
   Future<NetResultData> getDiscoverStars() async {
     NetResultData resultData = await netRequest.getRequest('${hostStr()}/user/ranked/stars', {
       'type': 'weeklyRecommend'
@@ -50,7 +51,7 @@ class ApiManager {
     return resultData;
   }
 
-  ///拉取tarot推荐神婆
+  ///拉取tarot推荐顾问
   Future<NetResultData> getTarotStars() async {
     NetResultData resultData = await netRequest.getRequest('${hostStr()}/user/ranked/stars', {
       'type': 'tarotRecommend'
@@ -66,7 +67,7 @@ class ApiManager {
 
   ///增加绑定用户逻辑，返回数据结构修改
   Future<NetResultData> loginV2(LoginParams params) async {
-    params.uuid = Global.logic().state.uuid;
+    params.uuid = GlobalManager.instance.uuid;
     LoginAfInfo afInfo = LoginAfInfo.fromJson({});
     String afAd = getAfAdFromPref();
     if (afAd.isNotEmpty) {
@@ -101,8 +102,7 @@ class ApiManager {
         await netRequest.getRequest('${hostStr()}/user/me', null);
     if (resultData.result) {
       UserInfoModel userInfo = UserInfoModel.fromJson(resultData.data);
-      Global.userLogic().updateLocalUserInfo(userInfo);
-      // Global.xmppLogic().connect();
+      UserManager.instance.updateLocalUserInfo(userInfo);
     }
     return resultData;
   }
@@ -227,15 +227,15 @@ class ApiManager {
   ///2.购买
   ///3.登录
   syncUserInfo() async {
-    if (!Global.userLogic().hasLogin()) {
+    if (!UserManager.instance.hasLogin()) {
       return;
     }
     Map<String, dynamic> params = {};
-    if (Global.logic().state.uuid.isNotEmpty) {
-      params['uuid'] = Global.logic().state.uuid;
+    if (GlobalManager.instance.uuid.isNotEmpty) {
+      params['uuid'] = GlobalManager.instance.uuid;
     }
-    if (Global.logic().state.locale != null) {
-      String country = Global.logic().state.locale?.countryCode ?? '';
+    if (GlobalManager.instance.locale != null) {
+      String country = GlobalManager.instance.locale?.countryCode ?? '';
       if (country.isNotEmpty) {
         params['country'] = country;
       }
@@ -245,11 +245,11 @@ class ApiManager {
     NetResultData resultData = await netRequest.postRequest('${hostStr()}/user/load', params);
     if (resultData.code == 400 && resultData.errorCode == 10005) {
       // 强制退出登录
-      Global.userLogic().logout();
+      UserManager.instance.logout();
       if (resultData.errorMsg?.isNotEmpty == true) {
         Future.delayed(Duration(seconds: 1), () {
           showNormalDialog(
-            barrierDismissible: Global.logic().isDebugEnv(),
+            barrierDismissible: GlobalManager.instance.isDebugEnv(),
             child: IconMsgDialog(
               message: resultData.errorMsg ?? '',
               buttonTitle: Strings.ok,
@@ -264,7 +264,7 @@ class ApiManager {
     } else {
       // List<dynamic> abTest = resultData.data['abTest'] ?? [];
       // List<AbTestModel> abTestModels = abTest.map((e) => AbTestModel.fromJson(e)).toList();
-      // Global.userLogic().handleAbTestVariant(abTestModels, fromLogin: false);
+      // UserManager.instance.handleAbTestVariant(abTestModels, fromLogin: false);
     }
   }
 
@@ -387,14 +387,14 @@ class ApiManager {
     return netRequest.getRequest('${hostStr()}/user/latest/order', null);
   }
 
-  //用户回复神婆追问
+  //用户回复顾问追问
   Future<NetResultData> replyAdditionanlQuiz(
       String orderId, String reply) async {
     return netRequest.postRequest(
         '${hostStr()}/order/user/reply', {'orderId': orderId, 'reply': reply});
   }
 
-  //获取推荐的神婆列
+  //获取推荐的顾问列
   Future<List<UserInfoModel>> getRecommendAdvisorList() async {
     NetResultData resultData =
         await netRequest.getRequest('${hostStr()}/user/recommend/stars', null);
@@ -465,7 +465,7 @@ class ApiManager {
   }
 
   Future<NetResultData> appEvent(String name, Map<String, String>? info) async {
-    if (name.isEmpty || !Global.userLogic().hasLogin()) return Future.value(null);
+    if (name.isEmpty || !UserManager.instance.hasLogin()) return Future.value(null);
     Map<String, dynamic> param = {
       'eventType': name,
       'timestamp': DateTime.now().millisecondsSinceEpoch.toString(),
@@ -532,7 +532,7 @@ class ApiManager {
   /// 返回结果中isGuestDevice字段，true表示单纯游客设备，false表示有非游客账号登录过
   Future<NetResultData> deviceCheck() async {
     Map<String, dynamic> params = {
-      'deviceId' : Global.logic().state.uuid,
+      'deviceId' : GlobalManager.instance.uuid,
     };
     return netRequest.postRequest('${hostStr()}/user/device', params);
   }

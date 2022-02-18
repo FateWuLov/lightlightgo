@@ -25,6 +25,8 @@ class GestureContainer extends StatelessWidget {
       behavior: HitTestBehavior.translucent,
       onTap: onTap,
       child: Container(
+        width: width,
+        height: height,
         decoration: decoration ?? BoxDecoration(
           color: color
         ),

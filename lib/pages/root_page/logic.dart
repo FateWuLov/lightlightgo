@@ -25,15 +25,4 @@ class RootPageLogic extends GetxController {
       Get.delete<StarListLogic>();
     }
   }
-
-  @override
-  void onInit() {
-    super.onInit();
-    print('[GETX] RootPageLogic onInit');
-  }
-
-  @override
-  void onClose() {
-    super.onClose();
-  }
 }

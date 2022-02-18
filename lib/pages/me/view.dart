@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lifeaste/common/common.dart';
 import 'package:lifeaste/common/size_config.dart';
-import 'package:lifeaste/logic/global.dart';
+import 'package:lifeaste/manager/globalManager.dart';
 import 'package:lifeaste/widgets/base/baseTabPage.dart';
 import 'package:lifeaste/widgets/roundAvatar.dart';
 
@@ -32,7 +32,7 @@ class MePage extends StatelessWidget {
                 SizedBox(height: 10),
                 Center(
                     child: Text(
-                      Global.logic().getVersionStr(),
+                      GlobalManager.instance.getVersionStr(),
                       textAlign: TextAlign.center,
                       style: Styles.subTextStyle(12),
                     )),
@@ -267,7 +267,7 @@ class MePage extends StatelessWidget {
 
   Widget _debugTools() {
     return Visibility(
-      visible: state.userInfo.value.isDebugUser() || Global.logic().isDebugEnv(),
+      visible: state.userInfo.value.isDebugUser() || GlobalManager.instance.isDebugEnv(),
       child: Container(
           child: createListItem(ImageNames.orders, 'DebugTools', () {
             logic.onClickDebugTools();

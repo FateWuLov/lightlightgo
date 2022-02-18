@@ -1,5 +1,6 @@
 
 import 'package:flutter/cupertino.dart';
+import 'package:get/get.dart';
 import 'package:lifeaste/common/size_config.dart';
 import 'package:lifeaste/models/userModel.dart';
 
@@ -17,7 +18,12 @@ class UserProfileState {
   final favoriteIconGId = 'favoriteIconGId';
 
   UserProfileState() {
-    ///Initialize variables
+    var args = Get.arguments;
+    if (args != null && args is UserPageArgs) {
+      userInfo = args.userModel;
+      attachPicturePath = args.attachPicturePath;
+      fromPage = args.fromPage;
+    }
   }
 }
 

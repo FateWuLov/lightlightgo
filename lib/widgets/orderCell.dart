@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lifeaste/common/common.dart';
-import 'package:lifeaste/common/size_config.dart';
 import 'package:lifeaste/models/orderModel.dart';
 import 'package:lifeaste/widgets/roundAvatar.dart';
-
-import 'gestureContainer.dart';
 
 class OrderCell extends StatelessWidget {
   final OrderInfoModel order;

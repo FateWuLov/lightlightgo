@@ -1,7 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:lifeaste/common/common.dart';
-import 'package:lifeaste/logic/global.dart';
 import 'package:lifeaste/models/userModel.dart';
 import 'package:lifeaste/widgets/gestureContainer.dart';
 import 'package:lifeaste/widgets/buttons.dart';

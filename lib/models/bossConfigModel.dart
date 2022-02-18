@@ -98,7 +98,7 @@ class AppInfoConfig {
   @JsonKey(defaultValue: '')
   String newerGreet;
 
-  /// 申请为神婆greeting文案
+  /// 申请为顾问greeting文案
   @JsonKey(defaultValue: '')
   String becomeAnAdvisorGreet;
 
@@ -119,7 +119,7 @@ class AppInfoConfig {
   @JsonKey(defaultValue: 20)
   int accuracyMinCount;
 
-  /// 神婆主页显示免费聊天入口
+  /// 顾问主页显示免费聊天入口
   @JsonKey(defaultValue: false)
   bool showFreeChatEntranceInStarPage;
 
@@ -131,11 +131,11 @@ class AppInfoConfig {
   @JsonKey(defaultValue: false)
   bool canChatFreely;
 
-  /// 显示神婆排行榜入口
+  /// 显示顾问排行榜入口
   @JsonKey(defaultValue: false)
   bool showStarLeaderboard;
 
-  /// 神婆排行榜链接
+  /// 顾问排行榜链接
   @JsonKey(defaultValue: '')
   String starLeaderboardLink;
 
@@ -147,7 +147,7 @@ class AppInfoConfig {
   @JsonKey(defaultValue: '')
   String dailyBounsLink;
 
-  /// 首页神婆列表banner配置
+  /// 首页顾问列表banner配置
   @JsonKey(defaultValue: [])
   List<BannerConfig> bannerList;
 

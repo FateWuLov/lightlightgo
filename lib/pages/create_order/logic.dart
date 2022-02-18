@@ -1,9 +1,9 @@
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:lifeaste/common/common.dart';
-import 'package:lifeaste/logic/global.dart';
 import 'package:lifeaste/manager/net/apiManager.dart';
 import 'package:lifeaste/manager/net/networkResultData.dart';
+import 'package:lifeaste/manager/userManager.dart';
 import 'package:lifeaste/models/orderModel.dart';
 import 'package:lifeaste/models/userModel.dart';
 import 'package:lifeaste/pages/order_list/logic.dart';
@@ -14,6 +14,12 @@ import 'state.dart';
 
 class CreateOrderLogic extends GetxController {
   final state = CreateOrderState();
+
+  @override
+  void onClose() {
+    state.questionEditController.dispose();
+    super.onClose();
+  }
 
   void onLeave() {
     Get.back();
@@ -39,9 +45,9 @@ class CreateOrderLogic extends GetxController {
       'price': state.service.price,
       'availableHours': state.service.availableHours.toInt(),
       'isRealTime': false,
-      'bossName': Global.userLogic().state.user.name,
+      'bossName': UserManager.instance.user.name,
       'birthday': stringFromDate(DateTime(1991, 1, 1)),
-      'gender': Global.userLogic().state.user.gender,
+      'gender': UserManager.instance.user.gender,
       'situation': 'test situation ${DateTime.now().toString()}',
       'question': state.questionEditController.text,
       'rush': false,
@@ -52,7 +58,7 @@ class CreateOrderLogic extends GetxController {
     if (resultData.result) {
       //更新个人信息
       UserInfoModel userInfoModel = UserInfoModel.fromJson(resultData.data['user']);
-      Global.userLogic().updateLocalUserInfo(userInfoModel);
+      UserManager.instance.updateLocalUserInfo(userInfoModel);
       cleanAllToast();
       Get.back();
 

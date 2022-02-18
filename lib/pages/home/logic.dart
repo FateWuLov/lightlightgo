@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:get/get.dart';
 import 'package:lifeaste/common/events.dart';
 import 'package:lifeaste/common/common.dart';
-import 'package:lifeaste/logic/global.dart';
 import 'package:lifeaste/manager/analyticsManager.dart';
 import 'package:lifeaste/manager/hiveManager.dart';
 import 'package:lifeaste/manager/net/apiManager.dart';
@@ -20,6 +19,27 @@ class HomeLogic extends GetxController {
 
   late StreamSubscription _unreadMsgEventBus; //持有事件
   late StreamSubscription _unreadOrderEventBus; //持有事件
+
+  @override
+  void onInit() {
+    super.onInit();
+    _updateUnreadMsg();
+    Get.lazyPut(() => StarListLogic());
+  }
+
+  @override
+  void onReady() {
+    _prepareForDialog();
+    _initEventBus();
+    super.onReady();
+  }
+
+  @override
+  void onClose() {
+    _unreadMsgEventBus.cancel();
+    _unreadOrderEventBus.cancel();
+    super.onClose();
+  }
 
   void setPageCount(int count) {
     state.pageCount = count;
@@ -71,26 +91,5 @@ class HomeLogic extends GetxController {
   /// 首次启动时更新，确认之后，后续不用再作请求；未确认则每次启动都作请求
   void _prepareForDialog() async {
 
-  }
-
-  @override
-  void onInit() {
-    super.onInit();
-    _updateUnreadMsg();
-    Get.lazyPut(() => StarListLogic());
-  }
-
-  @override
-  void onReady() {
-    _prepareForDialog();
-    _initEventBus();
-    super.onReady();
-  }
-
-  @override
-  void onClose() {
-    _unreadMsgEventBus.cancel();
-    _unreadOrderEventBus.cancel();
-    super.onClose();
   }
 }

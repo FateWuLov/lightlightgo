@@ -3,12 +3,11 @@ import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/physics.dart';
 import 'package:get/get.dart';
-import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:lifeaste/pages/root_page/logic.dart';
 import 'package:lifeaste/routeConfig.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'common/info.dart';
-import 'logic/global.dart';
+import 'manager/globalManager.dart';
 
 RouteObserver<PageRoute> routeObserver = MyObserver();
 
@@ -30,7 +29,7 @@ class RootApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Global.logic().finishLaunching();
+    GlobalManager.instance.finishLaunching();
     print('[LaunchApp] RootApp build');
     Get.lazyPut(() => RootPageLogic());
     routeObserver = MyObserver();

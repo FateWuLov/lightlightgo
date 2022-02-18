@@ -4,10 +4,11 @@ import 'package:lifeaste/pages/root_page/logic.dart';
 import 'package:lifeaste/rootApp.dart';
 
 import 'common/styles.dart';
-import 'logic/global.dart';
 import 'manager/analyticsManager.dart';
+import 'manager/globalManager.dart';
 import 'manager/hiveManager.dart';
 import 'manager/net/apiManager.dart';
+import 'manager/userManager.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,25 +20,25 @@ void launchApp() async {
   print('launch start');
   // 先初始化hive，以便后续能读取本地记录
   await HiveManager.instance.commonInit();
-  await Global.logic().loadNativeInfo();
+  await GlobalManager.instance.loadNativeInfo();
 
-  if (Global.logic().isDebugEnv()) {
+  if (GlobalManager.instance.isDebugEnv()) {
     showCatchError();
   }
 
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   // 初始化本地用户信息
-  await Global.userLogic().initForLaunch();
+  await UserManager.instance.initForLaunch();
 
   _logLaunchEvent();
   _showRootPage();
 }
 
 void _showRootPage() async {
-  if (!Global.userLogic().hasLogin()) {
+  if (!UserManager.instance.hasLogin()) {
     print('[LaunchApp] no login');
     // 未登录，先做游客登录逻辑，再进入app内
-    bool result = await Global.userLogic().guestLogin();
+    bool result = await UserManager.instance.guestLogin();
     if (result) {
       AnalyticsManager.instance.logEvent(EventName_LaunchPage, parameters: {Param_Type: 'home'});
       runApp(RootApp(RootPageNameHome));

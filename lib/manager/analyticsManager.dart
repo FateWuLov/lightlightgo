@@ -5,9 +5,10 @@ import 'package:lifeaste/models/userModel.dart';
 class AnalyticsManager {
   static AnalyticsManager get instance => _getInstance();
   static AnalyticsManager? _instance;
+  AnalyticsManager._();
 
   static AnalyticsManager _getInstance() {
-    var obj = _instance ?? AnalyticsManager();
+    var obj = _instance ?? AnalyticsManager._();
     if (_instance == null) {
       _instance = obj;
     }
@@ -42,7 +43,7 @@ class AnalyticsManager {
 const String IEN_LiveChat_CreateOrder = 'LiveChat_CreateOrder';
 //创建通话订单失败
 const String IEN_LiveChat_CreateOrder_Failed = 'LiveChat_CreateOrder_Failed';
-//给神婆发通话push
+//给顾问发通话push
 const String IEN_LiveChat_Push = 'LiveChat_Push';
 //响铃页开始计时
 const String IEN_LiveChat_StartTimer = 'LiveChat_StartTimer';
@@ -50,11 +51,11 @@ const String IEN_LiveChat_StartTimer = 'LiveChat_StartTimer';
 const String IEN_LiveChat_SendCallMsg = 'LiveChat_SendCallMsg';
 //开房，语音或视频通话获取agora channel key请求失败
 const String IEN_LiveChat_AgoraKey_Failed = 'LiveChat_AgoraKey_Failed';
-//收到神婆回复的Active push
+//收到顾问回复的Active push
 const String IEN_LiveChat_StarActive = 'LiveChat_StarActive';
-//收到神婆busy消息
+//收到顾问busy消息
 const String IEN_LiveChat_Busy = 'LiveChat_Busy';
-//收到神婆拒绝通话消息
+//收到顾问拒绝通话消息
 const String IEN_LiveChat_Decline = 'LiveChat_Decline';
 //取消通话
 const String IEN_LiveChat_Cancel = 'LiveChat_Cancel';
@@ -68,7 +69,7 @@ const String IEN_LiveChat_SendEndMsg = 'LiveChat_SendEndCall';
 const String IEN_LiveChat_ReceiveConfirmMsg = 'LiveChat_ReceiveConfirmMsg';
 //回复确认通话消息
 const String IEN_LiveChat_ReplyConfirmMsg = 'LiveChat_ReplyConfirmMsg';
-//神婆接听
+//顾问接听
 const String IEN_LiveChat_ReceiveAcceptMsg = 'LiveChat_ReceiveAcceptMsg';
 //进入聊天页
 const String IEN_LiveChat_ChatPage = 'LiveChat_ChatPage';
@@ -109,15 +110,15 @@ const String EventName_PurchaseCoinSuccess = 'PurchaseCoinSuccess';
 const String EventName_AdvisorTabShow = 'AdvisorTabShow';
 
 /*
-1.7新增参数from：all=神婆列表all版块；rencent_viewed=神婆列表最新浏览版块；
-for_you=神婆列表推荐版块；
-best_match=神婆匹配页面；
-order_submit_success=下单成功页面推荐神婆;
-live=在线神婆；
-staff_pick=所有神婆；
-feature=feature神婆；
-message=与神婆聊天页面点击神婆头像；
-order_detail=订单详情点击神婆头像
+1.7新增参数from：all=顾问列表all版块；rencent_viewed=顾问列表最新浏览版块；
+for_you=顾问列表推荐版块；
+best_match=顾问匹配页面；
+order_submit_success=下单成功页面推荐顾问;
+live=在线顾问；
+staff_pick=所有顾问；
+feature=feature顾问；
+message=与顾问聊天页面点击顾问头像；
+order_detail=订单详情点击顾问头像
 */
 const String EventName_AdvisorProfilePageShow = 'AdvisorProfilePageShow';
 const String EventName_ReportAdvisorShow = 'ReportAdvisorShow';
@@ -126,7 +127,7 @@ const String EventName_ReportAdvisorClick = 'ReportAdvisorClick';
 /*
 follow_up & first_reading 都只有非实时订单才生效
 新增参数订单折扣情况offer：follow_up=followup订单；normal=普通订单；first_reading=首单折扣；theme=主题折扣
-新增参数from：advisor_card=神婆个人主页；order_ask=订单详情页咨询入口;advisor_card_ask神婆个人主页右上角咨询入口
+新增参数from：advisor_card=顾问个人主页；order_ask=订单详情页咨询入口;advisor_card_ask顾问个人主页右上角咨询入口
 */
 const String EventName_ServiceTypeClick = 'ServiceTypeClick';
 const String EventName_NewUserRechargeOfferBannerShow =
@@ -170,8 +171,8 @@ const String EventName_OrderResultShow = "OrderResultShow";
 
 粘贴历史订单	PasteLastOrder
 follow-up促销banner展示	FollowUpBannerShow
-点击follow-up订单咨询	FollowUpServiceClick	value:advisor_page=神婆页面；askagain_popup=再次咨询弹窗
-follow-up订单下单成功	FollowUpServiceSubmitSuccess	value:advisor_page=神婆页面；askagain_popup=再次咨询弹窗
+点击follow-up订单咨询	FollowUpServiceClick	value:advisor_page=顾问页面；askagain_popup=再次咨询弹窗
+follow-up订单下单成功	FollowUpServiceSubmitSuccess	value:advisor_page=顾问页面；askagain_popup=再次咨询弹窗
 查看追问订单	ViewOrderAsk
 回复追问订单	ReplyOrderAsk
 */
@@ -224,17 +225,17 @@ const String ParamBuyWhere_StarListBanner = 'star_list_banner';
 const String ParamLevelRewardWhere_Message = "message";
 const String ParamLevelRewardWhere_Bubble = "bubble";
 
-/// 神婆主页服务项
+/// 顾问主页服务项
 const String ParamFromAdvisorCard = 'advisor_card';
 /// for you板块
 const String ParamFromForYou = 'for_you';
 /// 订单详情页服务弹窗
 const String ParamFromOrderAsk = 'order_ask';
-/// 神婆列表卡片按钮点出的弹窗
+/// 顾问列表卡片按钮点出的弹窗
 const String ParamFromAdvisorCardAsk = 'advisor_card_ask';
 /// 非实时聊天页右上角服务弹窗
 const String ParamFromChatAsk = 'chat_ask';
-/// 神婆主页上滑之后底下的按钮出服务弹窗
+/// 顾问主页上滑之后底下的按钮出服务弹窗
 const String ParamFromAdvisorPageConnect = 'advisor_page_connect';
 
 const String ParamFromPremiumTab = 'premium_tab';
@@ -266,10 +267,10 @@ const String ClaimLevelRewardSuccess = "ClaimLevelRewardSuccess";
 
 //用户选择标签
 
-//from:new=新用户；find_new_match=神婆列表for u版块点击match；get_match=神婆列表点击get matched
+//from:new=新用户；find_new_match=顾问列表for u版块点击match；get_match=顾问列表点击get matched
 const String SelectTagPageShow = 'SelectTagPageShow';
 
-//from:new=新用户；find_new_match=神婆列表for u版块点击match；get_match=神婆列表点击get matched
+//from:new=新用户；find_new_match=顾问列表for u版块点击match；get_match=顾问列表点击get matched
 const String SelectTagPageClose = 'SelectTagPageClose';
 
 const String BestMatchPageShow = 'BestMatchPageShow';
@@ -281,9 +282,9 @@ const String SubmitOrderSuccessDetailsClick = 'SubmitOrderSuccessDetailsClick';
 
 const String EnterAllAdvisor = 'EnterAllAdvisor';
 
-//屏蔽神婆消息成功
+//屏蔽顾问消息成功
 const String BlockAdvisorMessageSuccess = 'BlockAdvisorMessageSuccess';
-//回复接收神婆消息成功
+//回复接收顾问消息成功
 const String UnblockAdvisorMessageSuccess = 'UnblockAdvisorMessageSuccess';
 
 //首充优惠70Credits展示
@@ -299,7 +300,7 @@ const String FirstRechargeOfferPurchaseSuccess =
     'FirstRechargeOfferPurchaseSuccess';
 
 //点击咨询方式失败
-//value：busy=神婆忙；not_ready=神婆关闭ready开关；out_of_service=神婆无法接单
+//value：busy=顾问忙；not_ready=顾问关闭ready开关；out_of_service=顾问无法接单
 const String ClickServiceTypeFail = 'ClickServiceTypeFail';
 
 const String AFLogin = 'af_login';
@@ -434,9 +435,9 @@ const String ParamAdvisorMessageFrom_AwaitTextCallPage = 'await_text_call';
 /////
 
 
-//参数from：advisor_card=神婆个人主页；
+//参数from：advisor_card=顾问个人主页；
 //order_ask=订单详情页咨询入口;
-//advisor_card_ask神婆个人主页右上角咨询入口
+//advisor_card_ask顾问个人主页右上角咨询入口
 const String EventName_ServiceTypeShow = 'ServiceTypeShow';
 const String EventName_InviteRewardReminderShow = 'InviteRewardReminderShow';
 const String EventName_InviteRewardReminderClick = 'InviteRewardReminderClick';

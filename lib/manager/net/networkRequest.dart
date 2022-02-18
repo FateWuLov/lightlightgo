@@ -4,8 +4,8 @@ import 'package:dio/dio.dart';
 import 'package:encrypt/encrypt.dart';
 import 'package:lifeaste/common/common.dart';
 import 'package:lifeaste/common/fn_method_channel.dart';
-import 'package:lifeaste/logic/global.dart';
 import 'package:lifeaste/models/userModel.dart';
+import '../globalManager.dart';
 import '../hiveManager.dart';
 import 'networkResultData.dart';
 import 'package:crypto/crypto.dart';
@@ -22,7 +22,7 @@ class NetRequest {
     Map responseMap = {};
     if (response != null) {
       responseMap = response.data;
-      if (!Global.logic().state.isDebugServer) {
+      if (!GlobalManager.instance.isDebugServer) {
         if (responseMap.keys.contains('d')) {
           String string = responseMap['d'];
           var key = XYQ.Key.fromUtf8(Info.OOOKey);
@@ -196,7 +196,7 @@ class NetRequest {
 
   String requestUserInfo() {
     String agent = '';
-    var packageInfo = Global.logic().state.packageInfo;
+    var packageInfo = GlobalManager.instance.packageInfo;
     if (Platform.isIOS) {
       agent = AppProductLifeaste + '_ios';
     } else if (Platform.isAndroid) {

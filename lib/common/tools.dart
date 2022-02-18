@@ -6,7 +6,6 @@ import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lifeaste/common/common.dart';
-import 'package:lifeaste/logic/global.dart';
 import 'package:lifeaste/manager/net/networkResultData.dart';
 import 'package:lifeaste/models/orderModel.dart';
 import 'package:lifeaste/models/userModel.dart';
