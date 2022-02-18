@@ -159,7 +159,7 @@ class AppInfoConfig {
   @JsonKey(defaultValue: false)
   bool showToWebsiteBannerDialog;
 
-  @JsonKey(defaultValue: Info.baseWebLink)
+  @JsonKey(defaultValue: '')
   String baseLink;
 
   /// 往下滑N个增值服务重复显示之前看过的数量

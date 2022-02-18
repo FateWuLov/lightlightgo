@@ -99,8 +99,7 @@ UserInfoModel _$UserInfoModelFromJson(Map<String, dynamic> json) {
     json['isBlockingHim'] as bool? ?? false,
     json['isBlockingMe'] as bool? ?? false,
     json['favorite'] as bool? ?? false,
-    json['liveAutoMessage'] as String? ??
-        "Hello, I'm very happy in you choosing me as your reader. Please provide names and date of births of yourself and anyone in questioning or a picture for stong insights. Thank You!",
+    json['liveAutoMessage'] as String? ?? '',
   );
 }
 

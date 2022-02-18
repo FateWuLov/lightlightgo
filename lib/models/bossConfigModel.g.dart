@@ -29,14 +29,7 @@ AppInfoConfig _$AppInfoConfigFromJson(Map<String, dynamic> json) {
         [],
     defaultEventSaleConfig(json['eventSaleConfig']),
     (json['hotWordList'] as List<dynamic>?)?.map((e) => e as String).toList() ??
-        [
-          'Love',
-          'Relationship Coaching',
-          'General Reading',
-          'Tarot',
-          'Career',
-          'Dream Analysis'
-        ],
+        [],
     json['inviteReward'] as String? ?? '',
     json['beInvitedReward'] as String? ?? '',
     json['webLinkNew'] as String? ?? '',
@@ -44,8 +37,7 @@ AppInfoConfig _$AppInfoConfigFromJson(Map<String, dynamic> json) {
     json['dailyBounsLink'] as String? ?? '',
     json['starLeaderboardLink'] as String? ?? '',
     json['levelUpLunaWebMsg'] as String? ?? '',
-    json['levelUpRewardGreet'] as String? ??
-        'Hi %s, we have an exclusive gift for you.',
+    json['levelUpRewardGreet'] as String? ?? '',
     json['discoverBannerTitleForOldUser'] as String? ?? '',
     json['discoverBannerTitleForNewUser'] as String? ?? '',
     json['discoverDialogTitleForOldUser'] as String? ?? '',
@@ -59,34 +51,16 @@ AppInfoConfig _$AppInfoConfigFromJson(Map<String, dynamic> json) {
     (json['presetReplyWords'] as List<dynamic>?)
             ?.map((e) => e as String)
             .toList() ??
-        [
-          'I would like to connect with you. Please notify me when you are available.',
-          'Thanks.',
-          'Sure.',
-          'No problem.',
-          'Ok, I will call you soon.',
-          'Please wait a moment.',
-          'When shall we talk?',
-          'How long time it will be?',
-          'How much is it?',
-          'Sorry, I’m not available now.',
-          'Have a nice day!'
-        ],
+        [],
     json['specificQuestionMaxWordNum'] as int? ?? 200,
-    json['specificQuestionPlaceholder'] as String? ?? 'One question only',
+    json['specificQuestionPlaceholder'] as String? ?? '',
     json['generalSituationMaxWordNum'] as int? ?? 1500,
-    json['generalSituationPlaceholder'] as String? ??
-        'Describe your situation in certain sentences will help the advisors know your status better to further improve the accuracy and service quality',
-    json['newerGreet'] as String? ??
-        'Hi, welcome to Lifeaste, the most trustworthy online psychic platform in the world. Whatever your needs, we’ll support you to find the answers💗',
-    json['becomeAnAdvisorGreet'] as String? ??
-        'Thanks for your interest in joining Lifeaste. Please send your name, contact email address and a brief self-introduction to us by directly replying this message. Our recruitment staff will further guide you step by step to complete the psychic application process. Looking forward to your join : )',
-    json['badRatingGreet'] as String? ??
-        'We always attach great importance to user experience. If you have any question or advice about the service, please leave us messages, we will get back to you as soon as possible.',
-    json['invitePosterShareText'] as String? ??
-        "I've been inspired by this free psychic app Lifeaste, where you can get psychic advice from gifted readers - anywhere, at anytime and get reading insights into your life questions. I am sure you will find it fantastic too. Check it in the AppStore or in Google Play, use my code %s to get %s BONUS CREDITS!",
-    json['inviteNormalShareText'] as String? ??
-        "I've been inspired by this free psychic app Lifeaste, where you can get psychic advice from gifted readers - anywhere, at anytime and get reading insights into your life questions. I am sure you will find it fantastic too. Check it in the AppStore or in Google Play and get special first time offer!",
+    json['generalSituationPlaceholder'] as String? ?? '',
+    json['newerGreet'] as String? ?? '',
+    json['becomeAnAdvisorGreet'] as String? ?? '',
+    json['badRatingGreet'] as String? ?? '',
+    json['invitePosterShareText'] as String? ?? '',
+    json['inviteNormalShareText'] as String? ?? '',
     json['accuracyMinCount'] as int? ?? 20,
     json['showFreeChatEntranceInStarPage'] as bool? ?? false,
     json['bindedEmailReward'] as int? ?? 5,
@@ -99,11 +73,10 @@ AppInfoConfig _$AppInfoConfigFromJson(Map<String, dynamic> json) {
         [],
     json['showToWebsiteBannerScreen'] as bool? ?? false,
     json['showToWebsiteBannerDialog'] as bool? ?? false,
-    json['newInvitePosterShareText'] as String? ??
-        'I’ve been inspired by this free psychic app Lifeaste, where you can get psychic advice from gifted readers - anywhere, at anytime and get reading insights into your life questions. I am sure you will find it fantastic too. I’m sending you %s FREE CREDITS GIFT, enter my code %s & come experience to get the gift!',
+    json['newInvitePosterShareText'] as String? ?? '',
     json['iosOnlyWebsitePurchase'] as bool? ?? false,
     json['inviteCodeNeedsFlower'] as bool? ?? false,
-    json['baseLink'] as String? ?? 'https://aw.sparkling-insights.com',
+    json['baseLink'] as String? ?? '',
     json['repeatPremiumSlideCount'] as int? ?? 10,
     json['showChatPurchaseBanner'] as bool? ?? false,
     json['logAppEvent'] as bool? ?? true,

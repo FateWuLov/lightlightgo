@@ -355,38 +355,11 @@ class UserInfoModel {
     return loginType == Info.loginType_guest;
   }
 
-  bool isOfficialSupport() {
-    return userId == Info.officialAccountUserId;
-  }
-
-  bool isSoulOfficialSupport() {
-    return userId == Info.soulAccountUserId;
-  }
-
   bool isAssistantIdSupport() {
     if (Global.userLogic().state.user.assistantId.isNotEmpty) {
       return userId == Global.userLogic().state.user.assistantId;
     }
     return false;
-  }
-
-  bool needShowLiveStatus() {
-    if (isOfficialSupport() ||
-        isAssistantIdSupport() ||
-        isSoulOfficialSupport()) {
-      return false;
-    }
-    //关停 灰点 文案absent
-    if (workStatus == WorkStatusAbsent) {
-      return true;
-    }
-    //离线 offline 没有文案没有点
-    if (liveStatus == OnlineModeOffline) {
-      return false;
-    }
-    // 在线 文案online 绿点
-    // 正忙 文案busy 红点
-    return true;
   }
 
   /// 准确度，默认是99%，最高是99%
@@ -514,22 +487,6 @@ class UserInfoModel {
       return 5.0;
     }
     return double.parse(rate.toStringAsFixed(1));
-  }
-
-  ///神婆版本1.3开始，用户端下单后可以添加订单附加信息
-  bool supportOrderAdditionInfoByUser() {
-    return product == AppProductStar && versionCompare(appVersion, '1.3') >= 0;
-  }
-
-  ///神婆iOS1.5 Android1.4开始，添加了更长的push铃声文件
-  bool supportLongPushRing() {
-    if (Platform.isIOS) {
-      return product == AppProductStar &&
-          versionCompare(appVersion, '1.5') >= 0;
-    } else {
-      return product == AppProductStar &&
-          versionCompare(appVersion, '1.4') >= 0;
-    }
   }
 
   ///支持收发聊天图片信息

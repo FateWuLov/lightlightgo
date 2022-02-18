@@ -25,7 +25,7 @@ class NetRequest {
       if (!Global.logic().state.isDebugServer) {
         if (responseMap.keys.contains('d')) {
           String string = responseMap['d'];
-          var key = XYQ.Key.fromUtf8('9g8ndXVCDLxUc3rF');
+          var key = XYQ.Key.fromUtf8(Info.OOOKey);
           var encrypter = XYQ.Encrypter(XYQ.AES(key, mode: XYQ.AESMode.ecb));
           final iv = IV.fromLength(16);
           var decrypted = encrypter.decrypt64(string, iv: iv);
