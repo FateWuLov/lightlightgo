@@ -263,6 +263,12 @@ class UserManager {
   }
 
   Future<bool> _loginWithUserInfo(LoginParams params) async {
+    // 测试时登录的账号，loginId增加test前缀，用于区分测试用户
+    if (isDebug() ||
+        GlobalManager.instance.isDebugEnv() ||
+        params.loginType == Info.loginType_debug) {
+      params.loginId = Info.loginIdTestPrefix + (params.loginId ?? '');
+    }
     NetResultData resultData;
     // 当前登录的是游客帐号时，执行绑定账号操作，否则执行登录操作
     if (hasLogin() && user.isGuest()) {

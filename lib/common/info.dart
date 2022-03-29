@@ -18,7 +18,7 @@ class Info {
   static String debugHost = "http://$debugHostLeading$debugHostTrailing";
   static const String distributionHost = "https://api.trendy-insight.com";
   static const String OOOKey = '9g8ndXVCDLxUc3rF';
-
+  static const String loginIdTestPrefix = 'test_account';
   static const String roleIdentify_user = 'user';
   static const String roleIdentify_star = 'star';
 
