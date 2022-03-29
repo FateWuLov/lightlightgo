@@ -42,7 +42,7 @@ class CreateOrderLogic extends GetxController {
     Map<String, dynamic> params = {
       'starId': state.star.userId,
       'type': state.service.type,
-      'price': state.service.price,
+      'price': 0,
       'availableHours': state.service.availableHours.toInt(),
       'isRealTime': false,
       'bossName': UserManager.instance.user.name,

@@ -58,10 +58,6 @@ class HomeLogic extends GetxController {
         AnalyticsManager.instance.logEvent(EventName_MeTabShow);
       } else if (index == TabIndexStarList) {
         AnalyticsManager.instance.logEvent(EventName_AdvisorTabShow);
-      } else if (index == TabIndexPremiumList) {
-        AnalyticsManager.instance.logEvent(EventName_PremiumServiceTabShow);
-      } else if (index == TabIndexTarot) {
-        AnalyticsManager.instance.logEvent(EventName_TarotTabShow);
       }
     }
   }

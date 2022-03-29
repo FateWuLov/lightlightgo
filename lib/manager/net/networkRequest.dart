@@ -198,9 +198,9 @@ class NetRequest {
     String agent = '';
     var packageInfo = GlobalManager.instance.packageInfo;
     if (Platform.isIOS) {
-      agent = AppProductLifeaste + '_ios';
+      agent = Info.appProductMe + '_ios';
     } else if (Platform.isAndroid) {
-      agent = AppProductLifeaste + '_android';
+      agent = Info.appProductMe + '_android';
     }
     agent = agent + '_${packageInfo?.version}_${packageInfo?.buildNumber}';
     return agent;

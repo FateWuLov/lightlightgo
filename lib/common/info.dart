@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 
 class Info {
   static const appName = 'Lifeaste';
+  static const String appProductMe = 'minstinct';
 
   static const userInfoKey = 'userInfoKey';
   static const requestSessionKey = 'requestSessionKey';
@@ -12,11 +13,10 @@ class Info {
   static const termsUrl = '';
 
   static const feedbackEmail = 'betterlife.lab@outlook.com';
-
   static String debugHostLeading = "3.236.";
   static String debugHostTrailing = "42.87:8019";
   static String debugHost = "http://$debugHostLeading$debugHostTrailing";
-  static const String distributionHost = "https://api.sparkling-insights.com";
+  static const String distributionHost = "https://api.trendy-insight.com";
   static const String OOOKey = '9g8ndXVCDLxUc3rF';
 
   static const String roleIdentify_user = 'user';

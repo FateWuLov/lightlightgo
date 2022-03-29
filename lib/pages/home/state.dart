@@ -1,10 +1,8 @@
 import 'package:get/get.dart';
 
 const int TabIndexStarList = 0;
-const int TabIndexPremiumList = 1;
-const int TabIndexOrderList = 2;
-const int TabIndexTarot = 3;
-const int TabIndexMyInfo = 4;
+const int TabIndexOrderList = 1;
+const int TabIndexMyInfo = 2;
 
 class HomeState {
 

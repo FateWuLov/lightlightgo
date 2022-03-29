@@ -45,7 +45,7 @@ class UserManager {
 
   void resetUser(UserInfoModel? user) {
     if (user != null) {
-      user = user;
+      this.user = user;
       completeGetMatch.value = user.interestTags.isNotEmpty;
       existFirstReadingOff.value = user.nrtOrderCount <= 0;
       exist3MinFreeChat.value = canFreeChat3min();
