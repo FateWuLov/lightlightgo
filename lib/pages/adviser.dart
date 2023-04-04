@@ -1,49 +1,41 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../models/advisorlistmodel.dart';
+import '../models/advisormodel.dart';
 
 class FMAdvisorVC extends StatefulWidget {
   const FMAdvisorVC({super.key});
-
-  static const routeName = 'advisor';
-
   @override
   // TODO: implement build
   FMAdvisorState createState() => FMAdvisorState();
 }
 
 class FMAdvisorState extends State<FMAdvisorVC> {
-
-  static bool status = false;
-  static GlobalKey<_IconWidgetState> iconKey = GlobalKey();
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
-    //获取宽高
+    //获取屏幕宽高
     final size = MediaQuery.of(context).size;
     final width = size.width;
     final height = size.height;
-    //获取传参：头像、名字、简介
+    //获取传参：id
     final args = ModalRoute.of(context)!.settings.arguments as ScreenArguments;
+
+    var advisor = context.select<AdvisorListModel, Advisor> (
+          (advisorList) => advisorList.getById(args.id),
+    );
     // TODO: implement build
     return Container(
-      width: width,
-      height: height,
+      width: width, height: height,
       //设置白色背景
-      decoration: const BoxDecoration(
-        color: Colors.white,
-      ),
+      decoration: const BoxDecoration(color: Colors.white),
       ///层叠布局
       child: Stack(
         children: [
           ListView(
             padding: const EdgeInsets.all(0),
             children: [
-              /// 顾问主页 -- 除文本外区域
+              /// 除文本外区域
               Stack(
                 children: [
                   /// 顾问主页 -- 背景图
@@ -61,161 +53,7 @@ class FMAdvisorState extends State<FMAdvisorVC> {
                     ),
                   ),
                   /// 顾问主页 -- 名片
-                  Positioned(
-                      bottom: 10,
-                      child: Container(
-                        alignment: Alignment.center,
-                        width: width,
-                        child: Card(
-                          //背景色
-                          color: Colors.white,
-                          //阴影色
-                          shadowColor: Colors.orange[500],
-                          //阴影距离
-                          elevation: 7,
-                          //设置圆角
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(40),
-                          ),
-                          //卡片内容
-                          child: Container(
-                            height: height / 4.5,
-                            width: width - 40,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Container(
-                                  width: double.maxFinite,
-                                  height: height/23,
-                                  child: Row(
-                                    children: [
-                                      Padding(padding: EdgeInsets.fromLTRB(width/1.4, height/80, 0, 0)),
-                                      IconButton(
-                                        onPressed: (){
-                                          status = !status;
-                                          iconKey.currentState?.onPressed(status);
-                                        },
-                                        icon: IconWidget(iconKey),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                /// 顾问主页 -- 名片 -- 名称
-                                Container(
-                                  width: double.maxFinite,
-                                  padding:
-                                      const EdgeInsets.fromLTRB(20, 0, 0, 10),
-                                  child: Text(
-                                    args.title,
-                                    style: const TextStyle(
-                                      fontSize: 25,
-                                    ),
-                                  ),
-                                ),
-
-                                /// 顾问主页 -- 名片 -- 简介
-                                Container(
-                                  width: double.maxFinite,
-                                  padding:
-                                      const EdgeInsets.fromLTRB(20, 0, 0, 5),
-                                  child: Text(
-                                    args.sub,
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: const TextStyle(
-                                      fontSize: 15,
-                                    ),
-                                  ),
-                                ),
-
-                                /// 顾问主页 -- 名片 -- 内嵌卡片
-                                Container(
-                                  width: width - 80,
-                                  height: height / 12,
-                                  /*decoration: BoxDecoration(
-                                  border: border,
-                                ),*/
-                                  alignment: Alignment.center,
-                                  child: Card(
-                                    color: Colors.grey,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(20),
-                                    ),
-                                    elevation: 0,
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceAround,
-                                      children: [
-                                        Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: const [
-                                            ///顾问主页 -- 名片 -- 内嵌卡片 -- 文本 Text Reading
-                                            Text(
-                                              "Text Reading",
-                                              style: TextStyle(
-                                                fontSize: 20,
-                                                fontWeight: FontWeight.w600,
-                                              ),
-                                            ),
-
-                                            ///顾问主页 -- 名片 -- 内嵌卡片 -- 文本 Delivered within 24h
-                                            Text(
-                                              "Delivered within 24h",
-                                              style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.w300,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-
-                                        /// 顾问主页 -- 名片 -- 内嵌卡片 -- 金币按钮
-                                        ElevatedButton(
-                                          style: ButtonStyle(
-                                            shape: MaterialStateProperty.all(
-                                              RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                        18.67),
-                                              ),
-                                            ),
-                                          ),
-                                          child: Container(
-                                            width: width / 5,
-                                            height: height / 25,
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: const [
-                                                SizedBox(
-                                                  width: 30,
-                                                  height: 30,
-                                                  child: Image(
-                                                    image: AssetImage(
-                                                        "assets/3.0x/coin.png"),
-                                                    fit: BoxFit.fill,
-                                                  ),
-                                                ),
-                                                Text(
-                                                  "30",
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                          onPressed: () {},
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                      )),
+                  AdviserCard(id: args.id),
                   /// 顾问主页 -- 头像
                   Positioned(
                     left: 50,
@@ -226,26 +64,26 @@ class FMAdvisorState extends State<FMAdvisorVC> {
                       decoration: BoxDecoration(
                           borderRadius: const BorderRadius.all(Radius.circular(50)),
                           image: DecorationImage(
-                            image: AssetImage(args.avatar),
+                            image: AssetImage(advisor.avatar),
                             fit: BoxFit.fill,
                           )),
                     ),
                   ),
                 ],
               ),
-              /// 顾问主页 -- 下方文本
+              /// 下方文本
               Container(
                 width: width,
                 decoration: const BoxDecoration(
                   color: Colors.transparent,
                 ),
-                child: text(),
+                child: text(advisor),
               ),
             ],
           ),
           /// 顾问主页 -- 返回按钮
           Padding(
-            padding: EdgeInsets.fromLTRB(10, 50, 0, 0),
+            padding: const EdgeInsets.fromLTRB(10, 50, 0, 0),
             child: ElevatedButton(
               style: ButtonStyle(
                 shape: MaterialStateProperty.all(
@@ -262,10 +100,10 @@ class FMAdvisorState extends State<FMAdvisorVC> {
                 //点击返回后当前页面出栈
                 Navigator.pop(context);
               },
-              child: Container(
+              child: const SizedBox(
                 width: 30,
                 height: 30,
-                child: const Image(
+                child: Image(
                   image: AssetImage("assets/3.0x/back.png"),
                   fit: BoxFit.fill,
                 ),
@@ -276,14 +114,13 @@ class FMAdvisorState extends State<FMAdvisorVC> {
       ),
     );
   }
-
   /// 顾问主页 -- 下方文本实现
-  Widget text() {
+  Widget text(Advisor advisor) {
     return Column(
       children: [
-        Container(
+        const SizedBox(
           width: double.maxFinite,
-          child: const Padding(
+          child: Padding(
             padding: EdgeInsets.fromLTRB(25, 20, 25, 0),
             child: Text(
               "About Me",
@@ -296,16 +133,17 @@ class FMAdvisorState extends State<FMAdvisorVC> {
             ),
           ),
         ),
-        Container(
+        SizedBox(
           width: double.maxFinite,
-          child: const Padding(
-            padding: EdgeInsets.fromLTRB(25, 20, 25, 30),
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(25, 20, 25, 30),
             child: Text(
-              "Good morning, everyone. Thank you for taking your time. It’s really my honor to have this opportunity to take part in this interview. Now, I would like to introduce myself briefly."
-              "My name is Doris. I am 23 years old and born in Qingdao. I graduated from Hebei University of Science and Technology. My major is English. And I got my bachelor degree after my graduation. I also studied Audit in Hebei Normal University of Science and Technology. I am very interested in English and study very hard on this subject. I had passed TEM-8 and BEC Vantage. I worked in an American company at the beginning of this year. My spoken English was improved a lot by communicating with Americans frequently during that period."
-              "I am very optimistic and easy to get along with. I have many friends. Teamwork spirit is very important in this age. I think if we want to make big achievement, it’s very important to learn how to cooperate with other people. My motto is 'characters determine destity', so I alwarys remind myself to be honest and modest to everyone ."
-              "As a motto goes 'attitude is everything'. If I get this job, I will put all my heart in it and try my best to do it well.",
-              style: TextStyle(
+              advisor.about,
+              //"Good morning, everyone. Thank you for taking your time. It’s really my honor to have this opportunity to take part in this interview. Now, I would like to introduce myself briefly."
+              //"My name is Doris. I am 23 years old and born in Qingdao. I graduated from Hebei University of Science and Technology. My major is English. And I got my bachelor degree after my graduation. I also studied Audit in Hebei Normal University of Science and Technology. I am very interested in English and study very hard on this subject. I had passed TEM-8 and BEC Vantage. I worked in an American company at the beginning of this year. My spoken English was improved a lot by communicating with Americans frequently during that period."
+              //"I am very optimistic and easy to get along with. I have many friends. Teamwork spirit is very important in this age. I think if we want to make big achievement, it’s very important to learn how to cooperate with other people. My motto is 'characters determine destity', so I alwarys remind myself to be honest and modest to everyone ."
+              //"As a motto goes 'attitude is everything'. If I get this job, I will put all my heart in it and try my best to do it well.",
+              style: const TextStyle(
                 color: Colors.black,
                 fontWeight: FontWeight.w500,
                 fontSize: 15,
@@ -317,22 +155,193 @@ class FMAdvisorState extends State<FMAdvisorVC> {
       ],
     );
   }
-
-  /// Util -- 细线边框
-  Border border = Border.all(
-    color: Colors.orange,
-    width: 2,
-  );
 }
-/// 工具类 -- 获取传参：名字、简介、头像
+
+/// 顾问名片
+class AdviserCard extends StatelessWidget{
+  final int id;
+  const AdviserCard({super.key, required this.id});
+  @override
+  Widget build(BuildContext context) {
+
+    var likedList = context.watch<AdvisorModel>();
+    var advisor = context.select<AdvisorListModel, Advisor> (
+          (advisorList) => advisorList.getById(id),
+    );
+
+    // TODO: implement build
+    return Positioned(
+      left: 10,
+      right: 10,
+      bottom: 10,
+        child: SizedBox(
+          width: 350,
+          height: 200,
+          child: Card(
+            //背景色
+            color: Colors.white,
+            //阴影色
+            shadowColor: Colors.orange[500],
+            //阴影距离
+            elevation: 7,
+            //设置圆角
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40),),
+            //卡片内容
+            child: SizedBox(
+              height: 200,
+              width: 350,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  /// 收藏按钮
+                  SizedBox(
+                    width: 350,
+                    height: 20,
+                    child: Row(
+                      children: [
+                        const Padding(padding: EdgeInsets.fromLTRB(320, 0, 0, 0)),
+                        SizedBox(
+                          width: 30,
+                          height: 30,
+                          child: IconButton(
+                            onPressed: (){
+                              likedList.setLikeState(id);
+                            },
+                            icon: const Icon(Icons.favorite_rounded),
+                          ),
+                        )
+
+                      ],
+                    ),
+                  ),
+                  /// 顾问主页 -- 名片 -- 名称
+                  Container(
+                    width: double.maxFinite,
+                    padding:
+                    const EdgeInsets.fromLTRB(20, 0, 0, 10),
+                    child: Text(
+                      advisor.name,
+                      style: const TextStyle(
+                        fontSize: 25,
+                      ),
+                    ),
+                  ),
+
+                  /// 顾问主页 -- 名片 -- 简介
+                  Container(
+                    width: double.maxFinite,
+                    padding:
+                    const EdgeInsets.fromLTRB(20, 0, 0, 5),
+                    child: Text(
+                      advisor.introduction,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                        fontSize: 15,
+                      ),
+                    ),
+                  ),
+
+                  /// 顾问主页 -- 名片 -- 内嵌卡片
+                  Container(
+                    width: 370,
+                    height: 70,
+                    /*decoration: BoxDecoration(
+                                  border: border,
+                                ),*/
+                    alignment: Alignment.center,
+                    child: Card(
+                      color: Colors.grey,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      elevation: 0,
+                      child: Row(
+                        mainAxisAlignment:
+                        MainAxisAlignment.spaceAround,
+                        children: [
+                          Column(
+                            mainAxisAlignment:
+                            MainAxisAlignment.center,
+                            crossAxisAlignment:
+                            CrossAxisAlignment.start,
+                            children: const [
+                              ///顾问主页 -- 名片 -- 内嵌卡片 -- 文本 Text Reading
+                              Text(
+                                "Text Reading",
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+
+                              ///顾问主页 -- 名片 -- 内嵌卡片 -- 文本 Delivered within 24h
+                              Text(
+                                "Delivered within 24h",
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w300,
+                                ),
+                              ),
+                            ],
+                          ),
+
+                          /// 顾问主页 -- 名片 -- 内嵌卡片 -- 金币按钮
+                          ElevatedButton(
+                            style: ButtonStyle(
+                              shape: MaterialStateProperty.all(
+                                RoundedRectangleBorder(
+                                  borderRadius:
+                                  BorderRadius.circular(
+                                      18.67),
+                                ),
+                              ),
+                            ),
+                            child: SizedBox(
+                              width: 80,
+                              height: 30,
+                              child: Row(
+                                mainAxisAlignment:
+                                MainAxisAlignment.center,
+                                children: const [
+                                  SizedBox(
+                                    width: 30,
+                                    height: 30,
+                                    child: Image(
+                                      image: AssetImage(
+                                          "assets/3.0x/coin.png"),
+                                      fit: BoxFit.fill,
+                                    ),
+                                  ),
+                                  Text(
+                                    "30",
+                                  ),
+                                ],
+                              ),
+                            ),
+                            onPressed: () {},
+                          ),
+                        ],
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ),
+        ));
+  }
+
+}
+
+
+/// 工具类 -- 获取传参：id
 class ScreenArguments {
-  final String title;
-  final String sub;
-  final String avatar;
-
-  ScreenArguments(this.title, this.sub, this.avatar);
+  final int id;
+  ScreenArguments(this.id);
 }
-/// 工具类 -- 局部刷新收藏按钮
+
+/*/// 工具类 -- 局部刷新收藏按钮
 class IconWidget extends StatefulWidget {
   final Key key;
 
@@ -374,4 +383,4 @@ class _IconWidgetState extends State<IconWidget> {
       icon = status? like: unlike;
     });
   }
-}
+}*/

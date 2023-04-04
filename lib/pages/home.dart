@@ -1,87 +1,20 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:myapp/models/advisorlistmodel.dart';
+import 'package:provider/provider.dart';
 
+import '../common/decoration.dart';
 import 'adviser.dart';
 
 class FMHomeVC extends StatefulWidget {
   const FMHomeVC({super.key});
 
   @override
-  FMHomeState createState() => FMHomeState();
+  FMHomeState createState() {return FMHomeState();}
 }
 
 class FMHomeState extends State<FMHomeVC> {
-  // 渐变效果设置
-  Gradient gradient = LinearGradient(
-      begin: Alignment.centerLeft,
-      end: Alignment.centerRight,
-      colors: [
-        Colors.orange.shade200,
-        Colors.orange.shade500,
-        Colors.orange.shade800
-      ]);
-  List consultant = [
-    {
-      'consultant1': [
-        {'name': 'a'},
-        {'sub': 'a.sub'},
-        {'avatar': 'assets/images/photo01.png'}
-      ],
-      'consultant2': [
-        {'name': 'b'},
-        {'sub': 'b.sub'},
-        {'avatar': 'assets/images/photo02.HEIC'}
-      ],
-    },
-    {
-      'consultant1': [
-        {'name': 'a'},
-        {'sub': 'a.sub'},
-        {'avatar': 'assets/images/photo01.png'}
-      ],
-      'consultant2': [
-        {'name': 'b'},
-        {'sub': 'b.sub'},
-        {'avatar': 'assets/images/photo02.HEIC'}
-      ],
-    },
-    {
-      'consultant1': [
-        {'name': 'a'},
-        {'sub': 'a.sub'},
-        {'avatar': 'assets/images/photo01.png'}
-      ],
-      'consultant2': [
-        {'name': 'b'},
-        {'sub': 'b.sub'},
-        {'avatar': 'assets/images/photo02.HEIC'}
-      ],
-    },
-    {
-      'consultant1': [
-        {'name': 'a'},
-        {'sub': 'a.sub'},
-        {'avatar': 'assets/images/photo01.png'}
-      ],
-      'consultant2': [
-        {'name': 'b'},
-        {'sub': 'b.sub'},
-        {'avatar': 'assets/images/photo02.HEIC'}
-      ],
-    },
-    {
-      'consultant1': [
-        {'name': 'a'},
-        {'sub': 'a.sub'},
-        {'avatar': 'assets/images/photo01.png'}
-      ],
-      'consultant2': [
-        {'name': 'b'},
-        {'sub': 'b.sub'},
-        {'avatar': 'assets/images/photo02.HEIC'}
-      ],
-    },
-  ];
-
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -130,7 +63,7 @@ class FMHomeState extends State<FMHomeVC> {
       itemBuilder: (BuildContext context, int index) {
         //添加listview的表头
         if (index == 0) {
-          return Container(
+          return SizedBox(
               width: double.maxFinite,
               height: 50,
               child: Row(
@@ -159,20 +92,14 @@ class FMHomeState extends State<FMHomeVC> {
 
         ///list的每一行都是一个container，这个container中又包含两个名片container
         else {
-          return Container(
+          return SizedBox(
             height: 305,
-            decoration: BoxDecoration(
-              border: Border.all(
-                color: Colors.orange,
-                width: 1,
-              ),
-            ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                myCard(index - 1, 'consultant1'),
-                myCard(index - 1, 'consultant2'),
+                AdvisorCard(id: (index-1)*2),
+                AdvisorCard(id: (index-1)*2+1),
               ],
             ),
           );
@@ -180,9 +107,23 @@ class FMHomeState extends State<FMHomeVC> {
       },
     );
   }
+}
 
-  /// 主页--名片
-  Widget myCard(int row, var column) {
+/// 名片
+class AdvisorCard extends StatelessWidget {
+  //final Advisor advisor;
+  final int id;
+  const AdvisorCard({super.key, required this.id});
+  @override
+  Widget build(BuildContext context) {
+
+    var advisor = context.select<AdvisorListModel, Advisor> ((advisorList) => advisorList.getById(id));
+
+    if (kDebugMode) {
+      print("print : advisor --> $advisor");
+    }
+
+    // TODO: implement build
     return Stack(
       alignment: Alignment.center,
       children: [
@@ -190,31 +131,19 @@ class FMHomeState extends State<FMHomeVC> {
           width: 200,
           height: 300,
           //设置圆角和边框
-          decoration: BoxDecoration(
-            color: Colors.blueGrey,
-            border: Border.all(
-              color: Colors.orange,
-              width: 2,
-            ),
-            borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(15),
-                topRight: Radius.zero,
-                bottomLeft: Radius.zero,
-                bottomRight: Radius.circular(15)),
-          ),
+          decoration: MyDecoration.decoration1,
           child: Column(
             children: [
-              cardImage(row, column),
-              titleText(row, column),
-              subtitleText(row, column),
-              consultButton(row, column),
+              avatar(advisor.avatar),
+              _name(advisor.name),
+              _introduction(advisor.introduction),
+              ConsultButton(id: id),
             ],
           ),
         ),
+        /// 收藏按钮
         IconButton(
-          onPressed: () {
-
-          },
+          onPressed: () {},
           icon: const Icon(
             Icons.favorite_outline_rounded,
             size: 30,
@@ -224,19 +153,14 @@ class FMHomeState extends State<FMHomeVC> {
       ],
     );
   }
-
-  /// 主页--名片--头像
-  Widget cardImage(int row, var column) {
-    ///contain主页的头像
+  /// 头像
+  Widget avatar(String avatar) {
+    if (kDebugMode) {
+      print("print avatar :$avatar success");
+    }
     return Container(
-      //设置container圆角
-      decoration: const BoxDecoration(
-        borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(15),
-            topRight: Radius.zero,
-            bottomLeft: Radius.zero,
-            bottomRight: Radius.circular(15)),
-      ),
+      // 设置container圆角
+      decoration: MyDecoration.decoration2,
       child: SizedBox(
           width: 200,
           height: 180,
@@ -248,7 +172,7 @@ class FMHomeState extends State<FMHomeVC> {
                 bottomLeft: Radius.zero,
                 bottomRight: Radius.circular(15)),
             child: Image(
-              image: AssetImage(consultant[row][column][2]['avatar']),
+              image: AssetImage(avatar),
               fit: BoxFit.cover,
             ),
           )),
@@ -256,23 +180,20 @@ class FMHomeState extends State<FMHomeVC> {
   }
 
   /// 主页--名片--名字
-  Container titleText(int row, var column) {
+  Container _name(String name) {
+    if (kDebugMode) {
+      print("name: $name");
+    }
     return Container(
         width: double.maxFinite,
-        // decoration: BoxDecoration(
-        //   // border: Border.all(
-        //   //   color: Colors.orange,
-        //   //   width: 1,
-        //   // ),
-        // ),
         padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
         child: ShaderMask(
           shaderCallback: (Rect bounds) {
-            return gradient.createShader(bounds);
+            return MyDecoration.gradient.createShader(bounds);
           },
           blendMode: BlendMode.srcATop,
           child: Text(
-            consultant[row][column][0]['name'],
+            name,
             maxLines: 1,
             style: const TextStyle(
               fontWeight: FontWeight.w900,
@@ -284,12 +205,12 @@ class FMHomeState extends State<FMHomeVC> {
   }
 
   /// 主页--名片--简介
-  Container subtitleText(int row, var column) {
+  Container _introduction(String introduction) {
     return Container(
       width: double.maxFinite,
       padding: const EdgeInsets.fromLTRB(12, 5, 30, 10),
       child: Text(
-        consultant[row][column][1]['sub'],
+        introduction,
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
         style: const TextStyle(
@@ -300,12 +221,16 @@ class FMHomeState extends State<FMHomeVC> {
       ),
     );
   }
+}
 
-  /// 主页--名片--咨询按钮
-  Widget consultButton(int row, var column) {
-    var title = consultant[row][column][0]['name'];
-    var sub = consultant[row][column][1]['sub'];
-    var avatar = consultant[row][column][2]['avatar'];
+/// 主页--名片--咨询按钮
+class ConsultButton extends StatelessWidget{
+  final int id;
+  const ConsultButton({super.key, required this.id});
+
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
     return SizedBox(
       width: double.maxFinite,
       height: 35,
@@ -313,7 +238,7 @@ class FMHomeState extends State<FMHomeVC> {
         child: Container(
           width: 140,
           decoration: BoxDecoration(
-            gradient: gradient,
+            gradient: MyDecoration.gradient,
             border: Border.all(
               color: Colors.orange,
               width: 1,
@@ -333,9 +258,7 @@ class FMHomeState extends State<FMHomeVC> {
                 context,
                 'advisor',
                 arguments: ScreenArguments(
-                  title,
-                  sub,
-                  avatar,
+                  id
                 ),
               );
             },
