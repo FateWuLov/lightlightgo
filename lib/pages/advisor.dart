@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
-import '../models/advisorlistmodel.dart';
 import '../models/advisormodel.dart';
 
 class FMAdvisorVC extends StatefulWidget {
@@ -20,10 +17,7 @@ class FMAdvisorState extends State<FMAdvisorVC> {
     final height = size.height;
     //获取传参：id
     final args = ModalRoute.of(context)!.settings.arguments as ScreenArguments;
-
-    var advisor = context.select<AdvisorListModel, Advisor> (
-          (advisorList) => advisorList.getById(args.id),
-    );
+    Advisor advisor = args.advisor;
     // TODO: implement build
     return Container(
       width: width, height: height,
@@ -53,7 +47,7 @@ class FMAdvisorState extends State<FMAdvisorVC> {
                     ),
                   ),
                   /// 顾问主页 -- 名片
-                  AdviserCard(id: args.id),
+                  AdvisorCard(advisor: advisor),
                   /// 顾问主页 -- 头像
                   Positioned(
                     left: 50,
@@ -158,16 +152,11 @@ class FMAdvisorState extends State<FMAdvisorVC> {
 }
 
 /// 顾问名片
-class AdviserCard extends StatelessWidget{
-  final int id;
-  const AdviserCard({super.key, required this.id});
+class AdvisorCard extends StatelessWidget{
+  const AdvisorCard({super.key ,required this.advisor});
+  final Advisor advisor;
   @override
   Widget build(BuildContext context) {
-
-    var likedList = context.watch<AdvisorModel>();
-    var advisor = context.select<AdvisorListModel, Advisor> (
-          (advisorList) => advisorList.getById(id),
-    );
 
     // TODO: implement build
     return Positioned(
@@ -205,7 +194,7 @@ class AdviserCard extends StatelessWidget{
                           height: 30,
                           child: IconButton(
                             onPressed: (){
-                              likedList.setLikeState(id);
+
                             },
                             icon: const Icon(Icons.favorite_rounded),
                           ),
@@ -334,53 +323,9 @@ class AdviserCard extends StatelessWidget{
 
 }
 
-
 /// 工具类 -- 获取传参：id
 class ScreenArguments {
-  final int id;
-  ScreenArguments(this.id);
+  final Advisor advisor;
+  ScreenArguments(this.advisor);
 }
 
-/*/// 工具类 -- 局部刷新收藏按钮
-class IconWidget extends StatefulWidget {
-  final Key key;
-
-  const IconWidget(this.key);
-
-  @override
-  _IconWidgetState createState() => _IconWidgetState();
-}
-/// 工具类 -- 局部刷新收藏按钮
-class _IconWidgetState extends State<IconWidget> {
-
-  ///未收藏
-  Icon unlike = const Icon(
-    Icons.favorite_outline_rounded,
-    size: 30,
-    color: Colors.grey,
-  );
-  ///收藏图标
-  Icon like = const Icon(
-    Icons.favorite_rounded,
-    size: 30,
-    color: Colors.pink,
-  );
-
-  Icon icon = const Icon(
-    Icons.favorite_outline_rounded,
-    size: 30,
-    color: Colors.grey,
-  );
-
-  @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    return icon;
-  }
-
-  void onPressed(bool status) {
-    setState(() {
-      icon = status? like: unlike;
-    });
-  }
-}*/

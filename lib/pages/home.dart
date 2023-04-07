@@ -1,20 +1,34 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:myapp/models/advisorlistmodel.dart';
-import 'package:provider/provider.dart';
+import 'package:hive/hive.dart';
+import 'package:myapp/models/advisormodel.dart';
 
 import '../common/decoration.dart';
-import 'adviser.dart';
+import 'advisor.dart';
 
 class FMHomeVC extends StatefulWidget {
   const FMHomeVC({super.key});
-
   @override
   FMHomeState createState() {return FMHomeState();}
 }
 
 class FMHomeState extends State<FMHomeVC> {
+  late final Box box;
+  @override
+  void initState() {
+    // TODO: implement initState
+    box = Hive.box("advisorBox");
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    Hive.close();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -53,6 +67,29 @@ class FMHomeState extends State<FMHomeVC> {
       elevation: 0,
       backgroundColor: Colors.transparent,
       centerTitle: false,
+      actions: [
+        /// 个人用户
+        TextButton(
+          onPressed: (){
+            Navigator.pushNamed(
+              context,
+              'user',
+            );
+          },
+          child: Container(
+            height: 30,
+            width: 100,
+            decoration: BoxDecoration(
+              borderRadius: MyDecoration.borderRadius,
+              color: Colors.white
+            ),
+            alignment: Alignment.center,
+            child: const Text(
+                'default'
+            ),
+          ),
+        )
+      ],
     );
   }
 
@@ -92,14 +129,16 @@ class FMHomeState extends State<FMHomeVC> {
 
         ///list的每一行都是一个container，这个container中又包含两个名片container
         else {
+          Advisor advisor1 = box.getAt((index-1)*2);
+          Advisor advisor2 = box.getAt((index-1)*2 + 1);
           return SizedBox(
             height: 305,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                AdvisorCard(id: (index-1)*2),
-                AdvisorCard(id: (index-1)*2+1),
+                AdvisorCard(advisor: advisor1),
+                AdvisorCard(advisor: advisor2),
               ],
             ),
           );
@@ -111,18 +150,10 @@ class FMHomeState extends State<FMHomeVC> {
 
 /// 名片
 class AdvisorCard extends StatelessWidget {
-  //final Advisor advisor;
-  final int id;
-  const AdvisorCard({super.key, required this.id});
+  final Advisor advisor;
+  const AdvisorCard({super.key, required this.advisor});
   @override
   Widget build(BuildContext context) {
-
-    var advisor = context.select<AdvisorListModel, Advisor> ((advisorList) => advisorList.getById(id));
-
-    if (kDebugMode) {
-      print("print : advisor --> $advisor");
-    }
-
     // TODO: implement build
     return Stack(
       alignment: Alignment.center,
@@ -137,7 +168,7 @@ class AdvisorCard extends StatelessWidget {
               avatar(advisor.avatar),
               _name(advisor.name),
               _introduction(advisor.introduction),
-              ConsultButton(id: id),
+              ConsultButton(advisor: advisor,),
             ],
           ),
         ),
@@ -155,9 +186,6 @@ class AdvisorCard extends StatelessWidget {
   }
   /// 头像
   Widget avatar(String avatar) {
-    if (kDebugMode) {
-      print("print avatar :$avatar success");
-    }
     return Container(
       // 设置container圆角
       decoration: MyDecoration.decoration2,
@@ -188,9 +216,7 @@ class AdvisorCard extends StatelessWidget {
         width: double.maxFinite,
         padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
         child: ShaderMask(
-          shaderCallback: (Rect bounds) {
-            return MyDecoration.gradient.createShader(bounds);
-          },
+          shaderCallback: (Rect bounds) {return MyDecoration.gradient1.createShader(bounds);},
           blendMode: BlendMode.srcATop,
           child: Text(
             name,
@@ -199,9 +225,7 @@ class AdvisorCard extends StatelessWidget {
               fontWeight: FontWeight.w900,
               letterSpacing: 1,
               fontSize: 20,
-            ),
-          ),
-        ));
+            ),),),);
   }
 
   /// 主页--名片--简介
@@ -225,8 +249,8 @@ class AdvisorCard extends StatelessWidget {
 
 /// 主页--名片--咨询按钮
 class ConsultButton extends StatelessWidget{
-  final int id;
-  const ConsultButton({super.key, required this.id});
+  final Advisor advisor;
+  const ConsultButton({super.key, required this.advisor});
 
   @override
   Widget build(BuildContext context) {
@@ -238,7 +262,7 @@ class ConsultButton extends StatelessWidget{
         child: Container(
           width: 140,
           decoration: BoxDecoration(
-            gradient: MyDecoration.gradient,
+            gradient: MyDecoration.gradient1,
             border: Border.all(
               color: Colors.orange,
               width: 1,
@@ -258,7 +282,7 @@ class ConsultButton extends StatelessWidget{
                 context,
                 'advisor',
                 arguments: ScreenArguments(
-                  id
+                  advisor
                 ),
               );
             },
