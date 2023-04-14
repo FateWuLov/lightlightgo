@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:myapp/common/dbutil.dart';
 
 class FMUserVC extends StatelessWidget {
   const FMUserVC({super.key});
@@ -31,12 +33,14 @@ class FMUserVC extends StatelessWidget {
                 _List(),
               ],
             ),
-            /// 返回按钮
+            /*/// 返回按钮
             Padding(padding: const EdgeInsets.fromLTRB(15, 45, 0, 0),
             child: IconButton(
-              onPressed: (){Navigator.pop(context);},
+              onPressed: (){
+                Navigator.pop(context);
+                },
               icon: const Icon(Icons.arrow_back_ios_rounded),
-            ),),
+            ),),*/
           ],
         ),
       ),
@@ -67,12 +71,15 @@ class _Avatar extends StatelessWidget {
     // TODO: implement build
     return Container(
       width: double.maxFinite,
-      height: 140,
       padding: const EdgeInsets.fromLTRB(30, 20, 285, 0),
-      child: const Image(
-        image: AssetImage("assets/3.0x/defaultAvatar.png"),
-        fit: BoxFit.fill,
-      ),
+      child: ValueListenableBuilder(
+        valueListenable: DBUtil.instance.userBox.listenable(),
+        builder: (context, Box box, _) {
+          return CircleAvatar(
+            backgroundImage: AssetImage(box.getAt(0).avatar),
+            radius: 70,
+          );
+        },)
     );
   }
 }
@@ -85,10 +92,14 @@ class _UserName extends StatelessWidget {
       height: 50,
       width: double.maxFinite,
       padding: const EdgeInsets.fromLTRB(20, 20, 0, 0),
-      child: const Text(
-        "default",
-        style: TextStyle(fontWeight: FontWeight.w500, fontSize: 25),
-      ),
+      child: ValueListenableBuilder(
+        valueListenable: DBUtil.instance.userBox.listenable(),
+        builder: (context, Box box, _) {
+          return Text(
+            box.getAt(0).name,
+            style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 25),
+          );
+        },)
     );
   }
 }

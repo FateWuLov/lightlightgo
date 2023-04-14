@@ -2,32 +2,27 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:myapp/models/advisormodel.dart';
 
+import '../common/dbutil.dart';
 import '../common/decoration.dart';
-import 'advisor.dart';
+import '../common/util.dart';
+
+const String advisorBoxName = "advisorBox";
+const String userBoxName = "userBox";
 
 class FMHomeVC extends StatefulWidget {
   const FMHomeVC({super.key});
+
   @override
-  FMHomeState createState() {return FMHomeState();}
+  FMHomeState createState() {
+    return FMHomeState();
+  }
 }
 
 class FMHomeState extends State<FMHomeVC> {
-  late final Box box;
-  @override
-  void initState() {
-    // TODO: implement initState
-    box = Hive.box("advisorBox");
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    Hive.close();
-    super.dispose();
-  }
+  DBUtil dbUtil = DBUtil.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +43,7 @@ class FMHomeState extends State<FMHomeVC> {
       child: Scaffold(
         backgroundColor: Colors.transparent,
         appBar: myAppBar(),
-        body: homePageBody(),
+        body: _buildListView(),
       ),
     );
   }
@@ -69,80 +64,107 @@ class FMHomeState extends State<FMHomeVC> {
       centerTitle: false,
       actions: [
         /// 个人用户
-        TextButton(
-          onPressed: (){
-            Navigator.pushNamed(
-              context,
-              'user',
+        /*ValueListenableBuilder(
+          valueListenable: dbUtil.userBox.listenable(),
+          builder: (context, Box box, _) {
+            return TextButton(
+              onPressed: (){
+                Navigator.pushNamed(
+                  context,
+                  'user',
+                );
+              },
+              child: Container(
+                height: 30,
+                width: 100,
+                decoration: BoxDecoration(
+                    borderRadius: MyDecoration.borderRadius,
+                    color: Colors.white
+                ),
+                alignment: Alignment.center,
+                child: Text(
+                  box.name
+                ),
+              ),
             );
-          },
-          child: Container(
-            height: 30,
-            width: 100,
-            decoration: BoxDecoration(
-              borderRadius: MyDecoration.borderRadius,
-              color: Colors.white
-            ),
-            alignment: Alignment.center,
-            child: const Text(
-                'default'
-            ),
-          ),
-        )
+          },),*/
+        IconButton(
+            onPressed: () {
+              Navigator.pushNamed(context, "test");
+            },
+            icon: Icon(Icons.telegram)),
+        IconButton(
+            onPressed: () {
+              Navigator.pushNamed(context, "extension");
+            },
+            icon: Icon(Icons.extension_outlined)),
       ],
     );
   }
 
   ///主页--listview
-  ListView homePageBody() {
-    return ListView.builder(
-      itemCount: 50,
-      itemBuilder: (BuildContext context, int index) {
-        //添加listview的表头
-        if (index == 0) {
-          return SizedBox(
-              width: double.maxFinite,
-              height: 50,
-              child: Row(
-                children: const [
-                  Padding(
-                    padding: EdgeInsets.only(left: 13),
-                    child: Image(
-                      image: AssetImage("assets/2.0x/smallSquare.png"),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(left: 8),
-                    child: Text(
-                      "Trending",
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.w500,
-                        letterSpacing: 0.5,
-                        fontSize: 15,
+  Widget _buildListView() {
+    return ValueListenableBuilder(
+      valueListenable: dbUtil.advisorBox.listenable(),
+      builder: (context, Box box, _) {
+        return ListView.builder(
+          itemCount: 50,
+          itemBuilder: (BuildContext context, int index) {
+            //添加listview的表头
+            if (index == 0) {
+              return SizedBox(
+                  width: double.maxFinite,
+                  height: 50,
+                  child: Row(
+                    children: const [
+                      Padding(
+                        padding: EdgeInsets.only(left: 13),
+                        child: Image(
+                          image: AssetImage("assets/2.0x/smallSquare.png"),
+                        ),
                       ),
-                    ),
-                  ),
-                ],
-              ));
-        }
+                      Padding(
+                        padding: EdgeInsets.only(left: 8),
+                        child: Text(
+                          "Trending",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.w500,
+                            letterSpacing: 0.5,
+                            fontSize: 15,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ));
+            }
 
-        ///list的每一行都是一个container，这个container中又包含两个名片container
-        else {
-          Advisor advisor1 = box.getAt((index-1)*2);
-          Advisor advisor2 = box.getAt((index-1)*2 + 1);
-          return SizedBox(
-            height: 305,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                AdvisorCard(advisor: advisor1),
-                AdvisorCard(advisor: advisor2),
-              ],
-            ),
-          );
-        }
+            ///list的每一行都是一个container，这个container中又包含两个名片container
+            else {
+              int index1 = ((index - 1) * 2) % 10;
+              int index2 = ((index - 1) * 2 + 1) % 10;
+              Advisor advisor1 = box.getAt(index1)!;
+              //print(advisor1.name);
+              Advisor advisor2 = box.getAt(index2)!;
+              //print(advisor2.name);
+              return SizedBox(
+                height: 305,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    AdvisorCard(
+                      index: index1,
+                    ),
+                    AdvisorCard(
+                      index: index2,
+                    ),
+                  ],
+                ),
+              );
+            }
+          },
+        );
       },
     );
   }
@@ -150,13 +172,16 @@ class FMHomeState extends State<FMHomeVC> {
 
 /// 名片
 class AdvisorCard extends StatelessWidget {
-  final Advisor advisor;
-  const AdvisorCard({super.key, required this.advisor});
+  final int index;
+
+  const AdvisorCard({super.key, required this.index});
+
   @override
   Widget build(BuildContext context) {
+    DBUtil dbUtil = DBUtil.instance;
+    Advisor advisor = dbUtil.advisorBox.getAt(index);
     // TODO: implement build
     return Stack(
-      alignment: Alignment.center,
       children: [
         Container(
           width: 200,
@@ -168,22 +193,29 @@ class AdvisorCard extends StatelessWidget {
               avatar(advisor.avatar),
               _name(advisor.name),
               _introduction(advisor.introduction),
-              ConsultButton(advisor: advisor,),
+              ConsultButton(
+                index: index,
+              ),
             ],
           ),
         ),
+
         /// 收藏按钮
-        IconButton(
-          onPressed: () {},
-          icon: const Icon(
-            Icons.favorite_outline_rounded,
+        Positioned(
+          top: 150,
+          right: 10,
+          child: Icon(
+            advisor.liked == true
+                ? Icons.favorite_rounded
+                : Icons.favorite_outline_rounded,
             size: 30,
-            color: Colors.grey,
+            color: Colors.pink,
           ),
         ),
       ],
     );
   }
+
   /// 头像
   Widget avatar(String avatar) {
     return Container(
@@ -209,23 +241,25 @@ class AdvisorCard extends StatelessWidget {
 
   /// 主页--名片--名字
   Container _name(String name) {
-    if (kDebugMode) {
-      print("name: $name");
-    }
     return Container(
-        width: double.maxFinite,
-        padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
-        child: ShaderMask(
-          shaderCallback: (Rect bounds) {return MyDecoration.gradient1.createShader(bounds);},
-          blendMode: BlendMode.srcATop,
-          child: Text(
-            name,
-            maxLines: 1,
-            style: const TextStyle(
-              fontWeight: FontWeight.w900,
-              letterSpacing: 1,
-              fontSize: 20,
-            ),),),);
+      width: double.maxFinite,
+      padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+      child: ShaderMask(
+        shaderCallback: (Rect bounds) {
+          return MyDecoration.gradient1.createShader(bounds);
+        },
+        blendMode: BlendMode.srcATop,
+        child: Text(
+          name,
+          maxLines: 1,
+          style: const TextStyle(
+            fontWeight: FontWeight.w900,
+            letterSpacing: 1,
+            fontSize: 20,
+          ),
+        ),
+      ),
+    );
   }
 
   /// 主页--名片--简介
@@ -248,9 +282,10 @@ class AdvisorCard extends StatelessWidget {
 }
 
 /// 主页--名片--咨询按钮
-class ConsultButton extends StatelessWidget{
-  final Advisor advisor;
-  const ConsultButton({super.key, required this.advisor});
+class ConsultButton extends StatelessWidget {
+  final int index;
+
+  const ConsultButton({super.key, required this.index});
 
   @override
   Widget build(BuildContext context) {
@@ -281,9 +316,7 @@ class ConsultButton extends StatelessWidget{
               Navigator.pushNamed(
                 context,
                 'advisor',
-                arguments: ScreenArguments(
-                  advisor
-                ),
+                arguments: ScreenArguments(index),
               );
             },
           ),

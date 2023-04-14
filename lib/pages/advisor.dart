@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import '../common/dbutil.dart';
+import '../common/util.dart';
 import '../models/advisormodel.dart';
+import '../models/usermodel.dart';
 
 class FMAdvisorVC extends StatefulWidget {
   const FMAdvisorVC({super.key});
@@ -17,7 +21,9 @@ class FMAdvisorState extends State<FMAdvisorVC> {
     final height = size.height;
     //获取传参：id
     final args = ModalRoute.of(context)!.settings.arguments as ScreenArguments;
-    Advisor advisor = args.advisor;
+    int index = args.index;
+    DBUtil dbUtil = DBUtil.instance;
+    Advisor advisor = dbUtil.advisorBox.getAt(index);
     // TODO: implement build
     return Container(
       width: width, height: height,
@@ -47,7 +53,7 @@ class FMAdvisorState extends State<FMAdvisorVC> {
                     ),
                   ),
                   /// 顾问主页 -- 名片
-                  AdvisorCard(advisor: advisor),
+                  AdvisorCard(index: index),
                   /// 顾问主页 -- 头像
                   Positioned(
                     left: 50,
@@ -133,10 +139,6 @@ class FMAdvisorState extends State<FMAdvisorVC> {
             padding: const EdgeInsets.fromLTRB(25, 20, 25, 30),
             child: Text(
               advisor.about,
-              //"Good morning, everyone. Thank you for taking your time. It’s really my honor to have this opportunity to take part in this interview. Now, I would like to introduce myself briefly."
-              //"My name is Doris. I am 23 years old and born in Qingdao. I graduated from Hebei University of Science and Technology. My major is English. And I got my bachelor degree after my graduation. I also studied Audit in Hebei Normal University of Science and Technology. I am very interested in English and study very hard on this subject. I had passed TEM-8 and BEC Vantage. I worked in an American company at the beginning of this year. My spoken English was improved a lot by communicating with Americans frequently during that period."
-              //"I am very optimistic and easy to get along with. I have many friends. Teamwork spirit is very important in this age. I think if we want to make big achievement, it’s very important to learn how to cooperate with other people. My motto is 'characters determine destity', so I alwarys remind myself to be honest and modest to everyone ."
-              //"As a motto goes 'attitude is everything'. If I get this job, I will put all my heart in it and try my best to do it well.",
               style: const TextStyle(
                 color: Colors.black,
                 fontWeight: FontWeight.w500,
@@ -153,11 +155,12 @@ class FMAdvisorState extends State<FMAdvisorVC> {
 
 /// 顾问名片
 class AdvisorCard extends StatelessWidget{
-  const AdvisorCard({super.key ,required this.advisor});
-  final Advisor advisor;
+  const AdvisorCard({super.key ,required this.index});
+  final int index;
   @override
   Widget build(BuildContext context) {
-
+    DBUtil dbUtil = DBUtil.instance;
+    Advisor advisor = dbUtil.advisorBox.getAt(index);
     // TODO: implement build
     return Positioned(
       left: 10,
@@ -176,7 +179,8 @@ class AdvisorCard extends StatelessWidget{
             //设置圆角
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40),),
             //卡片内容
-            child: SizedBox(
+            child: Container(
+              padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
               height: 200,
               width: 350,
               child: Column(
@@ -185,19 +189,37 @@ class AdvisorCard extends StatelessWidget{
                   /// 收藏按钮
                   SizedBox(
                     width: 350,
-                    height: 20,
+                    height: 40,
                     child: Row(
                       children: [
-                        const Padding(padding: EdgeInsets.fromLTRB(320, 0, 0, 0)),
+                        const Padding(padding: EdgeInsets.fromLTRB(300, 0, 0, 0)),
                         SizedBox(
-                          width: 30,
+                          width: 40,
                           height: 30,
-                          child: IconButton(
-                            onPressed: (){
-
-                            },
-                            icon: const Icon(Icons.favorite_rounded),
-                          ),
+                          child: ValueListenableBuilder(
+                            valueListenable: dbUtil.advisorBox.listenable(),
+                            builder: (context, Box box, _) {
+                              return IconButton(
+                                alignment: Alignment.centerLeft,
+                                onPressed: () {
+                                  User user = dbUtil.userBox.getAt(0);
+                                  print(" User -- > likedList : " + user.likedList.length.toString());
+                                  if (advisor.liked){
+                                    user.likedList.remove(advisor);
+                                  } else {
+                                    user.likedList.add(advisor);
+                                  }
+                                  print(" User -- > likedList : " + user.likedList.length.toString());
+                                  advisor.liked = !advisor.liked;
+                                  box.putAt(index, advisor);
+                                  dbUtil.userBox.putAt(0, user);
+                                },
+                                icon: Icon(advisor.liked ? Icons.favorite_rounded :Icons.favorite_outline_rounded,
+                                  color: Colors.pink,
+                                  size: 30,
+                                ),
+                              );
+                            },),
                         )
 
                       ],
@@ -235,9 +257,6 @@ class AdvisorCard extends StatelessWidget{
                   Container(
                     width: 370,
                     height: 70,
-                    /*decoration: BoxDecoration(
-                                  border: border,
-                                ),*/
                     alignment: Alignment.center,
                     child: Card(
                       color: Colors.grey,
@@ -254,18 +273,18 @@ class AdvisorCard extends StatelessWidget{
                             MainAxisAlignment.center,
                             crossAxisAlignment:
                             CrossAxisAlignment.start,
-                            children: const [
+                            children: [
                               ///顾问主页 -- 名片 -- 内嵌卡片 -- 文本 Text Reading
                               Text(
-                                "Text Reading",
-                                style: TextStyle(
+                                'TextReading',
+                                style: const TextStyle(
                                   fontSize: 20,
                                   fontWeight: FontWeight.w600,
                                 ),
                               ),
 
                               ///顾问主页 -- 名片 -- 内嵌卡片 -- 文本 Delivered within 24h
-                              Text(
+                              const Text(
                                 "Delivered within 24h",
                                 style: TextStyle(
                                   fontSize: 15,
@@ -308,7 +327,9 @@ class AdvisorCard extends StatelessWidget{
                                 ],
                               ),
                             ),
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.pushNamed(context, 'buy' , arguments: ScreenArguments(index));
+                            },
                           ),
                         ],
                       ),
@@ -321,11 +342,5 @@ class AdvisorCard extends StatelessWidget{
         ));
   }
 
-}
-
-/// 工具类 -- 获取传参：id
-class ScreenArguments {
-  final Advisor advisor;
-  ScreenArguments(this.advisor);
 }
 

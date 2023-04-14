@@ -1,8 +1,13 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
-import 'package:hive/hive.dart';
 import 'package:myapp/common/decoration.dart';
+import '../common/dbutil.dart';
 import '../models/usermodel.dart';
+
+
+User userNow = DBUtil.instance.userBox.getAt(0);
+User userUtil = User("", "", userNow.gender, userNow.birth, "", userNow.avatar, [], []);
 
 class FMEditVC extends StatefulWidget {
   const FMEditVC({super.key});
@@ -15,27 +20,35 @@ class FMEditVC extends StatefulWidget {
 }
 
 class FMEditVCState extends State<FMEditVC> {
-  Box box = Hive.box("userBox");
   @override
   Widget build(BuildContext context) {
-    User user = User(box.get("name"), box.get("bio"), box.get("gender"), box.get("birth"), box.get("about"), box.get("avatar"), box.get("likedList"));
     // TODO: implement build
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      appBar: EditAppbar(user: user),
+      appBar: const EditAppbar(),
       backgroundColor: Colors.white,
-      body: EditBody(user: user),
+      body: GestureDetector(
+        onTap: () {
+          FocusScopeNode currentFocus = FocusScope.of(context);
+          if (!currentFocus.hasPrimaryFocus &&
+              currentFocus.focusedChild != null) {
+            FocusManager.instance.primaryFocus?.unfocus();
+          }
+        },
+        child: const EditBody(),
+      ),
     );
   }
 }
 
 class EditAppbar extends StatelessWidget implements PreferredSizeWidget {
-  const EditAppbar({super.key, required this.user});
-  final User user;
+  const EditAppbar({super.key});
+
   @override
   Widget build(BuildContext context) {
+    ValueNotifier<User> userNotifier = ValueNotifier<User>(userUtil);
     // TODO: implement build
     return AppBar(
+      centerTitle: true,
       leading: ShaderMask(
         shaderCallback: (Rect bounds) {
           return MyDecoration.gradient2.createShader(bounds);
@@ -59,27 +72,33 @@ class EditAppbar extends StatelessWidget implements PreferredSizeWidget {
       backgroundColor: Colors.transparent,
       shadowColor: Colors.transparent,
       actions: [
-        TextButton(
-          onPressed: () {
-            /// 这里写点击save按钮后执行的操作
-            Box box = Hive.box("userBox");
-            box.put("name", user.name);
-            box.put("bio", user.bio);
-            box.put("gender", user.gender);
-            box.put("avatar", user.avatar);
-            box.put("about", user.about);
-            box.put("likedList", user.likedList);
-            box.put("birth", user.birth);
+        ValueListenableBuilder(
+          valueListenable: userNotifier,
+          builder: (context, User user, _) {
+            return TextButton(
+              onPressed: () {
+                /// 这里写点击save按钮后执行的操作
+                if (user.name.isEmpty ||
+                    user.bio.isEmpty ||
+                    user.about.isEmpty ) {
+
+                } else {
+                  DBUtil db = DBUtil.instance;
+                  db.userBox.putAt(0, user);
+                  Navigator.pop(context);
+                }
+              },
+              child: ShaderMask(
+                shaderCallback: (Rect bounds) {
+                  return MyDecoration.gradient2.createShader(bounds);
+                },
+                child: const Text(
+                  "Save",
+                  style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20),
+                ),
+              ),
+            );
           },
-          child: ShaderMask(
-            shaderCallback: (Rect bounds) {
-              return MyDecoration.gradient2.createShader(bounds);
-            },
-            child: const Text(
-              "Save",
-              style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20),
-            ),
-          ),
         ),
       ],
     );
@@ -90,164 +109,204 @@ class EditAppbar extends StatelessWidget implements PreferredSizeWidget {
   Size get preferredSize => const Size.fromHeight(40);
 }
 
-class EditBody extends StatelessWidget {
-  const EditBody({super.key, required this.user});
-  final User user;
+class EditBody extends StatefulWidget {
+  const EditBody({super.key});
+  @override
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    return EditBodyState();
+  }
+}
+
+class EditBodyState extends State<EditBody> {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return GestureDetector(
-      behavior: HitTestBehavior.translucent,
-      onTap: (){ FocusScope.of(context).requestFocus(FocusNode());},
-      child: SingleChildScrollView(
-          reverse: true,
-          child: SizedBox(
-            height: MediaQuery.of(context).size.height - 90,
-            child: Stack(
-              alignment: Alignment.center,
-              children: [
-                SizedBox(
-                  width: double.maxFinite,
-                  height: double.maxFinite,
-                  child: Column(
-                    children: [
-                      const BackgroundImage(),
-                      const SizedBox(height: 70),
-                      /// 文本 name
-                      Container(
-                        width: double.maxFinite,
-                        padding: const EdgeInsets.only(left: 20),
-                        child: Text(
-                          "Name",
-                          style: TextStyle(
-                              color: Colors.purple.shade800,
-                              fontWeight: FontWeight.w600,
-                              fontSize: 20),
-                        ),
-                      ),
-                      /// 输入框
-                      Container(
-                        padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-                        width: double.maxFinite,
-                        height: 80,
-                        child: Padding(
-                          padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
-                          child: TextField(
-                            autofocus: true,
-                            decoration: InputDecoration(hintText: user.name),
-                          ),
-                        ),
-                      ),
-                      /// 文本 bio
-                      Container(
-                        width: double.maxFinite,
-                        padding: const EdgeInsets.only(left: 20),
-                        child: Text(
-                          "Bio",
-                          style: TextStyle(
-                              color: Colors.purple.shade800,
-                              fontWeight: FontWeight.w600,
-                              fontSize: 20),
-                        ),
-                      ),
-                      /// 输入框
-                      Container(
-                        padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-                        width: double.maxFinite,
-                        height: 80,
-                        child: Padding(
-                          padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
-                          child: TextField(
-                            autofocus: true,
-                            decoration: InputDecoration(hintText: user.bio),
-                          ),
-                        ),
-                      ),
-                      /// 文本 gender
-                      Container(
-                        width: double.maxFinite,
-                        padding: const EdgeInsets.only(left: 20),
-                        child: Text(
-                          "Gender",
-                          style: TextStyle(
-                              color: Colors.purple.shade800,
-                              fontWeight: FontWeight.w600,
-                              fontSize: 20),
-                        ),
-                      ),
-                      const SizedBox(height: 20),
-                      /// 性别选择项
-                      GenderDemo(user: user),
-                      const SizedBox(height: 20),
-                      /// 文本 birthday
-                      Container(
-                        width: double.maxFinite,
-                        padding: const EdgeInsets.only(left: 20),
-                        child: Text(
-                          "Birthday",
-                          style: TextStyle(
-                              color: Colors.purple.shade800,
-                              fontWeight: FontWeight.w600,
-                              fontSize: 20),
-                        ),
-                      ),
-                      /// 生日选择
-                      BirthDemo(user: user,),
-                      const SizedBox(height: 20),
-                      /// 文本 about me
-                      Container(
-                        width: double.maxFinite,
-                        padding: const EdgeInsets.only(left: 20),
-                        child: Text(
-                          "About Me",
-                          style: TextStyle(
-                              color: Colors.purple.shade800,
-                              fontWeight: FontWeight.w600,
-                              fontSize: 20),
-                        ),
-                      ),
-                      const SizedBox(height: 10),
-                      /// 输入框
-                      AboutDemo(user: user,),
-                    ],
-                  ),
+    return ListView(
+            children: [
+              BackgroundImageAndAvatar(),
+              SizedBox(height: 20),
+              /// 文本 name
+              Container(
+                width: double.maxFinite,
+                padding: const EdgeInsets.only(left: 20),
+                child: Text(
+                  "Name",
+                  style: TextStyle(
+                      color: Colors.purple.shade800,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 20),
                 ),
+              ),
 
-                /// 头像
-                Positioned(
-                  top: 80,
-                  child: TextButton(
-                    onPressed: () {
-                      /// 这里写点击头像后打开相册更换头像的逻辑
-                      ///
-                    },
-                    child: CircleAvatar(
-                      radius: 70,
-                      backgroundImage: AssetImage(user.avatar),
-                    ),
-                  ),
+              /// 输入框
+              Container(
+                padding: const EdgeInsets.fromLTRB(20, 10, 20, 20),
+                //width: double.maxFinite,
+                child: TextField(
+                  //autofocus: true,
+                  decoration: InputDecoration(
+                      hintText:
+                      "Input your name"),
+                  onChanged: (text) {
+                    userUtil.name = text;
+                  },
                 ),
-              ],
-            ),
-          )
-      ),
-    );
+              ),
+
+              /// 文本 bio
+              Container(
+                width: double.maxFinite,
+                padding: const EdgeInsets.fromLTRB(20, 5, 20, 0),
+                child: Text(
+                  "Bio",
+                  style: TextStyle(
+                      color: Colors.purple.shade800,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 20),
+                ),
+              ),
+
+              /// 输入框
+              Container(
+                padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
+                child: TextField(
+                  //autofocus: true,
+                  decoration: InputDecoration(
+                      hintText: "Input your Bio"),
+                  onChanged: (text) {
+                    userUtil.bio = text;
+                  },
+                ),
+              ),
+
+              /// 文本 gender
+              Container(
+                width: double.maxFinite,
+                padding: const EdgeInsets.only(left: 20),
+                child: Text(
+                  "Gender",
+                  style: TextStyle(
+                      color: Colors.purple.shade800,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 20),
+                ),
+              ),
+              SizedBox(height: 20),
+
+              /// 性别选择项
+              GenderDemo(),
+              SizedBox(height: 20),
+
+              /// 文本 birthday
+              Container(
+                width: double.maxFinite,
+                padding: const EdgeInsets.only(left: 20),
+                child: Text(
+                  "Birthday",
+                  style: TextStyle(
+                      color: Colors.purple.shade800,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 20),
+                ),
+              ),
+
+              /// 生日选择
+              BirthDemo(),
+              SizedBox(height: 20),
+
+              /// 文本 about me
+              Container(
+                width: double.maxFinite,
+                padding: const EdgeInsets.fromLTRB(20, 0, 0, 10),
+                child: Text(
+                  "About Me",
+                  style: TextStyle(
+                      color: Colors.purple.shade800,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 20),
+                ),
+              ),
+              SizedBox(height: 10),
+
+              /// 输入框
+              AboutDemo(),
+
+            ],
+      );
   }
 }
 
 /// 背景图
-class BackgroundImage extends StatelessWidget {
-  const BackgroundImage({super.key});
+class BackgroundImageAndAvatar extends StatefulWidget {
+  const BackgroundImageAndAvatar({super.key});
 
+  @override
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    return BackgroundImageAndAvatarState();
+  }
+
+
+}
+class BackgroundImageAndAvatarState extends State<BackgroundImageAndAvatar> {
+  var _imgpath;
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return const SizedBox(
+    return SizedBox(
       width: double.maxFinite,
-      height: 150,
-      child: Image(
-        image: AssetImage("assets/images/bg.jpg"),
-        fit: BoxFit.fitWidth,
+      height: 260,
+      child: Stack(
+        alignment: Alignment.topCenter,
+        children: [
+          const SizedBox(
+            width: double.maxFinite,
+            child: Image(
+              image: AssetImage("assets/images/bg.jpg"),
+              fit: BoxFit.fitWidth,)
+            ,
+          ),
+          Positioned(
+            top: 100 ,
+            child: TextButton(
+              onPressed: () {
+                /// 这里写点击头像后打开相册更换头像的逻辑
+                ///
+                showDialog(
+                  context: context,
+                  barrierColor: Colors.transparent, //设置透明底色,自定义也可能会用到
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: const Text("更换头像"),
+                      actions: [
+                        TextButton(
+                          onPressed: () {
+                            //_imgpath = ImagePicker().pickImage(source: ImageSource.camera);
+
+                          },
+                          child: const Text('拍照'),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            //_imgpath = ImagePicker().pickImage(source: ImageSource.gallery);
+
+                          },
+                          child: const Text('相册选图'),
+                        ),
+                      ],
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10)),
+                    );
+                  },
+                );
+              },
+              child: CircleAvatar(
+                radius: 70,
+                backgroundImage: AssetImage(userUtil.avatar),
+              ),
+            ),)
+        ],
       ),
     );
   }
@@ -255,19 +314,16 @@ class BackgroundImage extends StatelessWidget {
 
 /// 性别设置
 class GenderDemo extends StatefulWidget {
-  const GenderDemo({super.key, required this.user});
-
-  final User user;
+  const GenderDemo({super.key});
 
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    return GenderState(user);
+    return GenderState();
   }
 }
+
 class GenderState extends State<GenderDemo> {
-  late final User user;
-  GenderState(this.user);
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -291,10 +347,10 @@ class GenderState extends State<GenderDemo> {
               ),
             ),
             tooltip: "Male",
-            selected: user.gender.compareTo("Male") == 0 ? true : false,
+            selected: userUtil.gender.compareTo("Male") == 0 ? true : false,
             onSelected: (value) {
               setState(() {
-                user.gender = "Male";
+                userUtil.gender = "Male";
               });
             },
             selectedColor: Colors.purple,
@@ -316,10 +372,10 @@ class GenderState extends State<GenderDemo> {
               ),
             ),
             tooltip: "Female",
-            selected: user.gender.compareTo("Female") == 0 ? true : false,
+            selected: userUtil.gender.compareTo("Female") == 0 ? true : false,
             onSelected: (value) {
               setState(() {
-                user.gender = "Female";
+                userUtil.gender = "Female";
               });
             },
             selectedColor: Colors.purple,
@@ -342,10 +398,10 @@ class GenderState extends State<GenderDemo> {
             ),
             tooltip: "Not Specified",
             selected:
-                user.gender.compareTo("Not Specified") == 0 ? true : false,
+                userUtil.gender.compareTo("Not Specified") == 0 ? true : false,
             onSelected: (value) {
               setState(() {
-                user.gender = "Not Specified";
+                userUtil.gender = "Not Specified";
               });
             },
             selectedColor: Colors.purple,
@@ -362,21 +418,21 @@ class GenderState extends State<GenderDemo> {
 
 /// 生日设置
 class BirthDemo extends StatefulWidget {
-  const BirthDemo({super.key, required this.user});
+  const BirthDemo({super.key});
 
-  final User user;
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    return BirthState(user);
+    return BirthState();
   }
 }
+
 class BirthState extends State<BirthDemo> {
-  User user;
-  BirthState(this.user);
   @override
   Widget build(BuildContext context) {
-    DateTime birth = user.birth;
+    DateTime birth = DateTime(1999, 1, 1).compareTo(userUtil.birth) == 0
+        ? DateTime(1999, 1, 1)
+        : userUtil.birth;
     int year = birth.year;
     int month = birth.month;
     int day = birth.day;
@@ -392,11 +448,11 @@ class BirthState extends State<BirthDemo> {
                     minTime: DateTime(1900, 1, 1),
                     maxTime: DateTime.now(), onChanged: (date) {
                   setState(() {
-                    birth = date;
+                    userUtil.birth = date;
                   });
                 }, onConfirm: (date) {
                   setState(() {
-                    user.birth = date;
+                    userUtil.birth = date;
                   });
                 }, currentTime: birth, locale: LocaleType.zh);
               },
@@ -419,36 +475,31 @@ class BirthState extends State<BirthDemo> {
 
 /// 个人简介设置
 class AboutDemo extends StatefulWidget {
-  const AboutDemo({super.key, required this.user});
-
-  final User user;
+  const AboutDemo({super.key});
 
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    return AboutState(user);
+    return AboutState();
   }
 }
+
 class AboutState extends State<AboutDemo> {
-  User user;
-  AboutState(this.user);
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return Container(
-      height: 120,
       padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-      child: Padding(
-        padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
-        child: TextField(
+      child: TextField(
           keyboardType: TextInputType.multiline,
           maxLines: 5,
           decoration: InputDecoration(
-            hintText: 'About Me',
+            hintText: "Introduce yourself",
             filled: true,
             fillColor: Colors.grey.shade300,
             //isCollapsed: true,
-            contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+            contentPadding:
+                const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
             //isDense: true,
             border: const OutlineInputBorder(
               gapPadding: 0,
@@ -457,10 +508,9 @@ class AboutState extends State<AboutDemo> {
             ),
           ),
           onChanged: (text) {
-            user.about = text;
+            userUtil.about = text;
           },
         ),
-      ),
     );
   }
 }
