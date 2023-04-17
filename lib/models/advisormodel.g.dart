@@ -62,9 +62,11 @@ class AdvisorAdapter extends TypeAdapter<Advisor> {
 Advisor _$AdvisorFromJson(Map<String, dynamic> json) => Advisor(
       json['advisor_name'] as String,
       json['advisor_desc'] as String,
-      json['about'] as String,
+      json['about'] as String? ??
+          "Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about "
+  ,
       json['advisor_avatar'] as String,
-      json['liked'] as bool,
+      json['liked'] as bool? ?? false,
       (json['services'] as List<dynamic>)
           .map((e) => ServiceModel.fromJson(e as Map<String, dynamic>))
           .toList(),

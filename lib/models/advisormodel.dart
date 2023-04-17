@@ -23,9 +23,11 @@ class Advisor extends HiveObject{
   @HiveField(2)
   String introduction;
 
+  @JsonKey(defaultValue: "Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about Advisor's default about ")
   @HiveField(3)
   String about;
 
+  @JsonKey(defaultValue: false)
   @HiveField(4, defaultValue: false)
   bool liked;
 

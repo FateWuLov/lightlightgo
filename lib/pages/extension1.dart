@@ -170,7 +170,7 @@ class ExtensionBodyState extends State<ExtensionBody> {
                             left: 0,
                             right: 0,
                             child: Image(
-                              image: AssetImage(advisor.avatar),
+                              image: NetworkImage(advisor.avatar),
                                 fit: BoxFit.cover
                             )),
                             Positioned(
@@ -223,7 +223,7 @@ class ExtensionBodyState extends State<ExtensionBody> {
                                 Expanded(
                                   flex: 1,
                                   child: CircleAvatar(
-                                    backgroundImage: AssetImage(advisor.avatar),
+                                    backgroundImage: NetworkImage(advisor.avatar),
                                     radius: 25,
                                   ),
                                 ),
@@ -373,7 +373,7 @@ class ExtensionBodyState extends State<ExtensionBody> {
                                                 right: 0,
                                                 bottom: 0,
                                                 child: Image(
-                                                  image: AssetImage(
+                                                  image: NetworkImage(
                                                       advisorList[1].avatar),
                                                   fit: BoxFit.cover,
                                                 )),
@@ -503,6 +503,7 @@ class ExtensionBodyState extends State<ExtensionBody> {
                                                     Expanded(
                                                         child: Text(
                                                           advisorList[1].name,
+
                                                       style: TextStyle(
                                                           color: Colors.white,
                                                           fontSize: 20,
@@ -659,7 +660,7 @@ class ExtensionBodyState extends State<ExtensionBody> {
                                                 right: 0,
                                                 bottom: 0,
                                                 child: Image(
-                                                  image: AssetImage(
+                                                  image: NetworkImage(
                                                       advisorList[2].avatar),
                                                   fit: BoxFit.cover,
                                                 )),
@@ -951,7 +952,7 @@ class ExtensionBodyState extends State<ExtensionBody> {
                                                 right: 0,
                                                 bottom: 0,
                                                 child: Image(
-                                                  image: AssetImage(
+                                                  image: NetworkImage(
                                                       advisorList[3].avatar),
                                                   fit: BoxFit.cover,
                                                 )),
@@ -1236,7 +1237,7 @@ class ExtensionBodyState extends State<ExtensionBody> {
                                                 right: 0,
                                                 bottom: 0,
                                                 child: Image(
-                                                  image: AssetImage(
+                                                  image: NetworkImage(
                                                       advisorList[4].avatar),
                                                   fit: BoxFit.cover,
                                                 )),
@@ -1529,7 +1530,7 @@ class ExtensionBodyState extends State<ExtensionBody> {
                                                 right: 0,
                                                 bottom: 0,
                                                 child: Image(
-                                                  image: AssetImage(
+                                                  image: NetworkImage(
                                                       advisorList[5].avatar),
                                                   fit: BoxFit.cover,
                                                 )),
@@ -1814,7 +1815,7 @@ class ExtensionBodyState extends State<ExtensionBody> {
                                                 right: 0,
                                                 bottom: 0,
                                                 child: Image(
-                                                  image: AssetImage(
+                                                  image: NetworkImage(
                                                       advisorList[6].avatar),
                                                   fit: BoxFit.cover,
                                                 )),
@@ -2107,7 +2108,7 @@ class ExtensionBodyState extends State<ExtensionBody> {
                                                 right: 0,
                                                 bottom: 0,
                                                 child: Image(
-                                                  image: AssetImage(
+                                                  image: NetworkImage(
                                                       advisorList[7].avatar),
                                                   fit: BoxFit.cover,
                                                 )),
@@ -2393,7 +2394,7 @@ class ExtensionBodyState extends State<ExtensionBody> {
                                                 right: 0,
                                                 bottom: 0,
                                                 child: Image(
-                                                  image: AssetImage(
+                                                  image: NetworkImage(
                                                       advisorList[8].avatar),
                                                   fit: BoxFit.cover,
                                                 )),
@@ -2685,7 +2686,7 @@ class ExtensionBodyState extends State<ExtensionBody> {
                                                 right: 0,
                                                 bottom: 0,
                                                 child: Image(
-                                                  image: AssetImage(
+                                                  image: NetworkImage(
                                                       advisorList[9].avatar),
                                                   fit: BoxFit.cover,
                                                 )),
@@ -2971,7 +2972,7 @@ class ExtensionBodyState extends State<ExtensionBody> {
                                                 right: 0,
                                                 bottom: 0,
                                                 child: Image(
-                                                  image: AssetImage(
+                                                  image: NetworkImage(
                                                       advisorList[0].avatar),
                                                   fit: BoxFit.cover,
                                                 )),
@@ -3248,16 +3249,23 @@ class ExtensionBodyState extends State<ExtensionBody> {
                         builder: (context, Box box, _) {
                           User user = box.getAt(0);
                           List<String> list = [];
-                          for (var i = 0; i < user.likedList.length; i++) {
-                            list.add(user.likedList[i].avatar);
-                          }
+                          list.clear();
+                          print(user.likedList.length);
+                          for (int i = 0; i < user.likedList.length; i++) {
+                            if(list.contains(user.likedList[i].avatar)){
+                          list.remove(user.likedList[i].avatar);
+                          list.add(user.likedList[i].avatar);
+                        } else {
+                              list.add(user.likedList[i].avatar);
+                            }
+                      }
                           return ListView.builder(
                             scrollDirection: Axis.horizontal,
                             itemCount: user.likedList.length,
                             itemBuilder: (BuildContext context, int index) {
                               return CircleAvatar(
                                 backgroundImage:
-                                AssetImage(list[list.length - 1 - index]),
+                                NetworkImage(list[list.length - 1 - index]),
                                 radius: 30,
                               );
                             },

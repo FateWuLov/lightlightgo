@@ -24,17 +24,18 @@ class TestPageState extends State<TestPage> {
     return Material(
       child: FutureBuilder(
           future: dio.get(
-              //"https://c5qyslgwde.execute-api.us-east-1.amazonaws.com/prod/advisor-detail?advisor_id=100001",
-              "https://c5qyslgwde.execute-api.us-east-1.amazonaws.com/prod/me",
-
+              "https://c5qyslgwde.execute-api.us-east-1.amazonaws.com/prod/advisor-detail?advisor_id=100001",
+              //"https://c5qyslgwde.execute-api.us-east-1.amazonaws.com/prod/me",
+              //"https://c5qyslgwde.execute-api.us-east-1.amazonaws.com/prod/advisor-list"
           ),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             //请求完成
             if (snapshot.connectionState == ConnectionState.done) {
               //Response response = snapshot.data;
               //发生错误
-              return Center(child: Text(snapshot.data.toString()),);
-              if (snapshot.hasError) {
+              print(snapshot.data.toString());
+               return Center(child: Text(snapshot.data.toString()),);
+              /*if (snapshot.hasError) {
                 return Center(child: Text(snapshot.error.toString()),);
               }
               else {
@@ -52,7 +53,7 @@ class TestPageState extends State<TestPage> {
                     ],
                   ),
                 );
-              }
+              }*/
             }
             //请求未完成时弹出loading
             return CircularProgressIndicator();

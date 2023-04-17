@@ -1,9 +1,11 @@
 
+import 'package:hive/hive.dart';
 import 'package:json_annotation/json_annotation.dart';
 part 'servicemodel.g.dart';
 
 @JsonSerializable()
-class ServiceModel {
+@HiveType(typeId: 3)
+class ServiceModel extends HiveObject{
   @JsonKey(name: 'service_name')
   String? name;
 

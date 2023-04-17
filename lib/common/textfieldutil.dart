@@ -54,7 +54,7 @@ class EnsureVisibleWhenFocused extends StatefulWidget {
   final Duration duration;
 
   @override
-  _EnsureVisibleWhenFocusedState createState() => new _EnsureVisibleWhenFocusedState();
+  _EnsureVisibleWhenFocusedState createState() => _EnsureVisibleWhenFocusedState();
 }
 
 ///
@@ -98,7 +98,7 @@ class _EnsureVisibleWhenFocusedState extends State<EnsureVisibleWhenFocused> wit
   ///
   /// This method was suggested by Peter Yuen (see discussion).
   ///等待键盘显示在屏幕上
-  Future<Null> _keyboardToggled() async {
+  Future<void> _keyboardToggled() async {
     if (mounted){
       EdgeInsets edgeInsets = MediaQuery.of(context).viewInsets;
       while (mounted && MediaQuery.of(context).viewInsets == edgeInsets) {
@@ -109,7 +109,7 @@ class _EnsureVisibleWhenFocusedState extends State<EnsureVisibleWhenFocused> wit
     return;
   }
 
-  Future<Null> _ensureVisible() async {
+  Future<void> _ensureVisible() async {
     // Wait for the keyboard to come into view
     await Future.any([Future.delayed(const Duration(milliseconds: 300)), _keyboardToggled()]);
 
@@ -130,7 +130,6 @@ class _EnsureVisibleWhenFocusedState extends State<EnsureVisibleWhenFocused> wit
     // Get the Scrollable state (in order to retrieve its offset)
     //获取滑动状态，目的是为了获取滑动的offset
     ScrollableState scrollableState = Scrollable.of(context);
-    assert(scrollableState != null);
 
     // Get its offset
     ScrollPosition position = scrollableState.position;

@@ -143,24 +143,29 @@ class FMHomeState extends State<FMHomeVC> {
             else {
               int index1 = ((index - 1) * 2) % 10;
               int index2 = ((index - 1) * 2 + 1) % 10;
-              Advisor advisor1 = box.getAt(index1)!;
-              //print(advisor1.name);
-              Advisor advisor2 = box.getAt(index2)!;
-              //print(advisor2.name);
               return SizedBox(
-                height: 305,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    AdvisorCard(
-                      index: index1,
-                    ),
-                    AdvisorCard(
-                      index: index2,
-                    ),
-                  ],
-                ),
+                height: 300,
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+                  child: Flex(
+                    direction: Axis.horizontal,
+                    children: [
+                      Expanded(
+                        flex: 100,
+                        child: AdvisorCard(
+                          index: index1,
+                        ),
+                      ),
+                      Expanded(flex: 4, child: Container()),
+                      Expanded(
+                        flex: 100,
+                        child: AdvisorCard(
+                          index: index2,
+                        ),
+                      )
+                    ],
+                  ),
+                )
               );
             }
           },
@@ -173,7 +178,6 @@ class FMHomeState extends State<FMHomeVC> {
 /// 名片
 class AdvisorCard extends StatelessWidget {
   final int index;
-
   const AdvisorCard({super.key, required this.index});
 
   @override
@@ -181,16 +185,14 @@ class AdvisorCard extends StatelessWidget {
     DBUtil dbUtil = DBUtil.instance;
     Advisor advisor = dbUtil.advisorBox.getAt(index);
     // TODO: implement build
-    return Stack(
-      children: [
-        Container(
+    return Container(
           width: 200,
           height: 300,
           //设置圆角和边框
           decoration: MyDecoration.decoration1,
           child: Column(
             children: [
-              avatar(advisor.avatar),
+              avatar(advisor.avatar, advisor.liked),
               _name(advisor.name),
               _introduction(advisor.introduction),
               ConsultButton(
@@ -198,26 +200,11 @@ class AdvisorCard extends StatelessWidget {
               ),
             ],
           ),
-        ),
-
-        /// 收藏按钮
-        Positioned(
-          top: 150,
-          right: 10,
-          child: Icon(
-            advisor.liked == true
-                ? Icons.favorite_rounded
-                : Icons.favorite_outline_rounded,
-            size: 30,
-            color: Colors.pink,
-          ),
-        ),
-      ],
-    );
+        );
   }
 
   /// 头像
-  Widget avatar(String avatar) {
+  Widget avatar(String avatar, bool liked) {
     return Container(
       // 设置container圆角
       decoration: MyDecoration.decoration2,
@@ -231,9 +218,29 @@ class AdvisorCard extends StatelessWidget {
                 topRight: Radius.zero,
                 bottomLeft: Radius.zero,
                 bottomRight: Radius.circular(15)),
-            child: Image(
-              image: AssetImage(avatar),
-              fit: BoxFit.cover,
+            child: Stack(
+              children: [
+                Positioned(
+                  top: 0,
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    child: Image(
+                  image: NetworkImage(avatar),
+                  fit: BoxFit.fill,
+                )),
+                Positioned(
+                  bottom: 10,
+                  right: 10,
+                  child: Icon(
+                    liked == true
+                        ? Icons.favorite_rounded
+                        : Icons.favorite_outline_rounded,
+                    size: 30,
+                    color: Colors.pink,
+                  ),
+                ),
+              ],
             ),
           )),
     );

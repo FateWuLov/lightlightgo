@@ -53,6 +53,10 @@ class _BodyState extends State<_Body> {
       valueListenable: DBUtil.instance.orderBox.listenable(),
       builder: (context, Box box, _) {
         int amount = box.length;
+        List orderList = [];
+        for (int i = 0; i < amount; i++) {
+          orderList.add(box.getAt(i));
+        }
         if (amount == 0) {
           return const Center(
             child: Text(
@@ -65,8 +69,8 @@ class _BodyState extends State<_Body> {
           return ListView.builder(
             itemCount: amount,
             itemBuilder: (BuildContext context, int index) {
-              Advisor advisor = box.getAt(index).advisor;
-              Order order = box.getAt(index);
+              Order order = orderList[amount - 1 - index];
+              Advisor advisor = order.advisor;
               int year = order.date.year;
               int month = order.date.month;
               int day = order.date.day;
@@ -83,7 +87,7 @@ class _BodyState extends State<_Body> {
                           Padding(
                             padding: EdgeInsets.fromLTRB(20, 5, 15, 5),
                             child: CircleAvatar(
-                              backgroundImage: AssetImage(advisor.avatar),
+                              backgroundImage: NetworkImage(advisor.avatar),
                               radius: 20,
                             ),
                           ),

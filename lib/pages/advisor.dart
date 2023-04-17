@@ -64,7 +64,7 @@ class FMAdvisorState extends State<FMAdvisorVC> {
                       decoration: BoxDecoration(
                           borderRadius: const BorderRadius.all(Radius.circular(50)),
                           image: DecorationImage(
-                            image: AssetImage(advisor.avatar),
+                            image: NetworkImage(advisor.avatar),
                             fit: BoxFit.fill,
                           )),
                     ),

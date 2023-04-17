@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -76,7 +78,7 @@ class _Avatar extends StatelessWidget {
         valueListenable: DBUtil.instance.userBox.listenable(),
         builder: (context, Box box, _) {
           return CircleAvatar(
-            backgroundImage: AssetImage(box.getAt(0).avatar),
+            backgroundImage: FileImage(File(box.getAt(0).avatar)),
             radius: 70,
           );
         },)

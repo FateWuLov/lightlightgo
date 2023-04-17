@@ -19,11 +19,11 @@ class User extends HiveObject{
   @HiveField(1)
   String bio;
 
-  @JsonKey(defaultValue: "Male")
+  @JsonKey(defaultValue: '')
   @HiveField(2, defaultValue: "Male")
   String gender;
 
-  @JsonKey(defaultValue: null)
+  @JsonKey(defaultValue: "Male")
   @HiveField(3)
   DateTime birth;
 
@@ -31,8 +31,8 @@ class User extends HiveObject{
   @HiveField(4)
   String about;
 
-  @JsonKey(defaultValue: 'assets/3.0x/defaultAvatar.png')
-  @HiveField(5, defaultValue: "assets/3.0x/defaultAvatar.png")
+  @JsonKey(defaultValue: 'https://samantha2022.s3.amazonaws.com/1.png')
+  @HiveField(5, defaultValue: 'https://samantha2022.s3.amazonaws.com/1.png')
   String avatar;
 
   @JsonKey(defaultValue: [])

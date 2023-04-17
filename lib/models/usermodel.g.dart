@@ -22,7 +22,9 @@ class UserAdapter extends TypeAdapter<User> {
       fields[2] == null ? 'Male' : fields[2] as String,
       fields[3] as DateTime,
       fields[4] as String,
-      fields[5] == null ? 'assets/3.0x/defaultAvatar.png' : fields[5] as String,
+      fields[5] == null
+          ? 'https://samantha2022.s3.amazonaws.com/1.png'
+          : fields[5] as String,
       fields[6] == null ? [] : (fields[6] as List).cast<Advisor>(),
       fields[7] == null ? [] : (fields[7] as List).cast<Advisor>(),
     );
@@ -68,10 +70,11 @@ class UserAdapter extends TypeAdapter<User> {
 User _$UserFromJson(Map<String, dynamic> json) => User(
       json['name'] as String,
       json['bio'] as String,
-      json['gender'] as String? ?? 'Male',
-      DateTime.parse(json['birth'] as String),
+      json['gender'] as String? ?? '',
+      json['birth'] == null ? DateTime(1999,1,1) : DateTime.parse(json['birth'] as String),
       json['aboutMe'] as String,
-      json['avatar'] as String? ?? 'assets/3.0x/defaultAvatar.png',
+      json['avatar'] as String? ??
+          'https://samantha2022.s3.amazonaws.com/1.png',
       (json['likedList'] as List<dynamic>?)
               ?.map((e) => Advisor.fromJson(e as Map<String, dynamic>))
               .toList() ??
