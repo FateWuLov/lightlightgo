@@ -20,6 +20,21 @@ void main() async {
   runApp(const MyApp());
 }
 
+/*void launchApp() async {
+  print('launch start');
+  // 先初始化hive，以便后续能读取本地记录
+  await HiveManager.instance.commonInit();
+
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+
+  _showRootPage();
+}
+
+void _showRootPage() async{
+  runApp(RootApp(RootPageNameHome));
+}*/
+
+
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
