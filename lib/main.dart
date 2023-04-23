@@ -20,8 +20,10 @@ void launchApp() async {
   print('launch start');
   // 先初始化hive，以便后续能读取本地记录
   await HiveManager.instance.commonInit();
+  // 获取本地存储信息
   await GlobalManager.instance.loadNativeInfo();
 
+  // 判断是否为开发环境
   if (GlobalManager.instance.isDebugEnv()) {
     showCatchError();
   }

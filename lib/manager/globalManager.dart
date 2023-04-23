@@ -72,7 +72,9 @@ class GlobalManager {
   }
 
   loadNativeInfo() async {
+    /// 获取当前应用对应的应用包信息
     packageInfo = await PackageInfo.fromPlatform();
+    /// 获取当前设备的本地化信息
     locale = await Devicelocale.currentAsLocale;
     var value = await Info.methodChannel.invokeMethod(methodNameGetNativeInfo);
     if (value != null) {

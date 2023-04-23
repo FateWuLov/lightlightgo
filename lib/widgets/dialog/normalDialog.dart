@@ -4,7 +4,6 @@ import 'package:lifeaste/common/common.dart';
 
 import '../buttons.dart';
 
-
 class NormalDialog extends StatefulWidget {
   final String? title;
   final Color? titleColor;
@@ -17,40 +16,37 @@ class NormalDialog extends StatefulWidget {
   final bool needCloseBtn;
   final VoidCallback? closeAction;
 
-  NormalDialog({
-    this.title,
-    this.titleColor,
-    this.content,
-    this.subAction,
-    this.mainAction,
-    this.subTitle,
-    this.mainTitle,
-    this.rightPrefer = false,
-    this.needCloseBtn = false,
-    this.closeAction
-  });
+  NormalDialog(
+      {this.title,
+      this.titleColor,
+      this.content,
+      this.subAction,
+      this.mainAction,
+      this.subTitle,
+      this.mainTitle,
+      this.rightPrefer = false,
+      this.needCloseBtn = false,
+      this.closeAction});
 
   @override
   _NormalDialogState createState() => _NormalDialogState();
 }
 
-class _NormalDialogState extends State<NormalDialog>{
-
-  _onTapSubAction(){
+class _NormalDialogState extends State<NormalDialog> {
+  _onTapSubAction() {
     Get.back();
-    if(widget.subAction == null){
+    if (widget.subAction == null) {
       cleanAllToast();
-    } else{
+    } else {
       widget.subAction?.call();
     }
   }
 
-  _onTapMainAction(){
+  _onTapMainAction() {
     Get.back();
-    if(widget.mainAction == null){
+    if (widget.mainAction == null) {
       cleanAllToast();
-    }
-    else{
+    } else {
       widget.mainAction?.call();
     }
   }
@@ -70,8 +66,7 @@ class _NormalDialogState extends State<NormalDialog>{
                 width: 320,
                 decoration: BoxDecoration(
                     color: Styles.mainBg,
-                    borderRadius: BorderRadius.circular(16)
-                ),
+                    borderRadius: BorderRadius.circular(16)),
                 child: Stack(
                   children: [
                     Column(
@@ -79,81 +74,79 @@ class _NormalDialogState extends State<NormalDialog>{
                         (widget.title == null)
                             ? SizedBox(height: 20)
                             : Container(
-                          padding:
-                          const EdgeInsets.fromLTRB(30, 30, 30, 0),
-                          child: Text(
-                            widget.title ?? '',
-                            textAlign: TextAlign.center,
-                            style: Styles.textStyle(18).copyWith(
-                              color: widget.titleColor ??
-                                  Styles.mainText,
-                            ),
-                          ),
-                        ),
+                                padding:
+                                    const EdgeInsets.fromLTRB(30, 30, 30, 0),
+                                child: Text(
+                                  widget.title ?? '',
+                                  textAlign: TextAlign.center,
+                                  style: Styles.textStyle(18).copyWith(
+                                    color: widget.titleColor ?? Styles.mainText,
+                                  ),
+                                ),
+                              ),
                         SizedBox(
                           height: 10,
                         ),
                         (widget.content == null)
                             ? Container()
                             : Container(
-                          padding:
-                          const EdgeInsets.fromLTRB(30, 0, 30, 0),
-                          child: Text(
-                            widget.content ?? '',
-                            // textAlign: TextAlign.center,
-                            style: Styles.subTextStyle(14),
-                          ),
-                        ),
+                                padding:
+                                    const EdgeInsets.fromLTRB(30, 0, 30, 0),
+                                child: Text(
+                                  widget.content ?? '',
+                                  // textAlign: TextAlign.center,
+                                  style: Styles.subTextStyle(14),
+                                ),
+                              ),
                         SizedBox(
                           height: 16,
                         ),
                         widget.rightPrefer
                             ? Row(
-                          mainAxisAlignment:
-                          MainAxisAlignment.spaceEvenly,
-                          children: <Widget>[
-                            CustomButton(
-                              blur: 5,
-                              width: 120,
-                              height: 45,
-                              onTap: _onTapSubAction,
-                              title: widget.subTitle ?? Strings.cancel,
-                            ),
-                            MainButton(
-                              title: widget.mainTitle ?? Strings.confirm,
-                              textSize: 16,
-                              width: 120,
-                              height: 45,
-                              onTap: _onTapMainAction,
-                            ),
-                          ],
-                        )
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: <Widget>[
+                                  CustomButton(
+                                    blur: 5,
+                                    width: 120,
+                                    height: 45,
+                                    onTap: _onTapSubAction,
+                                    title: widget.subTitle ?? Strings.cancel,
+                                  ),
+                                  MainButton(
+                                    title: widget.mainTitle ?? Strings.confirm,
+                                    textSize: 16,
+                                    width: 120,
+                                    height: 45,
+                                    onTap: _onTapMainAction,
+                                  ),
+                                ],
+                              )
                             : Row(
-                          mainAxisAlignment:
-                          MainAxisAlignment.spaceEvenly,
-                          children: <Widget>[
-                            MainButton(
-                              title: widget.mainTitle ?? Strings.confirm,
-                              textSize: 16,
-                              width: 120,
-                              height: 45,
-                              onTap: _onTapMainAction,
-                            ),
-                            CustomButton(
-                              blur: 5,
-                              width: 120,
-                              height: 45,
-                              onTap: _onTapSubAction,
-                              title: widget.subTitle ?? Strings.cancel,
-                            ),
-                          ],
-                        ),
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: <Widget>[
+                                  MainButton(
+                                    title: widget.mainTitle ?? Strings.confirm,
+                                    textSize: 16,
+                                    width: 120,
+                                    height: 45,
+                                    onTap: _onTapMainAction,
+                                  ),
+                                  CustomButton(
+                                    blur: 5,
+                                    width: 120,
+                                    height: 45,
+                                    onTap: _onTapSubAction,
+                                    title: widget.subTitle ?? Strings.cancel,
+                                  ),
+                                ],
+                              ),
                         SizedBox(height: 26),
                       ],
                     ),
                   ],
-                )
-            ),
+                )),
             Visibility(
               visible: widget.needCloseBtn,
               child: Column(
@@ -179,6 +172,4 @@ class _NormalDialogState extends State<NormalDialog>{
       ),
     );
   }
-
 }
-

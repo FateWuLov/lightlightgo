@@ -28,21 +28,21 @@ class HomePage extends StatelessWidget {
       },
       child: Scaffold(
         body: Obx(
-            () => Stack(
-              children: [
-                IndexedStack(
-                  index: state.index.value,
-                  children: pages,
-                  key: key,
-                ),
-                Positioned(
-                  left: 0,
-                  right: 0,
-                  bottom: 0,
-                  child: bottomNavigationBar(),
-                ),
-              ],
-            ),
+          () => Stack(
+            children: [
+              IndexedStack(
+                index: state.index.value,
+                children: pages,
+                key: key,
+              ),
+              Positioned(
+                left: 0,
+                right: 0,
+                bottom: 0,
+                child: bottomNavigationBar(),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -69,18 +69,16 @@ class HomePage extends StatelessWidget {
   List<BottomNavigationBarItem> _tabItems() {
     List<BottomNavigationBarItem> list = [
       BottomNavigationBarItem(
-          title: SizedBox(),
+          label: " ",
           icon: starListIcon(false),
           activeIcon: starListIcon(true)),
       BottomNavigationBarItem(
-        title: SizedBox(),
+        label: " ",
         icon: orderIcon(false),
         activeIcon: orderIcon(true),
       ),
       BottomNavigationBarItem(
-          title: SizedBox(),
-          icon: mineIcon(false),
-          activeIcon: mineIcon(true))
+          label: " ", icon: mineIcon(false), activeIcon: mineIcon(true)),
     ];
     return list;
   }
@@ -124,7 +122,10 @@ class HomePage extends StatelessWidget {
         child: Column(
           children: [
             Expanded(
-                child: Image.asset(ImageNames.orders, color: active ? Styles.tabSelect : Styles.tabDeselect,)),
+                child: Image.asset(
+              ImageNames.orders,
+              color: active ? Styles.tabSelect : Styles.tabDeselect,
+            )),
             // Container(
             //   padding: EdgeInsets.only(left: 2),
             //   child: Text(
@@ -144,7 +145,9 @@ class HomePage extends StatelessWidget {
       child: Column(
         children: [
           Expanded(
-            child: Image.asset(active ? ImageNames.advisors : ImageNames.advisors2),),
+            child: Image.asset(
+                active ? ImageNames.advisors : ImageNames.advisors2),
+          ),
           // Text(
           //   Strings.advisor,
           //   style: Styles.textStyleMedium(12)
@@ -160,7 +163,8 @@ class HomePage extends StatelessWidget {
       child: Column(
         children: [
           Expanded(
-            child: Image.asset(active ? ImageNames.mine : ImageNames.mine2),),
+            child: Image.asset(active ? ImageNames.mine : ImageNames.mine2),
+          ),
           // Container(
           //   padding: EdgeInsets.only(left: 2),
           //   child: Text(

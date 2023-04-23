@@ -21,11 +21,13 @@ class StarListPage extends StatelessWidget {
       child: GetBuilder<StarListLogic>(
         id: state.dataListGID,
         builder: (logic) {
-          return Expanded(child: SmartRefresher(
-            controller: state.refreshController,
-            onRefresh: logic.headerRefresh,
-            child: _mainContent(),
-          ));
+          return Expanded(
+            child: SmartRefresher(
+              controller: state.refreshController,
+              onRefresh: logic.headerRefresh,
+              child: _mainContent(),
+            ),
+          );
         },
       ),
     );
@@ -49,7 +51,9 @@ class StarListPage extends StatelessWidget {
                     logic.onAskStar(model);
                   },
                 ),
-                SizedBox(height: 70,)
+                SizedBox(
+                  height: 70,
+                )
               ],
             );
           }
