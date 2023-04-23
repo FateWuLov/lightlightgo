@@ -15,6 +15,7 @@ class MyObserver extends RouteObserver<PageRoute> {
 }
 
 class RootApp extends StatelessWidget {
+  const RootApp({super.key});
 
   @override
   Widget build(BuildContext context) {

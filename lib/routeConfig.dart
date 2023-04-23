@@ -1,5 +1,11 @@
 import 'package:get/get_navigation/src/routes/get_route.dart';
+import 'package:lifeaste_lt/pages/advisor_detail/view.dart';
+import 'package:lifeaste_lt/pages/advisor_list/view.dart';
+import 'package:lifeaste_lt/pages/create_order/view.dart';
+import 'package:lifeaste_lt/pages/extension/view.dart';
 import 'package:lifeaste_lt/pages/home/view.dart';
+import 'package:lifeaste_lt/pages/user/view.dart';
+import 'package:lifeaste_lt/pages/user_profile/view.dart';
 
 class RouteConfig {
   /// 导航
@@ -23,14 +29,18 @@ class RouteConfig {
   /// 编辑页
   static const String userProfile = "/user_profile";
 
+  //
+  static const String extension = "/extension";
+
   ///别名映射页面
   static final List<GetPage> getPages = [
     GetPage(name: root, page: () => HomePage()),
-/*    GetPage(name: advisorList, page: () => AdvisorListPage()),
+    GetPage(name: advisorList, page: () => AdvisorListPage()),
     GetPage(name: advisorDetail, page: () => AdvisorDetailPage()),
-    GetPage(name: orderList, page: () => OrderListPage()),
+    //GetPage(name: orderList, page: () => OrderListPage()),
     GetPage(name: createOrder, page: () => CreateOrderPage()),
     GetPage(name: user, page: () => UserPage()),
-    GetPage(name: userProfile, page: () => UserProfilePage()),*/
+    GetPage(name: userProfile, page: () => UserProfilePage()),
+    GetPage(name: extension, page: () => ExtensionPage())
   ];
 }

@@ -1,13 +1,11 @@
-import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../../models/advisormodel.dart';
+import '../../models/usermodel.dart';
 
 class AdvisorListState {
   String advisorListGID = 'advisorListGID';
 
+  late User user;
+
   List<Advisor> advisorList = [];
-
-  RefreshController refreshController = RefreshController();
-
-  AdvisorListState();
 }

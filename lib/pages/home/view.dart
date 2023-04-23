@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../common/size_config.dart';
 import '../../common/styles.dart';
 import '../advisor_list/view.dart';
-import '../me/view.dart';
+
 import '../order_list/view.dart';
+import '../user/view.dart';
 import 'logic.dart';
 import 'state.dart';
 
@@ -15,13 +17,14 @@ class HomePage extends StatelessWidget {
   final List<Widget> pages = [
     AdvisorListPage(),
     OrderListPage(),
-    MePage(),
+    UserPage(),
   ];
 
   HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     logic.setPageCount(pages.length);
     return WillPopScope(
       onWillPop: () async {
@@ -29,9 +32,10 @@ class HomePage extends StatelessWidget {
       },
       child: Scaffold(
         body: Obx(
-              () => Stack(
+          () => Stack(
             children: [
               IndexedStack(
+                sizing: StackFit.expand,
                 index: state.index.value,
                 key: key,
                 children: pages,
@@ -69,105 +73,22 @@ class HomePage extends StatelessWidget {
 
   List<BottomNavigationBarItem> _tabItems() {
     List<BottomNavigationBarItem> list = [
-      BottomNavigationBarItem(
-          label: " ",
-          //icon: starListIcon(false),
-          //activeIcon: starListIcon(true)),
-          icon: Icon(Icons.add),
+      const BottomNavigationBarItem(
+        label: "home",
+        //icon: starListIcon(false),
+        //activeIcon: starListIcon(true)),
+        icon: Icon(Icons.home),
       ),
-      BottomNavigationBarItem(
-        label: " ",
-        //icon: orderIcon(false),
-        //activeIcon: orderIcon(true),
-          icon: Icon(Icons.add)
-      ),
-      BottomNavigationBarItem(
-          label: " ",
+      const BottomNavigationBarItem(
+          label: " order ",
+          //icon: orderIcon(false),
+          //activeIcon: orderIcon(true),
+          icon: Icon(Icons.money)),
+      const BottomNavigationBarItem(
+          label: " me ",
           //icon: mineIcon(false), activeIcon: mineIcon(true)
-          icon: Icon(Icons.add)
-      ),
+          icon: Icon(Icons.people)),
     ];
     return list;
   }
-
-/*  Widget orderIcon(bool active) {
-      return _itemBase(
-        child: Column(
-          children: [
-            Expanded(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  SizedBox(width: 10),
-                  Image.asset(active ? ImageNames.orders : ImageNames.orders2),
-                  SizedBox(width: 2),
-                  Align(
-                    alignment: Alignment.topRight,
-                    child: Container(
-                      width: 8,
-                      height: 8,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(4),
-                        color: Styles.unread,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            // Text(
-            //   Strings.order,
-            //   style: Styles.textStyleMedium(12)
-            //       .copyWith(color: active ? Styles.tabSelect : Styles.tabDeselect,),
-            // ),
-          ],
-        ),
-      );
-  }
-
-  Widget starListIcon(bool active) {
-    return _itemBase(
-      child: Column(
-        children: [
-          Expanded(
-            child: Image.asset(
-                active ? ImageNames.advisors : ImageNames.advisors2),
-          ),
-          // Text(
-          //   Strings.advisor,
-          //   style: Styles.textStyleMedium(12)
-          //       .copyWith(color: active ? Styles.tabSelect : Styles.tabDeselect,),
-          // ),
-        ],
-      ),
-    );
-  }
-
-  Widget mineIcon(bool active) {
-    return _itemBase(
-      child: Column(
-        children: [
-          Expanded(
-            child: Image.asset(active ? ImageNames.mine : ImageNames.mine2),
-          ),
-          // Container(
-          //   padding: EdgeInsets.only(left: 2),
-          //   child: Text(
-          //     Strings.mine,
-          //     style: Styles.textStyleMedium(12)
-          //         .copyWith(color: active ? Styles.tabSelect : Styles.tabDeselect,),
-          //   ),
-          // ),
-        ],
-      ),
-    );
-  }
-
-  Widget _itemBase({Widget? child}) {
-    return Container(
-      height: 52,
-      width: SizeConfig.screenWidth / pages.length,
-      child: child ?? Container(),
-    );
-  }*/
 }
